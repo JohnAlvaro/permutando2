@@ -1,0 +1,234 @@
+html, body, #app {
+    height: 100%;
+}
+
+.map {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:url(../img/bg-map.jpg);
+    background-size: cover;
+    background-position: center;
+}
+.map:after {
+    content: '';
+    position: absolute;
+    background: rgba(255, 255, 255, 0.5);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 56px;
+    bottom: 0;
+    z-index: 1000;
+    height: calc(100vh - 56px);
+    padding: 20px;
+    
+}
+.sidebar .box {
+    max-width: 320px;
+    max-height: 100%;
+    overflow-y: auto;
+    background: #ffffff;
+    box-shadow: 3px 3px 3px #cccccc;
+    border-radius: 20px;
+    padding: 20px;
+}
+.sidebar h3 {
+    color: #d07d00;
+    font-size: 1.2rem;
+}
+
+.title {
+    background: #f19100;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    -webkit-transition: all .3s ease;
+            transition: all .3s ease;
+}
+.title.busco {
+    border-radius: 10px 10px 0 0;
+}
+.title.vendo {
+    border-radius: 10px;
+    margin-top: 20px;
+}
+.title svg {
+    width: 30px;
+    margin: 5px;
+    fill: #fff;
+    display: inline-block;
+    vertical-align: middle;
+}
+.title h2 {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    margin: 5px 0;
+}
+
+.check-group {
+    display: flex;
+    justify-content: space-around;
+}
+.check-group input[type=checkbox]{
+    display:none;
+}
+.check-group input[type=checkbox] + label.radio-btn {    
+    flex: 1;
+    display: inline-block;
+    font-weight: 500;
+    color: #fff;
+    position: relative;
+    background: #ffa316;
+    border: 1px solid #d07d00;
+    border-radius: 7px;
+    padding: 5px 10px;
+    margin: 5px;
+    cursor: pointer;
+    outline: none;
+    -webkit-transition: all .3s ease;
+            transition: all .3s ease;
+}
+.check-group input[type=checkbox]:checked + label.radio-btn, .check-group input[type=checkbox] + label.radio-btn:hover {
+    background: #d07d00;
+}
+
+.fields {
+    display: none;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-top: 0;
+    border-radius: 0 0 10px 10px;
+}
+.fields .detalles >div {
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+    margin-top: 10px;
+}
+
+.check-group.estado {
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.check-group.estado input[type=checkbox] + label.radio-btn {
+    flex: 0 0 auto;
+    background: #f7f7f7;
+    color: #828282;
+    border-color: #a5a5a5;
+    padding: 0px 7px;
+    border-radius: 5px;
+    font-weight: 400;
+    font-size: .9rem;
+    margin: 2px 3px 2px 3px;
+}
+.check-group.estado input[type=checkbox] + label.radio-btn:hover, .check-group.estado input[type=checkbox]:checked + label.radio-btn {
+    background: #a5a5a5;
+    color: #fff;
+}
+
+.title:not(.active) {
+    border-radius: 10px;
+    background: #f7f7f7;
+    color: #a5a5a5;
+}
+.title:not(.active) svg {
+    fill: #a5a5a5;
+}
+.title:not(.active) .check-group input[type=checkbox] + label.radio-btn {
+    background: #a5a5a5;
+    border-color: #a5a5a5;
+}
+.title:not(.active) .check-group input[type=checkbox] + label.radio-btn:hover, .title:not(.active) .check-group input[type=checkbox]:checked + label.radio-btn{
+    background: #f19100;
+    border-color: #f19100;
+}
+
+select {
+    -webkit-appearance: button;
+    -webkit-border-radius: 2px;
+    -webkit-padding-end: 20px;
+    -webkit-padding-start: 2px;
+    -webkit-user-select: none;
+    background-image: url(../img/arrow-select.svg);
+    background-position: 97% center;
+    background-repeat: no-repeat;
+    background-size: 10px;
+    background-color: #f7f7f7;
+    border: 1px solid #a5a5a5;
+    border-radius: 5px;
+    margin: 3px 0;
+    overflow: hidden;
+    padding: 0px 7px;
+    font-size: .9rem;
+    color: #828282;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+}
+select:focus {
+    outline: none;
+}
+
+.valor label {
+    font-size: .9rem;
+    margin: 3px 0;
+}
+.valor input[type=checkbox] {
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+.content {
+    padding-top: 76px;
+}
+.content .box {
+    background: #fff;
+    max-width: 900px;
+    box-shadow: 3px 3px 3px #cccccc;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.fields-busco, .fields-vendo {
+    display: none;
+}
+
+.list-mode {
+    display: flex;
+    align-items: center;
+}
+.list-mode h3 {
+    flex: 1;
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+.list-mode input {
+    margin: 0 5px 0 10px;
+}
+.list-mode label {
+    margin: 0;
+}
+
+@media (min-width: 768px){
+    
+    .sidebar .box {
+        margin-left: 5%;
+    }
+    
+}
+
+@media (min-width:992px){
+    
+    
+}
