@@ -12,9 +12,13 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
 Route::post('registro','UserController@registro');
 Route::post('autenticar','UserController@autenticar');
 Route::get('logout','UserController@logout');
+
+// Admin
+Route::get('admin',function(){return view('admin.index');});
+Route::get('lista-usuarios',function(){return view('admin.usuario.lista');});
