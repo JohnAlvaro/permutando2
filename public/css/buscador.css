@@ -51,14 +51,11 @@ html, body, #app {
     color: #fff;
     text-align: center;
     padding: 10px;
+    border-radius: 10px 10px 0 0;
     -webkit-transition: all .3s ease;
             transition: all .3s ease;
 }
-.title.busco {
-    border-radius: 10px 10px 0 0;
-}
-.title.vendo {
-    border-radius: 10px;
+.sell-menu .title {
     margin-top: 20px;
 }
 .title svg {
@@ -78,13 +75,13 @@ html, body, #app {
 
 .check-group {
     display: flex;
-    justify-content: space-around;
+    flex-flow: wrap;
 }
 .check-group input[type=checkbox]{
     display:none;
 }
 .check-group input[type=checkbox] + label.radio-btn {    
-    flex: 1;
+    flex: 0 0 46%;
     display: inline-block;
     font-weight: 500;
     color: #fff;
@@ -93,7 +90,7 @@ html, body, #app {
     border: 1px solid #d07d00;
     border-radius: 7px;
     padding: 5px 10px;
-    margin: 5px;
+    margin: 2%;
     cursor: pointer;
     outline: none;
     -webkit-transition: all .3s ease;
@@ -197,9 +194,6 @@ select:focus {
     box-shadow: 3px 3px 3px #cccccc;
     border-radius: 20px;
     padding: 20px;
-}
-
-.fields-busco, .fields-vendo {
     display: none;
 }
 
@@ -219,6 +213,58 @@ select:focus {
 .list-mode label {
     margin: 0;
 }
+
+
+
+.stepwizard-step p {
+    margin-top: 10px;
+}
+
+.stepwizard-row {
+    display: table-row;
+}
+
+.stepwizard {
+    display: table;
+    width: 100%;
+    position: relative;
+}
+
+.stepwizard-step button[disabled] {
+    opacity: 1 !important;
+    filter: alpha(opacity=100) !important;
+}
+
+.stepwizard-row:before {
+    top: 14px;
+    bottom: 0;
+    position: absolute;
+    content: " ";
+    width: 100%;
+    height: 1px;
+    background-color: #ccc;
+    z-order: 0;
+
+}
+
+.stepwizard-step {
+    display: table-cell;
+    text-align: center;
+    position: relative;
+}
+
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 15px;
+}
+
+
+
 
 @media (min-width: 768px){
     

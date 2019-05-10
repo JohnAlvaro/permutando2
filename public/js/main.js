@@ -2,11 +2,8 @@ var $ = jQuery;
 
 $(document).ready(function () {
     
-    showhideopt();
-    
-    $(document).on('click', '.to-show', function () {
-        
-        /* Checkbox único */
+    // Checkbox único
+    $(document).on('click', '.unique', function () {
         var $box = $(this);
         if ($box.is(":checked")) {
             var group = "input:checkbox[name='" + $box.attr("name") + "']";
@@ -15,38 +12,86 @@ $(document).ready(function () {
         } else {
             $box.prop("checked", false);
         }
-        
-        /* Mostrar-ocultar */
-        showhideopt();
-        
     });
     
-    function showhideopt() {
+    $('.title').on('click', 'input', function () {
         
-        var a, relElem, elemChk, checkElem = [];
-        
-        $(".to-show").each(function () {
-            relElem = $(this).attr("data-show");
-            if (relElem !== undefined) {
-                console.log(relElem);
-                $("." + relElem).removeClass("toShow").addClass("toHide");
-                $(this).parents('.title').removeClass('active');
-                if ($(this).is(':checked')) {
-                    checkElem.push($(this).attr("id")); 
-                }
-            }
+        $('.title').removeClass('active');
+        $('.fields').slideUp(400, function(){
+            $(this).find('input').prop("checked", false);
+            hide_res();
         });
         
-        for (a = 0; a < checkElem.length; a += 1) {
-            elemChk = $("#" + checkElem[a]);
-            relElem = $(elemChk).attr("data-show");
-            $("." + relElem).removeClass("toHide").addClass("toShow");
-            $(elemChk).parents('.title').addClass('active');
+        var title = $(this).parents('.title');
+        
+        if ($(this).is(":checked")) {
+            title.addClass('active');
+            title.next().slideDown();
         }
         
-        $(".toShow").slideDown();
-        $(".toHide").slideUp();
-        
+    });
+
+    $('.estado').on('click', 'input', function () {
+        var id = $(this).attr("show");
+        hide_res('resultados-' + id);
+        show_res('resultados-' + id);
+    });
+
+    function show_res(id) {
+        id = id === undefined ? 'content .box' : id;
+        $('.' + id).fadeIn();
     }
     
+    function hide_res(id) {
+        id = id === undefined ? 'content .box' : id;
+        $('.' + id).fadeOut();
+    }
+
+});
+
+
+
+$(document).ready(function () {
+
+    var navListItems = $('div.setup-panel div a'),
+            allWells = $('.setup-content'),
+            allNextBtn = $('.nextBtn');
+
+    allWells.hide();
+
+    navListItems.click(function (e) {
+        e.preventDefault();
+        var $target = $($(this).attr('href')),
+                $item = $(this);
+
+        if (!$item.hasClass('disabled')) {
+            navListItems.removeClass('btn-primary').addClass('btn-default');
+            $item.addClass('btn-primary');
+            allWells.hide();
+            $target.show();
+            $target.find('input:eq(0)').focus();
+        }
+    });
+
+    allNextBtn.click(function(){
+        var curStep = $(this).closest(".setup-content"),
+            curStepBtn = curStep.attr("id"),
+            nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
+            curInputs = curStep.find("input[type='text'],input[type='url']"),
+            isValid = true;
+
+        $(".form-group").removeClass("has-error");
+        for(var i=0; i<curInputs.length; i++){
+            if (!curInputs[i].validity.valid){
+                isValid = false;
+                $(curInputs[i]).closest(".form-group").addClass("has-error");
+            }
+        }
+
+        if (isValid)
+            nextStepWizard.removeAttr('disabled').trigger('click');
+    });
+
+    $('div.setup-panel div a.btn-primary').trigger('click');
+
 });
