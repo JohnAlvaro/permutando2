@@ -22,18 +22,6 @@ function bar_progress(progress_line_object, direction) {
 jQuery(document).ready(function() {
 
     /*
-        Fullscreen background
-    */
-    $.backstretch("assets/img/backgrounds/1.jpg");
-
-    $('#top-navbar-1').on('shown.bs.collapse', function(){
-    	$.backstretch("resize");
-    });
-    $('#top-navbar-1').on('hidden.bs.collapse', function(){
-    	$.backstretch("resize");
-    });
-
-    /*
         Form
     */
     $('.f1 fieldset:first').fadeIn('slow');
@@ -52,16 +40,16 @@ jQuery(document).ready(function() {
 
     	// fields validation
     	parent_fieldset.find('input[type="text"], input[type="password"], textarea').each(function() {
-    		if( $(this).val() == "" ) {
+    		/*if( $(this).val() == "" ) {
     			$(this).addClass('input-error');
     			next_step = false;
     		}
     		else {
     			$(this).removeClass('input-error');
-    		}
+    		}*/
     	});
-    	// fields validation
 
+    	// fields validation
     	if( next_step ) {
     		parent_fieldset.fadeOut(400, function() {
     			// change icons
@@ -78,7 +66,7 @@ jQuery(document).ready(function() {
     });
 
     // previous step
-    $('.f1 .btn-previous').on('click', function() {
+    $('.f1 .btn-prev').on('click', function() {
     	// navigation steps / progress steps
     	var current_active_step = $(this).parents('.f1').find('.f1-step.active');
     	var progress_line = $(this).parents('.f1').find('.f1-progress-line');

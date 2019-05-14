@@ -47,9 +47,23 @@ $(document).ready(function () {
         $('.' + id).fadeOut();
     }
 
+    $( '.image .inputfile' ).each( function() {
+
+        var label = $(this).next('label');
+
+        $(this).on( 'change', function( e ) {
+
+            var fileName = '';
+            if( e.target.value ) {
+                fileName = e.target.value.split( '\\' ).pop();
+                label.html(fileName);
+            }
+
+        });
+
+    });
+
 });
-
-
 
 $(document).ready(function () {
 
