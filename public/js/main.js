@@ -48,64 +48,26 @@ $(document).ready(function () {
     }
 
     $( '.image .inputfile' ).each( function() {
-
         var label = $(this).next('label');
-
         $(this).on( 'change', function( e ) {
-
             var fileName = '';
             if( e.target.value ) {
                 fileName = e.target.value.split( '\\' ).pop();
                 label.html(fileName);
             }
-
         });
-
     });
 
-});
+    $('.filter').on('click', 'input', function () {
 
-$(document).ready(function () {
 
-    var navListItems = $('div.setup-panel div a'),
-            allWells = $('.setup-content'),
-            allNextBtn = $('.nextBtn');
 
-    allWells.hide();
-
-    navListItems.click(function (e) {
-        e.preventDefault();
-        var $target = $($(this).attr('href')),
-                $item = $(this);
-
-        if (!$item.hasClass('disabled')) {
-            navListItems.removeClass('btn-primary').addClass('btn-default');
-            $item.addClass('btn-primary');
-            allWells.hide();
-            $target.show();
-            $target.find('input:eq(0)').focus();
-        }
-    });
-
-    allNextBtn.click(function(){
-        var curStep = $(this).closest(".setup-content"),
-            curStepBtn = curStep.attr("id"),
-            nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
-            curInputs = curStep.find("input[type='text'],input[type='url']"),
-            isValid = true;
-
-        $(".form-group").removeClass("has-error");
-        for(var i=0; i<curInputs.length; i++){
-            if (!curInputs[i].validity.valid){
-                isValid = false;
-                $(curInputs[i]).closest(".form-group").addClass("has-error");
-            }
+        if ($(this).attr('id') == 'lista') {
+            $(this).parent().parent().find('.list').slideDown();
+        } else {
+            $(this).parent().parent().find('.list').slideUp();
         }
 
-        if (isValid)
-            nextStepWizard.removeAttr('disabled').trigger('click');
     });
-
-    $('div.setup-panel div a.btn-primary').trigger('click');
 
 });

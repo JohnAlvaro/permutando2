@@ -198,21 +198,141 @@ select:focus {
     display: none;
 }
 
-.list-mode {
+.list-mode .filter {
     display: flex;
     align-items: center;
 }
-.list-mode h3 {
+.list-mode .filter h3 {
     flex: 1;
     font-size: 1.2rem;
     margin: 0;
 }
 
-.list-mode input {
+.list-mode .filter input {
     margin: 0 5px 0 10px;
 }
-.list-mode label {
+.list-mode .filter label {
     margin: 0;
+}
+
+.list-mode .list {
+    margin-top: 40px;
+}
+.list-mode .list .item {
+    display: flex;
+    border: 1px solid #ccc;
+    padding: 15px;
+    background: #f7f7f7;
+    margin-bottom: 20px;
+}
+.list-mode .item .img {
+    flex: 0 0 auto;
+    display: block;
+    width: 180px;
+    height: 180px;
+    background-size: cover;
+    background-position: center;
+}
+.list-mode .item .info {
+    flex: 1;
+    margin: 0 20px;
+}
+
+.list-mode .info h3 {
+    font-size: 1.4rem;
+    color: #005b95;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+.list-mode .info .desc {
+    display: flex;
+}
+.list-mode .info .desc >div {
+    flex: 0 0 50%;
+}
+.list-mode .desc span {
+    display: block;
+    margin-bottom: 5px;
+}
+.list-mode .item .buttons {
+    flex: 0 0 auto;
+}
+.list-mode .item .buttons .btn {
+    display: block;
+    width: 100%;
+    color: #fff;
+    background: #005b95;
+    margin-bottom: 10px;
+}
+.list-mode .item .buttons .btn:hover {
+    background:#f19100;
+}
+
+.modal-body.box-info {
+    display: flex;
+    flex-flow: wrap;
+}
+.modal-body.box-info .img {
+    flex: 1;
+    background-size: cover;
+    background-position: center;
+}
+.modal-body.box-info .text {
+    flex: 1;
+    margin-left: 20px;
+    font-size: .9rem;
+}
+.modal-body.box-info .text h3 {
+    font-size: 1.2rem;
+    color: #005b95;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+.modal-body.box-info .text .desc {
+    display: flex;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+.modal-body.box-info .text .desc >div {
+    flex: 0 0 50%;
+}
+.modal-body.box-info .text .desc span {
+    display: block;
+    margin-bottom: 5px;
+}
+.modal-body.box-info .text p {
+    margin: 10px 0 0 0;
+}
+.modal-body.box-info .more {
+    flex: 0 0 100%;
+    margin-top: 15px;
+    text-align: center;
+    font-size: .9rem;
+}
+.modal-body.box-info .more strong {
+    display: block;
+    text-align: left;
+}
+.modal-body.box-info .more p {
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+    margin-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+.modal-body.box-info .more .btn {
+    display: inline-block;
+    width: 100%;
+    max-width: 200px;
+    color: #fff;
+    background:#f19100;
+    margin: 5px;
+}
+.modal-body.box-info .more .btn:hover {
+    background: #005b95;
 }
 
 @media (min-width: 768px){
