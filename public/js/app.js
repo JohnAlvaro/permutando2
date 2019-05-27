@@ -14311,6 +14311,9 @@ window.Vue = __webpack_require__(37);
 Vue.component('lista-usuarios', __webpack_require__(41));
 Vue.component('example-component', __webpack_require__(45));
 
+//Web
+Vue.component('form-inmueble', __webpack_require__(60));
+
 var app = new Vue({
   el: '#app'
 });
@@ -64728,6 +64731,1691 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 49 */,
+/* 50 */,
+/* 51 */,
+/* 52 */,
+/* 53 */,
+/* 54 */,
+/* 55 */,
+/* 56 */,
+/* 57 */,
+/* 58 */,
+/* 59 */,
+/* 60 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(11)
+/* script */
+var __vue_script__ = __webpack_require__(61)
+/* template */
+var __vue_template__ = __webpack_require__(62)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/web/Form.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-e5fb8486", Component.options)
+  } else {
+    hotAPI.reload("data-v-e5fb8486", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 61 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            form: {
+                area: '',
+                habitaciones: '',
+                banos: '',
+                balcon: '',
+                terraza: '',
+                porteria: '',
+                parqueadero: '',
+                caracteristica: '',
+                zonas: [],
+                transporte: []
+            }
+        };
+    }
+});
+
+/***/ }),
+/* 62 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "form",
+    { staticClass: "f1", attrs: { role: "form", action: "", method: "post" } },
+    [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("fieldset", [
+        _c("h4", [_vm._v("Casa en venta")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("div", { staticClass: "form-field" }, [
+            _c("div", { staticClass: "my-text" }, [
+              _vm._m(1),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.area,
+                    expression: "form.area"
+                  }
+                ],
+                attrs: { type: "text", name: "area" },
+                domProps: { value: _vm.form.area },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.form, "area", $event.target.value)
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-field" }, [
+            _c("div", { staticClass: "my-select" }, [
+              _c("span", [_vm._v("Habitaciones")]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.habitaciones,
+                      expression: "form.habitaciones"
+                    }
+                  ],
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.form,
+                        "habitaciones",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
+                },
+                [
+                  _c("option", [_vm._v("--")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "1" } }, [_vm._v("1")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "2" } }, [_vm._v("2")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "3" } }, [_vm._v("3")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "4" } }, [_vm._v("4")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "5" } }, [_vm._v("5")])
+                ]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-field" }, [
+            _c("div", { staticClass: "my-select" }, [
+              _c("span", [_vm._v("Baños")]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.banos,
+                      expression: "form.banos"
+                    }
+                  ],
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.form,
+                        "banos",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
+                },
+                [
+                  _c("option", [_vm._v("--")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "1" } }, [_vm._v("1")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "2" } }, [_vm._v("2")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "3" } }, [_vm._v("3")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "4" } }, [_vm._v("4")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "5" } }, [_vm._v("5")])
+                ]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-field" }, [
+            _c("div", { staticClass: "my-radio" }, [
+              _c("span", [_vm._v("Balcón")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.balcon,
+                    expression: "form.balcon"
+                  }
+                ],
+                attrs: { type: "radio", value: "true", id: "balcon_1" },
+                domProps: { checked: _vm._q(_vm.form.balcon, "true") },
+                on: {
+                  change: function($event) {
+                    return _vm.$set(_vm.form, "balcon", "true")
+                  }
+                }
+              }),
+              _c("label", { attrs: { for: "balcon_1" } }, [_vm._v("Si")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.balcon,
+                    expression: "form.balcon"
+                  }
+                ],
+                attrs: {
+                  type: "radio",
+                  value: "false",
+                  id: "balcon_0",
+                  checked: ""
+                },
+                domProps: { checked: _vm._q(_vm.form.balcon, "false") },
+                on: {
+                  change: function($event) {
+                    return _vm.$set(_vm.form, "balcon", "false")
+                  }
+                }
+              }),
+              _c("label", { staticClass: "no", attrs: { for: "balcon_0" } }, [
+                _vm._v("No")
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-field" }, [
+            _c("div", { staticClass: "my-radio" }, [
+              _c("span", [_vm._v("Terraza")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.terraza,
+                    expression: "form.terraza"
+                  }
+                ],
+                attrs: { type: "radio", value: "true", id: "terraza_1" },
+                domProps: { checked: _vm._q(_vm.form.terraza, "true") },
+                on: {
+                  change: function($event) {
+                    return _vm.$set(_vm.form, "terraza", "true")
+                  }
+                }
+              }),
+              _c("label", { attrs: { for: "terraza_1" } }, [_vm._v("Si")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.terraza,
+                    expression: "form.terraza"
+                  }
+                ],
+                attrs: {
+                  type: "radio",
+                  value: "false",
+                  id: "terraza_0",
+                  checked: ""
+                },
+                domProps: { checked: _vm._q(_vm.form.terraza, "false") },
+                on: {
+                  change: function($event) {
+                    return _vm.$set(_vm.form, "terraza", "false")
+                  }
+                }
+              }),
+              _c("label", { staticClass: "no", attrs: { for: "terraza_0" } }, [
+                _vm._v("No")
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-field" }, [
+            _c("div", { staticClass: "my-radio" }, [
+              _c("span", [_vm._v("Portería")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.porteria,
+                    expression: "form.porteria"
+                  }
+                ],
+                attrs: { type: "radio", value: "12h", id: "porteria_12" },
+                domProps: { checked: _vm._q(_vm.form.porteria, "12h") },
+                on: {
+                  change: function($event) {
+                    return _vm.$set(_vm.form, "porteria", "12h")
+                  }
+                }
+              }),
+              _c("label", { attrs: { for: "porteria_12" } }, [_vm._v("12H")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.porteria,
+                    expression: "form.porteria"
+                  }
+                ],
+                attrs: {
+                  type: "radio",
+                  value: "24h",
+                  id: "porteria_24",
+                  checked: ""
+                },
+                domProps: { checked: _vm._q(_vm.form.porteria, "24h") },
+                on: {
+                  change: function($event) {
+                    return _vm.$set(_vm.form, "porteria", "24h")
+                  }
+                }
+              }),
+              _c("label", { attrs: { for: "porteria_24" } }, [_vm._v("24H")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.porteria,
+                    expression: "form.porteria"
+                  }
+                ],
+                attrs: {
+                  type: "radio",
+                  value: "no",
+                  id: "porteria_0",
+                  checked: ""
+                },
+                domProps: { checked: _vm._q(_vm.form.porteria, "no") },
+                on: {
+                  change: function($event) {
+                    return _vm.$set(_vm.form, "porteria", "no")
+                  }
+                }
+              }),
+              _c("label", { staticClass: "no", attrs: { for: "porteria_0" } }, [
+                _vm._v("No")
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-field" }, [
+            _c("div", { staticClass: "my-radio" }, [
+              _c("span", [_vm._v("Parqueadero")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.parqueadero,
+                    expression: "form.parqueadero"
+                  }
+                ],
+                attrs: { type: "radio", value: "true", id: "parqueadero_1" },
+                domProps: { checked: _vm._q(_vm.form.parqueadero, "true") },
+                on: {
+                  change: function($event) {
+                    return _vm.$set(_vm.form, "parqueadero", "true")
+                  }
+                }
+              }),
+              _c("label", { attrs: { for: "parqueadero_1" } }, [_vm._v("Si")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.parqueadero,
+                    expression: "form.parqueadero"
+                  }
+                ],
+                attrs: {
+                  type: "radio",
+                  value: "false",
+                  id: "parqueadero_0",
+                  checked: ""
+                },
+                domProps: { checked: _vm._q(_vm.form.parqueadero, "false") },
+                on: {
+                  change: function($event) {
+                    return _vm.$set(_vm.form, "parqueadero", "false")
+                  }
+                }
+              }),
+              _c(
+                "label",
+                { staticClass: "no", attrs: { for: "parqueadero_0" } },
+                [_vm._v("No")]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-field w2" }, [
+            _c("div", { staticClass: "my-checkbox" }, [
+              _c("span", [_vm._v("Zonas Comunes")]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-col" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.zonas,
+                      expression: "form.zonas"
+                    }
+                  ],
+                  attrs: { type: "checkbox", value: "Gimnasio", id: "zonas_1" },
+                  domProps: {
+                    checked: Array.isArray(_vm.form.zonas)
+                      ? _vm._i(_vm.form.zonas, "Gimnasio") > -1
+                      : _vm.form.zonas
+                  },
+                  on: {
+                    change: function($event) {
+                      var $$a = _vm.form.zonas,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = "Gimnasio",
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            _vm.$set(_vm.form, "zonas", $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            _vm.$set(
+                              _vm.form,
+                              "zonas",
+                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                            )
+                        }
+                      } else {
+                        _vm.$set(_vm.form, "zonas", $$c)
+                      }
+                    }
+                  }
+                }),
+                _c("label", { attrs: { for: "zonas_1" } }, [
+                  _vm._v("Gimnasio")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.zonas,
+                      expression: "form.zonas"
+                    }
+                  ],
+                  attrs: { type: "checkbox", value: "BBQ", id: "zonas_2" },
+                  domProps: {
+                    checked: Array.isArray(_vm.form.zonas)
+                      ? _vm._i(_vm.form.zonas, "BBQ") > -1
+                      : _vm.form.zonas
+                  },
+                  on: {
+                    change: function($event) {
+                      var $$a = _vm.form.zonas,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = "BBQ",
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            _vm.$set(_vm.form, "zonas", $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            _vm.$set(
+                              _vm.form,
+                              "zonas",
+                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                            )
+                        }
+                      } else {
+                        _vm.$set(_vm.form, "zonas", $$c)
+                      }
+                    }
+                  }
+                }),
+                _c("label", { attrs: { for: "zonas_2" } }, [_vm._v("BBQ")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.zonas,
+                      expression: "form.zonas"
+                    }
+                  ],
+                  attrs: {
+                    type: "checkbox",
+                    value: "Salón comunal",
+                    id: "zonas_3"
+                  },
+                  domProps: {
+                    checked: Array.isArray(_vm.form.zonas)
+                      ? _vm._i(_vm.form.zonas, "Salón comunal") > -1
+                      : _vm.form.zonas
+                  },
+                  on: {
+                    change: function($event) {
+                      var $$a = _vm.form.zonas,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = "Salón comunal",
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            _vm.$set(_vm.form, "zonas", $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            _vm.$set(
+                              _vm.form,
+                              "zonas",
+                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                            )
+                        }
+                      } else {
+                        _vm.$set(_vm.form, "zonas", $$c)
+                      }
+                    }
+                  }
+                }),
+                _c("label", { attrs: { for: "zonas_3" } }, [
+                  _vm._v("Salón comunal")
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-col" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.zonas,
+                      expression: "form.zonas"
+                    }
+                  ],
+                  attrs: {
+                    type: "checkbox",
+                    value: "Zona húmeda",
+                    id: "zonas_4"
+                  },
+                  domProps: {
+                    checked: Array.isArray(_vm.form.zonas)
+                      ? _vm._i(_vm.form.zonas, "Zona húmeda") > -1
+                      : _vm.form.zonas
+                  },
+                  on: {
+                    change: function($event) {
+                      var $$a = _vm.form.zonas,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = "Zona húmeda",
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            _vm.$set(_vm.form, "zonas", $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            _vm.$set(
+                              _vm.form,
+                              "zonas",
+                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                            )
+                        }
+                      } else {
+                        _vm.$set(_vm.form, "zonas", $$c)
+                      }
+                    }
+                  }
+                }),
+                _c("label", { attrs: { for: "zonas_4" } }, [
+                  _vm._v("Zona húmeda")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.zonas,
+                      expression: "form.zonas"
+                    }
+                  ],
+                  attrs: {
+                    type: "checkbox",
+                    value: "Parques para niños",
+                    id: "zonas_5"
+                  },
+                  domProps: {
+                    checked: Array.isArray(_vm.form.zonas)
+                      ? _vm._i(_vm.form.zonas, "Parques para niños") > -1
+                      : _vm.form.zonas
+                  },
+                  on: {
+                    change: function($event) {
+                      var $$a = _vm.form.zonas,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = "Parques para niños",
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            _vm.$set(_vm.form, "zonas", $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            _vm.$set(
+                              _vm.form,
+                              "zonas",
+                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                            )
+                        }
+                      } else {
+                        _vm.$set(_vm.form, "zonas", $$c)
+                      }
+                    }
+                  }
+                }),
+                _c("label", { attrs: { for: "zonas_5" } }, [
+                  _vm._v("Parques para niños")
+                ])
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("textarea", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.form.caracteristica,
+                expression: "form.caracteristica"
+              }
+            ],
+            attrs: { placeholder: "Otras características" },
+            domProps: { value: _vm.form.caracteristica },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.form, "caracteristica", $event.target.value)
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-field value" }, [
+            _c("span", [_vm._v("Valor: $")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.form.valor,
+                  expression: "form.valor"
+                }
+              ],
+              attrs: { type: "text" },
+              domProps: { value: _vm.form.valor },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.form, "valor", $event.target.value)
+                }
+              }
+            })
+          ])
+        ]),
+        _vm._v(" "),
+        _vm._m(2)
+      ]),
+      _vm._v(" "),
+      _c("fieldset", [
+        _c("h4", [_vm._v("Entorno del inmueble")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group list" }, [
+          _c("div", { staticClass: "form-field" }, [
+            _c("span", [_vm._v("Transporte")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "my-checkbox" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.transporte,
+                    expression: "form.transporte"
+                  }
+                ],
+                attrs: {
+                  type: "checkbox",
+                  value: "Transmilenio",
+                  id: "transporte_1"
+                },
+                domProps: {
+                  checked: Array.isArray(_vm.form.transporte)
+                    ? _vm._i(_vm.form.transporte, "Transmilenio") > -1
+                    : _vm.form.transporte
+                },
+                on: {
+                  change: function($event) {
+                    var $$a = _vm.form.transporte,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = "Transmilenio",
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 &&
+                          _vm.$set(_vm.form, "transporte", $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          _vm.$set(
+                            _vm.form,
+                            "transporte",
+                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                          )
+                      }
+                    } else {
+                      _vm.$set(_vm.form, "transporte", $$c)
+                    }
+                  }
+                }
+              }),
+              _c("label", { attrs: { for: "transporte_1" } }, [
+                _vm._v("Transmilenio")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.transporte,
+                    expression: "form.transporte"
+                  }
+                ],
+                attrs: {
+                  type: "checkbox",
+                  value: "Paradero SITP",
+                  id: "transporte_2"
+                },
+                domProps: {
+                  checked: Array.isArray(_vm.form.transporte)
+                    ? _vm._i(_vm.form.transporte, "Paradero SITP") > -1
+                    : _vm.form.transporte
+                },
+                on: {
+                  change: function($event) {
+                    var $$a = _vm.form.transporte,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = "Paradero SITP",
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 &&
+                          _vm.$set(_vm.form, "transporte", $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          _vm.$set(
+                            _vm.form,
+                            "transporte",
+                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                          )
+                      }
+                    } else {
+                      _vm.$set(_vm.form, "transporte", $$c)
+                    }
+                  }
+                }
+              }),
+              _c("label", { attrs: { for: "transporte_2" } }, [
+                _vm._v("Paradero SITP")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.transporte,
+                    expression: "form.transporte"
+                  }
+                ],
+                attrs: {
+                  type: "checkbox",
+                  value: "Ciclorutas",
+                  id: "transporte_3"
+                },
+                domProps: {
+                  checked: Array.isArray(_vm.form.transporte)
+                    ? _vm._i(_vm.form.transporte, "Ciclorutas") > -1
+                    : _vm.form.transporte
+                },
+                on: {
+                  change: function($event) {
+                    var $$a = _vm.form.transporte,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = "Ciclorutas",
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 &&
+                          _vm.$set(_vm.form, "transporte", $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          _vm.$set(
+                            _vm.form,
+                            "transporte",
+                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                          )
+                      }
+                    } else {
+                      _vm.$set(_vm.form, "transporte", $$c)
+                    }
+                  }
+                }
+              }),
+              _c("label", { attrs: { for: "transporte_3" } }, [
+                _vm._v("Ciclorutas")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.transporte,
+                    expression: "form.transporte"
+                  }
+                ],
+                attrs: {
+                  type: "checkbox",
+                  value: "Parqueaderos",
+                  id: "transporte_4"
+                },
+                domProps: {
+                  checked: Array.isArray(_vm.form.transporte)
+                    ? _vm._i(_vm.form.transporte, "Parqueaderos") > -1
+                    : _vm.form.transporte
+                },
+                on: {
+                  change: function($event) {
+                    var $$a = _vm.form.transporte,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = "Parqueaderos",
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 &&
+                          _vm.$set(_vm.form, "transporte", $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          _vm.$set(
+                            _vm.form,
+                            "transporte",
+                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                          )
+                      }
+                    } else {
+                      _vm.$set(_vm.form, "transporte", $$c)
+                    }
+                  }
+                }
+              }),
+              _c("label", { attrs: { for: "transporte_4" } }, [
+                _vm._v("Parqueaderos")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.transporte,
+                    expression: "form.transporte"
+                  }
+                ],
+                attrs: {
+                  type: "checkbox",
+                  value: "Gasolineras",
+                  id: "transporte_5"
+                },
+                domProps: {
+                  checked: Array.isArray(_vm.form.transporte)
+                    ? _vm._i(_vm.form.transporte, "Gasolineras") > -1
+                    : _vm.form.transporte
+                },
+                on: {
+                  change: function($event) {
+                    var $$a = _vm.form.transporte,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = "Gasolineras",
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 &&
+                          _vm.$set(_vm.form, "transporte", $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          _vm.$set(
+                            _vm.form,
+                            "transporte",
+                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                          )
+                      }
+                    } else {
+                      _vm.$set(_vm.form, "transporte", $$c)
+                    }
+                  }
+                }
+              }),
+              _c("label", { attrs: { for: "transporte_5" } }, [
+                _vm._v("Gasolineras")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.transporte,
+                    expression: "form.transporte"
+                  }
+                ],
+                attrs: {
+                  type: "checkbox",
+                  value: "Alimentadores",
+                  id: "transporte_6"
+                },
+                domProps: {
+                  checked: Array.isArray(_vm.form.transporte)
+                    ? _vm._i(_vm.form.transporte, "Alimentadores") > -1
+                    : _vm.form.transporte
+                },
+                on: {
+                  change: function($event) {
+                    var $$a = _vm.form.transporte,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = "Alimentadores",
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 &&
+                          _vm.$set(_vm.form, "transporte", $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          _vm.$set(
+                            _vm.form,
+                            "transporte",
+                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                          )
+                      }
+                    } else {
+                      _vm.$set(_vm.form, "transporte", $$c)
+                    }
+                  }
+                }
+              }),
+              _c("label", { attrs: { for: "transporte_6" } }, [
+                _vm._v("Alimentadores")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.transporte,
+                    expression: "form.transporte"
+                  }
+                ],
+                attrs: {
+                  type: "checkbox",
+                  value: "Buses intermunicipales",
+                  id: "transporte_7"
+                },
+                domProps: {
+                  checked: Array.isArray(_vm.form.transporte)
+                    ? _vm._i(_vm.form.transporte, "Buses intermunicipales") > -1
+                    : _vm.form.transporte
+                },
+                on: {
+                  change: function($event) {
+                    var $$a = _vm.form.transporte,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = "Buses intermunicipales",
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 &&
+                          _vm.$set(_vm.form, "transporte", $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          _vm.$set(
+                            _vm.form,
+                            "transporte",
+                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                          )
+                      }
+                    } else {
+                      _vm.$set(_vm.form, "transporte", $$c)
+                    }
+                  }
+                }
+              }),
+              _c("label", { attrs: { for: "transporte_7" } }, [
+                _vm._v("Buses intermunicipales")
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _vm._m(3),
+          _vm._v(" "),
+          _vm._m(4),
+          _vm._v(" "),
+          _vm._m(5),
+          _vm._v(" "),
+          _vm._m(6),
+          _vm._v(" "),
+          _vm._m(7),
+          _vm._v(" "),
+          _vm._m(8)
+        ]),
+        _vm._v(" "),
+        _vm._m(9)
+      ]),
+      _vm._v(" "),
+      _vm._m(10)
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "f1-steps" }, [
+      _c("div", { staticClass: "f1-progress" }, [
+        _c("div", {
+          staticClass: "f1-progress-line",
+          staticStyle: { width: "16.66%" },
+          attrs: { "data-now-value": "16.66", "data-number-of-steps": "3" }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "f1-step active" }, [
+        _c("div", { staticClass: "f1-step-icon" }, [_vm._v("1")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "f1-step" }, [
+        _c("div", { staticClass: "f1-step-icon" }, [_vm._v("2")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "f1-step" }, [
+        _c("div", { staticClass: "f1-step-icon" }, [_vm._v("3")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_vm._v("Area mts"), _c("sup", [_vm._v("2")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "f1-buttons" }, [
+      _c("button", { staticClass: "btn btn-next", attrs: { type: "button" } }, [
+        _vm._v("Siguiente")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-field" }, [
+      _c("span", [_vm._v("Víveres")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "my-checkbox" }, [
+        _c("input", {
+          attrs: { type: "checkbox", name: "viveres", id: "viveres_1" }
+        }),
+        _c("label", { attrs: { for: "viveres_1" } }, [
+          _vm._v("Tienda de barrio")
+        ]),
+        _vm._v(" "),
+        _c("input", {
+          attrs: { type: "checkbox", name: "viveres", id: "viveres_2" }
+        }),
+        _c("label", { attrs: { for: "viveres_2" } }, [_vm._v("Panadería")]),
+        _vm._v(" "),
+        _c("input", {
+          attrs: { type: "checkbox", name: "viveres", id: "viveres_3" }
+        }),
+        _c("label", { attrs: { for: "viveres_3" } }, [_vm._v("Fruterías")]),
+        _vm._v(" "),
+        _c("input", {
+          attrs: { type: "checkbox", name: "viveres", id: "viveres_4" }
+        }),
+        _c("label", { attrs: { for: "viveres_4" } }, [
+          _vm._v("Plaza de mercado")
+        ]),
+        _vm._v(" "),
+        _c("input", {
+          attrs: { type: "checkbox", name: "viveres", id: "viveres_5" }
+        }),
+        _c("label", { attrs: { for: "viveres_5" } }, [
+          _vm._v("Mercado de frutas y verduras")
+        ]),
+        _vm._v(" "),
+        _c("input", {
+          attrs: { type: "checkbox", name: "viveres", id: "viveres_6" }
+        }),
+        _c("label", { attrs: { for: "viveres_6" } }, [_vm._v("Supermercados")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-field" }, [
+      _c("span", [_vm._v("Bienestar")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "my-checkbox" }, [
+        _c("input", {
+          attrs: { type: "checkbox", name: "bienestar", id: "bienestar_1" }
+        }),
+        _c("label", { attrs: { for: "bienestar_1" } }, [_vm._v("Gimnasios")]),
+        _vm._v(" "),
+        _c("input", {
+          attrs: { type: "checkbox", name: "bienestar", id: "bienestar_2" }
+        }),
+        _c("label", { attrs: { for: "bienestar_2" } }, [
+          _vm._v("Centro de Yoga")
+        ]),
+        _vm._v(" "),
+        _c("input", {
+          attrs: { type: "checkbox", name: "bienestar", id: "bienestar_3" }
+        }),
+        _c("label", { attrs: { for: "bienestar_3" } }, [_vm._v("Ciclovía")]),
+        _vm._v(" "),
+        _c("input", {
+          attrs: { type: "checkbox", name: "bienestar", id: "bienestar_4" }
+        }),
+        _c("label", { attrs: { for: "bienestar_4" } }, [_vm._v("Parques")]),
+        _vm._v(" "),
+        _c("input", {
+          attrs: { type: "checkbox", name: "bienestar", id: "bienestar_5" }
+        }),
+        _c("label", { attrs: { for: "bienestar_5" } }, [_vm._v("Hospitales")]),
+        _vm._v(" "),
+        _c("input", {
+          attrs: { type: "checkbox", name: "bienestar", id: "bienestar_6" }
+        }),
+        _c("label", { attrs: { for: "bienestar_6" } }, [_vm._v("Clínicas")]),
+        _vm._v(" "),
+        _c("input", {
+          attrs: { type: "checkbox", name: "bienestar", id: "bienestar_7" }
+        }),
+        _c("label", { attrs: { for: "bienestar_7" } }, [_vm._v("Iglesias")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-field" }, [
+      _c("span", [_vm._v("Entretenimiento")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "my-checkbox" }, [
+        _c("input", {
+          attrs: {
+            type: "checkbox",
+            name: "entrenimiento",
+            id: "entrenimiento_1"
+          }
+        }),
+        _c("label", { attrs: { for: "entrenimiento_1" } }, [
+          _vm._v("Centros comerciales")
+        ]),
+        _vm._v(" "),
+        _c("input", {
+          attrs: {
+            type: "checkbox",
+            name: "entrenimiento",
+            id: "entrenimiento_2"
+          }
+        }),
+        _c("label", { attrs: { for: "entrenimiento_2" } }, [_vm._v("Teatros")]),
+        _vm._v(" "),
+        _c("input", {
+          attrs: {
+            type: "checkbox",
+            name: "entrenimiento",
+            id: "entrenimiento_3"
+          }
+        }),
+        _c("label", { attrs: { for: "entrenimiento_3" } }, [_vm._v("Cines")]),
+        _vm._v(" "),
+        _c("input", {
+          attrs: {
+            type: "checkbox",
+            name: "entrenimiento",
+            id: "entrenimiento_4"
+          }
+        }),
+        _c("label", { attrs: { for: "entrenimiento_4" } }, [_vm._v("Bares")]),
+        _vm._v(" "),
+        _c("input", {
+          attrs: {
+            type: "checkbox",
+            name: "entrenimiento",
+            id: "entrenimiento_5"
+          }
+        }),
+        _c("label", { attrs: { for: "entrenimiento_5" } }, [
+          _vm._v("Discotecas")
+        ]),
+        _vm._v(" "),
+        _c("input", {
+          attrs: {
+            type: "checkbox",
+            name: "entrenimiento",
+            id: "entrenimiento_6"
+          }
+        }),
+        _c("label", { attrs: { for: "entrenimiento_6" } }, [_vm._v("Museos")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-field" }, [
+      _c("span", [_vm._v("Educativo")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "my-checkbox" }, [
+        _c("input", {
+          attrs: { type: "checkbox", name: "educativo", id: "educativo_1" }
+        }),
+        _c("label", { attrs: { for: "educativo_1" } }, [_vm._v("Jardines")]),
+        _vm._v(" "),
+        _c("input", {
+          attrs: { type: "checkbox", name: "educativo", id: "educativo_2" }
+        }),
+        _c("label", { attrs: { for: "educativo_2" } }, [_vm._v("Colegios")]),
+        _vm._v(" "),
+        _c("input", {
+          attrs: { type: "checkbox", name: "educativo", id: "educativo_3" }
+        }),
+        _c("label", { attrs: { for: "educativo_3" } }, [
+          _vm._v("Universidades")
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-field" }, [
+      _c("span", [_vm._v("Gastronomía")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "my-checkbox" }, [
+        _c("input", {
+          attrs: { type: "checkbox", name: "gastronomia", id: "gastronomia_1" }
+        }),
+        _c("label", { attrs: { for: "gastronomia_1" } }, [
+          _vm._v("Restaurantes")
+        ]),
+        _vm._v(" "),
+        _c("input", {
+          attrs: { type: "checkbox", name: "gastronomia", id: "gastronomia_2" }
+        }),
+        _c("label", { attrs: { for: "gastronomia_2" } }, [_vm._v("Cafés")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-field" }, [
+      _c("span", [_vm._v("Mascotas")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "my-checkbox" }, [
+        _c("input", {
+          attrs: { type: "checkbox", name: "mascotas", id: "mascotas_1" }
+        }),
+        _c("label", { attrs: { for: "mascotas_1" } }, [_vm._v("Veterinarias")]),
+        _vm._v(" "),
+        _c("input", {
+          attrs: { type: "checkbox", name: "mascotas", id: "mascotas_2" }
+        }),
+        _c("label", { attrs: { for: "mascotas_2" } }, [_vm._v("Guarderias")]),
+        _vm._v(" "),
+        _c("input", {
+          attrs: { type: "checkbox", name: "mascotas", id: "mascotas_3" }
+        }),
+        _c("label", { attrs: { for: "mascotas_3" } }, [
+          _vm._v("Paseadores de perros")
+        ]),
+        _vm._v(" "),
+        _c("input", {
+          attrs: { type: "checkbox", name: "mascotas", id: "mascotas_4" }
+        }),
+        _c("label", { attrs: { for: "mascotas_4" } }, [
+          _vm._v("Tienda para mascotas")
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "f1-buttons" }, [
+      _c("button", { staticClass: "btn btn-prev", attrs: { type: "button" } }, [
+        _vm._v("Anterior")
+      ]),
+      _vm._v(" "),
+      _c("button", { staticClass: "btn btn-next", attrs: { type: "button" } }, [
+        _vm._v("Siguiente")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("fieldset", [
+      _c("h4", [_vm._v("Más información")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group more" }, [
+        _c("div", { staticClass: "form-field" }, [
+          _c("span", [_vm._v("Más información")]),
+          _vm._v(" "),
+          _c("textarea", { attrs: { placeholder: "¿Cúal?" } })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-field" }, [
+          _c("span", [_vm._v("Imágenes")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "image" }, [
+            _c("input", {
+              staticClass: "inputfile",
+              attrs: { type: "file", id: "file" }
+            }),
+            _vm._v(" "),
+            _c("label", { attrs: { for: "file" } }, [_vm._v("Subir imagen")])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "f1-buttons" }, [
+        _c(
+          "button",
+          { staticClass: "btn btn-prev", attrs: { type: "button" } },
+          [_vm._v("Anterior")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          { staticClass: "btn btn-submit", attrs: { type: "submit" } },
+          [_vm._v("Finalizar")]
+        )
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-e5fb8486", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

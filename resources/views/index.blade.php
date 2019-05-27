@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Permutando</title>
     <link rel="stylesheet" href="css/bootstrap.min.css" type='text/css' media='all'>
     <link rel="stylesheet" href="css/main.css" type='text/css' media='all'>
@@ -128,7 +129,9 @@
                     </div>
                     
                     <div class="box resultados-vendo">
-                        @include('componentes.formulario_vender')
+                        <!-- @include('componentes.formulario_vender') -->
+
+                        <form-inmueble></form-inmueble>
                     </div>
                     
                 </div>
@@ -143,6 +146,7 @@
 
     <script src="wizard/js/jquery.backstretch.min.js"></script>
     <script src="wizard/js/scripts.js"></script>
+    <script src="js/app.js"></script>
 
 </body>
 
