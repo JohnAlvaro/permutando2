@@ -70,7 +70,7 @@
 "use strict";
 
 
-var bind = __webpack_require__(5);
+var bind = __webpack_require__(6);
 var isBuffer = __webpack_require__(20);
 
 /*global toString:true*/
@@ -11019,10 +11019,10 @@ function getDefaultAdapter() {
   var adapter;
   if (typeof XMLHttpRequest !== 'undefined') {
     // For browsers use XHR adapter
-    adapter = __webpack_require__(7);
+    adapter = __webpack_require__(8);
   } else if (typeof process !== 'undefined') {
     // For node use HTTP adapter
-    adapter = __webpack_require__(7);
+    adapter = __webpack_require__(8);
   }
   return adapter;
 }
@@ -11097,10 +11097,119 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = defaults;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
 
 /***/ }),
 /* 4 */
+/***/ (function(module, exports) {
+
+/* globals __VUE_SSR_CONTEXT__ */
+
+// IMPORTANT: Do NOT use ES2015 features in this file.
+// This module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle.
+
+module.exports = function normalizeComponent (
+  rawScriptExports,
+  compiledTemplate,
+  functionalTemplate,
+  injectStyles,
+  scopeId,
+  moduleIdentifier /* server only */
+) {
+  var esModule
+  var scriptExports = rawScriptExports = rawScriptExports || {}
+
+  // ES6 modules interop
+  var type = typeof rawScriptExports.default
+  if (type === 'object' || type === 'function') {
+    esModule = rawScriptExports
+    scriptExports = rawScriptExports.default
+  }
+
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
+
+  // render functions
+  if (compiledTemplate) {
+    options.render = compiledTemplate.render
+    options.staticRenderFns = compiledTemplate.staticRenderFns
+    options._compiled = true
+  }
+
+  // functional template
+  if (functionalTemplate) {
+    options.functional = true
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = scopeId
+  }
+
+  var hook
+  if (moduleIdentifier) { // server build
+    hook = function (context) {
+      // 2.3 injection
+      context =
+        context || // cached call
+        (this.$vnode && this.$vnode.ssrContext) || // stateful
+        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
+      // 2.2 with runInNewContext: true
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__
+      }
+      // inject component styles
+      if (injectStyles) {
+        injectStyles.call(this, context)
+      }
+      // register component module identifier for async chunk inferrence
+      if (context && context._registeredComponents) {
+        context._registeredComponents.add(moduleIdentifier)
+      }
+    }
+    // used by ssr in case component is cached and beforeCreate
+    // never gets called
+    options._ssrRegister = hook
+  } else if (injectStyles) {
+    hook = injectStyles
+  }
+
+  if (hook) {
+    var functional = options.functional
+    var existing = functional
+      ? options.render
+      : options.beforeCreate
+
+    if (!functional) {
+      // inject component registration as beforeCreate hook
+      options.beforeCreate = existing
+        ? [].concat(existing, hook)
+        : [hook]
+    } else {
+      // for template-only hot-reload because in that case the render fn doesn't
+      // go through the normalizer
+      options._injectStyles = hook
+      // register for functioal component in vue file
+      options.render = function renderWithStyleInjection (h, context) {
+        hook.call(context)
+        return existing(h, context)
+      }
+    }
+  }
+
+  return {
+    esModule: esModule,
+    exports: scriptExports,
+    options: options
+  }
+}
+
+
+/***/ }),
+/* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -13713,7 +13822,7 @@ Popper.Defaults = Defaults;
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13731,7 +13840,7 @@ module.exports = function bind(fn, thisArg) {
 
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -13921,7 +14030,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13932,7 +14041,7 @@ var settle = __webpack_require__(23);
 var buildURL = __webpack_require__(25);
 var parseHeaders = __webpack_require__(26);
 var isURLSameOrigin = __webpack_require__(27);
-var createError = __webpack_require__(8);
+var createError = __webpack_require__(9);
 var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(28);
 
 module.exports = function xhrAdapter(config) {
@@ -14108,7 +14217,7 @@ module.exports = function xhrAdapter(config) {
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14133,7 +14242,7 @@ module.exports = function createError(message, config, code, request, response) 
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14145,7 +14254,7 @@ module.exports = function isCancel(value) {
 
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14171,120 +14280,11 @@ module.exports = Cancel;
 
 
 /***/ }),
-/* 11 */
-/***/ (function(module, exports) {
-
-/* globals __VUE_SSR_CONTEXT__ */
-
-// IMPORTANT: Do NOT use ES2015 features in this file.
-// This module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle.
-
-module.exports = function normalizeComponent (
-  rawScriptExports,
-  compiledTemplate,
-  functionalTemplate,
-  injectStyles,
-  scopeId,
-  moduleIdentifier /* server only */
-) {
-  var esModule
-  var scriptExports = rawScriptExports = rawScriptExports || {}
-
-  // ES6 modules interop
-  var type = typeof rawScriptExports.default
-  if (type === 'object' || type === 'function') {
-    esModule = rawScriptExports
-    scriptExports = rawScriptExports.default
-  }
-
-  // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
-
-  // render functions
-  if (compiledTemplate) {
-    options.render = compiledTemplate.render
-    options.staticRenderFns = compiledTemplate.staticRenderFns
-    options._compiled = true
-  }
-
-  // functional template
-  if (functionalTemplate) {
-    options.functional = true
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = scopeId
-  }
-
-  var hook
-  if (moduleIdentifier) { // server build
-    hook = function (context) {
-      // 2.3 injection
-      context =
-        context || // cached call
-        (this.$vnode && this.$vnode.ssrContext) || // stateful
-        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
-      // 2.2 with runInNewContext: true
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__
-      }
-      // inject component styles
-      if (injectStyles) {
-        injectStyles.call(this, context)
-      }
-      // register component module identifier for async chunk inferrence
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier)
-      }
-    }
-    // used by ssr in case component is cached and beforeCreate
-    // never gets called
-    options._ssrRegister = hook
-  } else if (injectStyles) {
-    hook = injectStyles
-  }
-
-  if (hook) {
-    var functional = options.functional
-    var existing = functional
-      ? options.render
-      : options.beforeCreate
-
-    if (!functional) {
-      // inject component registration as beforeCreate hook
-      options.beforeCreate = existing
-        ? [].concat(existing, hook)
-        : [hook]
-    } else {
-      // for template-only hot-reload because in that case the render fn doesn't
-      // go through the normalizer
-      options._injectStyles = hook
-      // register for functioal component in vue file
-      options.render = function renderWithStyleInjection (h, context) {
-        hook.call(context)
-        return existing(h, context)
-      }
-    }
-  }
-
-  return {
-    esModule: esModule,
-    exports: scriptExports,
-    options: options
-  }
-}
-
-
-/***/ }),
 /* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(13);
-module.exports = __webpack_require__(48);
+module.exports = __webpack_require__(51);
 
 
 /***/ }),
@@ -14312,7 +14312,7 @@ Vue.component('lista-usuarios', __webpack_require__(41));
 Vue.component('example-component', __webpack_require__(45));
 
 //Web
-Vue.component('form-inmueble', __webpack_require__(60));
+Vue.component('form-inmueble', __webpack_require__(48));
 
 var app = new Vue({
   el: '#app'
@@ -14324,7 +14324,7 @@ var app = new Vue({
 
 
 window._ = __webpack_require__(15);
-window.Popper = __webpack_require__(4).default;
+window.Popper = __webpack_require__(5).default;
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -31532,7 +31532,7 @@ module.exports = function(module) {
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
   */
 (function (global, factory) {
-   true ? factory(exports, __webpack_require__(2), __webpack_require__(4)) :
+   true ? factory(exports, __webpack_require__(2), __webpack_require__(5)) :
   typeof define === 'function' && define.amd ? define(['exports', 'jquery', 'popper.js'], factory) :
   (global = global || self, factory(global.bootstrap = {}, global.jQuery, global.Popper));
 }(this, function (exports, $, Popper) { 'use strict';
@@ -35977,7 +35977,7 @@ module.exports = __webpack_require__(19);
 
 
 var utils = __webpack_require__(0);
-var bind = __webpack_require__(5);
+var bind = __webpack_require__(6);
 var Axios = __webpack_require__(21);
 var defaults = __webpack_require__(3);
 
@@ -36012,9 +36012,9 @@ axios.create = function create(instanceConfig) {
 };
 
 // Expose Cancel & CancelToken
-axios.Cancel = __webpack_require__(10);
+axios.Cancel = __webpack_require__(11);
 axios.CancelToken = __webpack_require__(35);
-axios.isCancel = __webpack_require__(9);
+axios.isCancel = __webpack_require__(10);
 
 // Expose all/spread
 axios.all = function all(promises) {
@@ -36167,7 +36167,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 "use strict";
 
 
-var createError = __webpack_require__(8);
+var createError = __webpack_require__(9);
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -36600,7 +36600,7 @@ module.exports = InterceptorManager;
 
 var utils = __webpack_require__(0);
 var transformData = __webpack_require__(32);
-var isCancel = __webpack_require__(9);
+var isCancel = __webpack_require__(10);
 var defaults = __webpack_require__(3);
 var isAbsoluteURL = __webpack_require__(33);
 var combineURLs = __webpack_require__(34);
@@ -36760,7 +36760,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 "use strict";
 
 
-var Cancel = __webpack_require__(10);
+var Cancel = __webpack_require__(11);
 
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -49069,14 +49069,14 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(6)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(7)))
 
 /***/ }),
 /* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(11)
+var normalizeComponent = __webpack_require__(4)
 /* script */
 var __vue_script__ = __webpack_require__(42)
 /* template */
@@ -64612,7 +64612,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(11)
+var normalizeComponent = __webpack_require__(4)
 /* script */
 var __vue_script__ = __webpack_require__(46)
 /* template */
@@ -64728,31 +64728,14 @@ if (false) {
 
 /***/ }),
 /* 48 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 49 */,
-/* 50 */,
-/* 51 */,
-/* 52 */,
-/* 53 */,
-/* 54 */,
-/* 55 */,
-/* 56 */,
-/* 57 */,
-/* 58 */,
-/* 59 */,
-/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(11)
+var normalizeComponent = __webpack_require__(4)
 /* script */
-var __vue_script__ = __webpack_require__(61)
+var __vue_script__ = __webpack_require__(49)
 /* template */
-var __vue_template__ = __webpack_require__(62)
+var __vue_template__ = __webpack_require__(50)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -64791,11 +64774,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 61 */
+/* 49 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_toastr__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_toastr__);
 //
 //
 //
@@ -65009,27 +64994,102 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
+__WEBPACK_IMPORTED_MODULE_0_toastr___default.a.options = {
+  "closeButton": true,
+  "timeOut": "10000"
+  // "progressBar": true,
+};
 /* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            form: {
-                area: '',
-                habitaciones: '',
-                banos: '',
-                balcon: '',
-                terraza: '',
-                porteria: '',
-                parqueadero: '',
-                caracteristica: '',
-                zonas: [],
-                transporte: []
-            }
+  data: function data() {
+    return {
+      form: {
+        area: '',
+        habitaciones: '',
+        banos: '',
+        balcon: '',
+        terraza: '',
+        porteria: '',
+        parqueadero: '',
+        caracteristica: '',
+        mas_informacion: '',
+        zonas: [],
+        transporte: [],
+        viveres: [],
+        bienestar: [],
+        entretenimiento: [],
+        educativo: [],
+        gastronomia: [],
+        mascotas: [],
+        image: ''
+      }
+    };
+  },
+
+  methods: {
+    img: function img(event) {
+      this.form.image = this.$refs.file.files[0];
+      console.log(this.form.image);
+    },
+    storeInmueble: function storeInmueble() {
+      var _this = this;
+
+      var fd = new FormData();
+      fd.append('area', this.form.area);
+      fd.append('habitaciones', this.form.habitaciones);
+      fd.append('banos', this.form.banos);
+      fd.append('balcon', this.form.balcon);
+      fd.append('image', this.form.image);
+      fd.append('terraza', this.form.terraza);
+      fd.append('porteria', this.form.porteria);
+      fd.append('parqueadero', this.form.parqueadero);
+      fd.append('caracteristica', this.form.caracteristica);
+      fd.append('mas_informacion', this.form.mas_informacion);
+      fd.append('zonas', this.form.zonas);
+      fd.append('transporte', this.form.transporte);
+      fd.append('viveres', this.form.viveres);
+      fd.append('bienestar', this.form.bienestar);
+      fd.append('entretenimiento', this.form.entretenimiento);
+      fd.append('educativo', this.form.educativo);
+      fd.append('gastronomia', this.form.gastronomia);
+      fd.append('mascotas', this.form.mascotas);
+
+      axios.post('api/store-inmueble', fd, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(function (res) {
+        console.log(res.data);
+
+        _this.form = {
+          area: '',
+          habitaciones: '',
+          banos: '',
+          balcon: '',
+          image: '',
+          terraza: '',
+          porteria: '',
+          parqueadero: '',
+          caracteristica: '',
+          mas_informacion: '',
+          zonas: '',
+          transporte: '',
+          viveres: '',
+          bienestar: '',
+          entretenimiento: '',
+          educativo: '',
+          gastronomia: '',
+          mascotas: ''
         };
+        __WEBPACK_IMPORTED_MODULE_0_toastr___default.a.success('Inmueble subido correctamente');
+      });
     }
+  }
+
 });
 
 /***/ }),
-/* 62 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -65038,7 +65098,16 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "form",
-    { staticClass: "f1", attrs: { role: "form", action: "", method: "post" } },
+    {
+      staticClass: "f1",
+      attrs: { role: "form" },
+      on: {
+        submit: function($event) {
+          $event.preventDefault()
+          return _vm.storeInmueble($event)
+        }
+      }
+    },
     [
       _vm._m(0),
       _vm._v(" "),
@@ -66043,23 +66112,1463 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _vm._m(3),
+          _c("div", { staticClass: "form-field" }, [
+            _c("span", [_vm._v("Víveres")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "my-checkbox" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.viveres,
+                    expression: "form.viveres"
+                  }
+                ],
+                attrs: {
+                  type: "checkbox",
+                  value: "Tienda de barrio",
+                  id: "viveres_1"
+                },
+                domProps: {
+                  checked: Array.isArray(_vm.form.viveres)
+                    ? _vm._i(_vm.form.viveres, "Tienda de barrio") > -1
+                    : _vm.form.viveres
+                },
+                on: {
+                  change: function($event) {
+                    var $$a = _vm.form.viveres,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = "Tienda de barrio",
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 &&
+                          _vm.$set(_vm.form, "viveres", $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          _vm.$set(
+                            _vm.form,
+                            "viveres",
+                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                          )
+                      }
+                    } else {
+                      _vm.$set(_vm.form, "viveres", $$c)
+                    }
+                  }
+                }
+              }),
+              _c("label", { attrs: { for: "viveres_1" } }, [
+                _vm._v("Tienda de barrio")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.viveres,
+                    expression: "form.viveres"
+                  }
+                ],
+                attrs: {
+                  type: "checkbox",
+                  value: "Panadería",
+                  id: "viveres_2"
+                },
+                domProps: {
+                  checked: Array.isArray(_vm.form.viveres)
+                    ? _vm._i(_vm.form.viveres, "Panadería") > -1
+                    : _vm.form.viveres
+                },
+                on: {
+                  change: function($event) {
+                    var $$a = _vm.form.viveres,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = "Panadería",
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 &&
+                          _vm.$set(_vm.form, "viveres", $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          _vm.$set(
+                            _vm.form,
+                            "viveres",
+                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                          )
+                      }
+                    } else {
+                      _vm.$set(_vm.form, "viveres", $$c)
+                    }
+                  }
+                }
+              }),
+              _c("label", { attrs: { for: "viveres_2" } }, [
+                _vm._v("Panadería")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.viveres,
+                    expression: "form.viveres"
+                  }
+                ],
+                attrs: {
+                  type: "checkbox",
+                  value: "Fruterías",
+                  id: "viveres_3"
+                },
+                domProps: {
+                  checked: Array.isArray(_vm.form.viveres)
+                    ? _vm._i(_vm.form.viveres, "Fruterías") > -1
+                    : _vm.form.viveres
+                },
+                on: {
+                  change: function($event) {
+                    var $$a = _vm.form.viveres,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = "Fruterías",
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 &&
+                          _vm.$set(_vm.form, "viveres", $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          _vm.$set(
+                            _vm.form,
+                            "viveres",
+                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                          )
+                      }
+                    } else {
+                      _vm.$set(_vm.form, "viveres", $$c)
+                    }
+                  }
+                }
+              }),
+              _c("label", { attrs: { for: "viveres_3" } }, [
+                _vm._v("Fruterías")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.viveres,
+                    expression: "form.viveres"
+                  }
+                ],
+                attrs: {
+                  type: "checkbox",
+                  value: "Plaza de mercado",
+                  id: "viveres_4"
+                },
+                domProps: {
+                  checked: Array.isArray(_vm.form.viveres)
+                    ? _vm._i(_vm.form.viveres, "Plaza de mercado") > -1
+                    : _vm.form.viveres
+                },
+                on: {
+                  change: function($event) {
+                    var $$a = _vm.form.viveres,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = "Plaza de mercado",
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 &&
+                          _vm.$set(_vm.form, "viveres", $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          _vm.$set(
+                            _vm.form,
+                            "viveres",
+                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                          )
+                      }
+                    } else {
+                      _vm.$set(_vm.form, "viveres", $$c)
+                    }
+                  }
+                }
+              }),
+              _c("label", { attrs: { for: "viveres_4" } }, [
+                _vm._v("Plaza de mercado")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.viveres,
+                    expression: "form.viveres"
+                  }
+                ],
+                attrs: {
+                  type: "checkbox",
+                  value: "Mercado de frutas y verduras",
+                  id: "viveres_5"
+                },
+                domProps: {
+                  checked: Array.isArray(_vm.form.viveres)
+                    ? _vm._i(_vm.form.viveres, "Mercado de frutas y verduras") >
+                      -1
+                    : _vm.form.viveres
+                },
+                on: {
+                  change: function($event) {
+                    var $$a = _vm.form.viveres,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = "Mercado de frutas y verduras",
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 &&
+                          _vm.$set(_vm.form, "viveres", $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          _vm.$set(
+                            _vm.form,
+                            "viveres",
+                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                          )
+                      }
+                    } else {
+                      _vm.$set(_vm.form, "viveres", $$c)
+                    }
+                  }
+                }
+              }),
+              _c("label", { attrs: { for: "viveres_5" } }, [
+                _vm._v("Mercado de frutas y verduras")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.viveres,
+                    expression: "form.viveres"
+                  }
+                ],
+                attrs: {
+                  type: "checkbox",
+                  value: "Supermercados",
+                  id: "viveres_6"
+                },
+                domProps: {
+                  checked: Array.isArray(_vm.form.viveres)
+                    ? _vm._i(_vm.form.viveres, "Supermercados") > -1
+                    : _vm.form.viveres
+                },
+                on: {
+                  change: function($event) {
+                    var $$a = _vm.form.viveres,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = "Supermercados",
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 &&
+                          _vm.$set(_vm.form, "viveres", $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          _vm.$set(
+                            _vm.form,
+                            "viveres",
+                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                          )
+                      }
+                    } else {
+                      _vm.$set(_vm.form, "viveres", $$c)
+                    }
+                  }
+                }
+              }),
+              _c("label", { attrs: { for: "viveres_6" } }, [
+                _vm._v("Supermercados")
+              ])
+            ])
+          ]),
           _vm._v(" "),
-          _vm._m(4),
+          _c("div", { staticClass: "form-field" }, [
+            _c("span", [_vm._v("Bienestar")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "my-checkbox" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.bienestar,
+                    expression: "form.bienestar"
+                  }
+                ],
+                attrs: {
+                  type: "checkbox",
+                  value: "Gimnasios",
+                  id: "bienestar_1"
+                },
+                domProps: {
+                  checked: Array.isArray(_vm.form.bienestar)
+                    ? _vm._i(_vm.form.bienestar, "Gimnasios") > -1
+                    : _vm.form.bienestar
+                },
+                on: {
+                  change: function($event) {
+                    var $$a = _vm.form.bienestar,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = "Gimnasios",
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 &&
+                          _vm.$set(_vm.form, "bienestar", $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          _vm.$set(
+                            _vm.form,
+                            "bienestar",
+                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                          )
+                      }
+                    } else {
+                      _vm.$set(_vm.form, "bienestar", $$c)
+                    }
+                  }
+                }
+              }),
+              _c("label", { attrs: { for: "bienestar_1" } }, [
+                _vm._v("Gimnasios")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.bienestar,
+                    expression: "form.bienestar"
+                  }
+                ],
+                attrs: {
+                  type: "checkbox",
+                  value: "Centro de Yoga",
+                  id: "bienestar_2"
+                },
+                domProps: {
+                  checked: Array.isArray(_vm.form.bienestar)
+                    ? _vm._i(_vm.form.bienestar, "Centro de Yoga") > -1
+                    : _vm.form.bienestar
+                },
+                on: {
+                  change: function($event) {
+                    var $$a = _vm.form.bienestar,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = "Centro de Yoga",
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 &&
+                          _vm.$set(_vm.form, "bienestar", $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          _vm.$set(
+                            _vm.form,
+                            "bienestar",
+                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                          )
+                      }
+                    } else {
+                      _vm.$set(_vm.form, "bienestar", $$c)
+                    }
+                  }
+                }
+              }),
+              _c("label", { attrs: { for: "bienestar_2" } }, [
+                _vm._v("Centro de Yoga")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.bienestar,
+                    expression: "form.bienestar"
+                  }
+                ],
+                attrs: {
+                  type: "checkbox",
+                  value: "Ciclovía",
+                  id: "bienestar_3"
+                },
+                domProps: {
+                  checked: Array.isArray(_vm.form.bienestar)
+                    ? _vm._i(_vm.form.bienestar, "Ciclovía") > -1
+                    : _vm.form.bienestar
+                },
+                on: {
+                  change: function($event) {
+                    var $$a = _vm.form.bienestar,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = "Ciclovía",
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 &&
+                          _vm.$set(_vm.form, "bienestar", $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          _vm.$set(
+                            _vm.form,
+                            "bienestar",
+                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                          )
+                      }
+                    } else {
+                      _vm.$set(_vm.form, "bienestar", $$c)
+                    }
+                  }
+                }
+              }),
+              _c("label", { attrs: { for: "bienestar_3" } }, [
+                _vm._v("Ciclovía")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.bienestar,
+                    expression: "form.bienestar"
+                  }
+                ],
+                attrs: {
+                  type: "checkbox",
+                  value: "Parques",
+                  id: "bienestar_4"
+                },
+                domProps: {
+                  checked: Array.isArray(_vm.form.bienestar)
+                    ? _vm._i(_vm.form.bienestar, "Parques") > -1
+                    : _vm.form.bienestar
+                },
+                on: {
+                  change: function($event) {
+                    var $$a = _vm.form.bienestar,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = "Parques",
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 &&
+                          _vm.$set(_vm.form, "bienestar", $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          _vm.$set(
+                            _vm.form,
+                            "bienestar",
+                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                          )
+                      }
+                    } else {
+                      _vm.$set(_vm.form, "bienestar", $$c)
+                    }
+                  }
+                }
+              }),
+              _c("label", { attrs: { for: "bienestar_4" } }, [
+                _vm._v("Parques")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.bienestar,
+                    expression: "form.bienestar"
+                  }
+                ],
+                attrs: {
+                  type: "checkbox",
+                  value: "Hospitales",
+                  id: "bienestar_5"
+                },
+                domProps: {
+                  checked: Array.isArray(_vm.form.bienestar)
+                    ? _vm._i(_vm.form.bienestar, "Hospitales") > -1
+                    : _vm.form.bienestar
+                },
+                on: {
+                  change: function($event) {
+                    var $$a = _vm.form.bienestar,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = "Hospitales",
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 &&
+                          _vm.$set(_vm.form, "bienestar", $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          _vm.$set(
+                            _vm.form,
+                            "bienestar",
+                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                          )
+                      }
+                    } else {
+                      _vm.$set(_vm.form, "bienestar", $$c)
+                    }
+                  }
+                }
+              }),
+              _c("label", { attrs: { for: "bienestar_5" } }, [
+                _vm._v("Hospitales")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.bienestar,
+                    expression: "form.bienestar"
+                  }
+                ],
+                attrs: {
+                  type: "checkbox",
+                  value: "Clínicas",
+                  id: "bienestar_6"
+                },
+                domProps: {
+                  checked: Array.isArray(_vm.form.bienestar)
+                    ? _vm._i(_vm.form.bienestar, "Clínicas") > -1
+                    : _vm.form.bienestar
+                },
+                on: {
+                  change: function($event) {
+                    var $$a = _vm.form.bienestar,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = "Clínicas",
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 &&
+                          _vm.$set(_vm.form, "bienestar", $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          _vm.$set(
+                            _vm.form,
+                            "bienestar",
+                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                          )
+                      }
+                    } else {
+                      _vm.$set(_vm.form, "bienestar", $$c)
+                    }
+                  }
+                }
+              }),
+              _c("label", { attrs: { for: "bienestar_6" } }, [
+                _vm._v("Clínicas")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.bienestar,
+                    expression: "form.bienestar"
+                  }
+                ],
+                attrs: {
+                  type: "checkbox",
+                  value: "Iglesias",
+                  id: "bienestar_7"
+                },
+                domProps: {
+                  checked: Array.isArray(_vm.form.bienestar)
+                    ? _vm._i(_vm.form.bienestar, "Iglesias") > -1
+                    : _vm.form.bienestar
+                },
+                on: {
+                  change: function($event) {
+                    var $$a = _vm.form.bienestar,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = "Iglesias",
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 &&
+                          _vm.$set(_vm.form, "bienestar", $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          _vm.$set(
+                            _vm.form,
+                            "bienestar",
+                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                          )
+                      }
+                    } else {
+                      _vm.$set(_vm.form, "bienestar", $$c)
+                    }
+                  }
+                }
+              }),
+              _c("label", { attrs: { for: "bienestar_7" } }, [
+                _vm._v("Iglesias")
+              ])
+            ])
+          ]),
           _vm._v(" "),
-          _vm._m(5),
+          _c("div", { staticClass: "form-field" }, [
+            _c("span", [_vm._v("Entretenimiento")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "my-checkbox" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.entretenimiento,
+                    expression: "form.entretenimiento"
+                  }
+                ],
+                attrs: {
+                  type: "checkbox",
+                  value: "Centros comerciales",
+                  id: "entrenimiento_1"
+                },
+                domProps: {
+                  checked: Array.isArray(_vm.form.entretenimiento)
+                    ? _vm._i(_vm.form.entretenimiento, "Centros comerciales") >
+                      -1
+                    : _vm.form.entretenimiento
+                },
+                on: {
+                  change: function($event) {
+                    var $$a = _vm.form.entretenimiento,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = "Centros comerciales",
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 &&
+                          _vm.$set(
+                            _vm.form,
+                            "entretenimiento",
+                            $$a.concat([$$v])
+                          )
+                      } else {
+                        $$i > -1 &&
+                          _vm.$set(
+                            _vm.form,
+                            "entretenimiento",
+                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                          )
+                      }
+                    } else {
+                      _vm.$set(_vm.form, "entretenimiento", $$c)
+                    }
+                  }
+                }
+              }),
+              _c("label", { attrs: { for: "entrenimiento_1" } }, [
+                _vm._v("Centros comerciales")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.entretenimiento,
+                    expression: "form.entretenimiento"
+                  }
+                ],
+                attrs: {
+                  type: "checkbox",
+                  value: "Teatros",
+                  id: "entrenimiento_2"
+                },
+                domProps: {
+                  checked: Array.isArray(_vm.form.entretenimiento)
+                    ? _vm._i(_vm.form.entretenimiento, "Teatros") > -1
+                    : _vm.form.entretenimiento
+                },
+                on: {
+                  change: function($event) {
+                    var $$a = _vm.form.entretenimiento,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = "Teatros",
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 &&
+                          _vm.$set(
+                            _vm.form,
+                            "entretenimiento",
+                            $$a.concat([$$v])
+                          )
+                      } else {
+                        $$i > -1 &&
+                          _vm.$set(
+                            _vm.form,
+                            "entretenimiento",
+                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                          )
+                      }
+                    } else {
+                      _vm.$set(_vm.form, "entretenimiento", $$c)
+                    }
+                  }
+                }
+              }),
+              _c("label", { attrs: { for: "entrenimiento_2" } }, [
+                _vm._v("Teatros")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.entretenimiento,
+                    expression: "form.entretenimiento"
+                  }
+                ],
+                attrs: {
+                  type: "checkbox",
+                  value: "Cines",
+                  id: "entrenimiento_3"
+                },
+                domProps: {
+                  checked: Array.isArray(_vm.form.entretenimiento)
+                    ? _vm._i(_vm.form.entretenimiento, "Cines") > -1
+                    : _vm.form.entretenimiento
+                },
+                on: {
+                  change: function($event) {
+                    var $$a = _vm.form.entretenimiento,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = "Cines",
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 &&
+                          _vm.$set(
+                            _vm.form,
+                            "entretenimiento",
+                            $$a.concat([$$v])
+                          )
+                      } else {
+                        $$i > -1 &&
+                          _vm.$set(
+                            _vm.form,
+                            "entretenimiento",
+                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                          )
+                      }
+                    } else {
+                      _vm.$set(_vm.form, "entretenimiento", $$c)
+                    }
+                  }
+                }
+              }),
+              _c("label", { attrs: { for: "entrenimiento_3" } }, [
+                _vm._v("Cines")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.entretenimiento,
+                    expression: "form.entretenimiento"
+                  }
+                ],
+                attrs: {
+                  type: "checkbox",
+                  value: "Bares",
+                  id: "entrenimiento_4"
+                },
+                domProps: {
+                  checked: Array.isArray(_vm.form.entretenimiento)
+                    ? _vm._i(_vm.form.entretenimiento, "Bares") > -1
+                    : _vm.form.entretenimiento
+                },
+                on: {
+                  change: function($event) {
+                    var $$a = _vm.form.entretenimiento,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = "Bares",
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 &&
+                          _vm.$set(
+                            _vm.form,
+                            "entretenimiento",
+                            $$a.concat([$$v])
+                          )
+                      } else {
+                        $$i > -1 &&
+                          _vm.$set(
+                            _vm.form,
+                            "entretenimiento",
+                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                          )
+                      }
+                    } else {
+                      _vm.$set(_vm.form, "entretenimiento", $$c)
+                    }
+                  }
+                }
+              }),
+              _c("label", { attrs: { for: "entrenimiento_4" } }, [
+                _vm._v("Bares")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.entretenimiento,
+                    expression: "form.entretenimiento"
+                  }
+                ],
+                attrs: {
+                  type: "checkbox",
+                  value: "Discotecas",
+                  id: "entrenimiento_5"
+                },
+                domProps: {
+                  checked: Array.isArray(_vm.form.entretenimiento)
+                    ? _vm._i(_vm.form.entretenimiento, "Discotecas") > -1
+                    : _vm.form.entretenimiento
+                },
+                on: {
+                  change: function($event) {
+                    var $$a = _vm.form.entretenimiento,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = "Discotecas",
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 &&
+                          _vm.$set(
+                            _vm.form,
+                            "entretenimiento",
+                            $$a.concat([$$v])
+                          )
+                      } else {
+                        $$i > -1 &&
+                          _vm.$set(
+                            _vm.form,
+                            "entretenimiento",
+                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                          )
+                      }
+                    } else {
+                      _vm.$set(_vm.form, "entretenimiento", $$c)
+                    }
+                  }
+                }
+              }),
+              _c("label", { attrs: { for: "entrenimiento_5" } }, [
+                _vm._v("Discotecas")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.entretenimiento,
+                    expression: "form.entretenimiento"
+                  }
+                ],
+                attrs: {
+                  type: "checkbox",
+                  value: "Museos",
+                  id: "entrenimiento_6"
+                },
+                domProps: {
+                  checked: Array.isArray(_vm.form.entretenimiento)
+                    ? _vm._i(_vm.form.entretenimiento, "Museos") > -1
+                    : _vm.form.entretenimiento
+                },
+                on: {
+                  change: function($event) {
+                    var $$a = _vm.form.entretenimiento,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = "Museos",
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 &&
+                          _vm.$set(
+                            _vm.form,
+                            "entretenimiento",
+                            $$a.concat([$$v])
+                          )
+                      } else {
+                        $$i > -1 &&
+                          _vm.$set(
+                            _vm.form,
+                            "entretenimiento",
+                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                          )
+                      }
+                    } else {
+                      _vm.$set(_vm.form, "entretenimiento", $$c)
+                    }
+                  }
+                }
+              }),
+              _c("label", { attrs: { for: "entrenimiento_6" } }, [
+                _vm._v("Museos")
+              ])
+            ])
+          ]),
           _vm._v(" "),
-          _vm._m(6),
+          _c("div", { staticClass: "form-field" }, [
+            _c("span", [_vm._v("Educativo")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "my-checkbox" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.educativo,
+                    expression: "form.educativo"
+                  }
+                ],
+                attrs: {
+                  type: "checkbox",
+                  value: "Jardines",
+                  id: "educativo_1"
+                },
+                domProps: {
+                  checked: Array.isArray(_vm.form.educativo)
+                    ? _vm._i(_vm.form.educativo, "Jardines") > -1
+                    : _vm.form.educativo
+                },
+                on: {
+                  change: function($event) {
+                    var $$a = _vm.form.educativo,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = "Jardines",
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 &&
+                          _vm.$set(_vm.form, "educativo", $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          _vm.$set(
+                            _vm.form,
+                            "educativo",
+                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                          )
+                      }
+                    } else {
+                      _vm.$set(_vm.form, "educativo", $$c)
+                    }
+                  }
+                }
+              }),
+              _c("label", { attrs: { for: "educativo_1" } }, [
+                _vm._v("Jardines")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.educativo,
+                    expression: "form.educativo"
+                  }
+                ],
+                attrs: {
+                  type: "checkbox",
+                  value: "Colegios",
+                  id: "educativo_2"
+                },
+                domProps: {
+                  checked: Array.isArray(_vm.form.educativo)
+                    ? _vm._i(_vm.form.educativo, "Colegios") > -1
+                    : _vm.form.educativo
+                },
+                on: {
+                  change: function($event) {
+                    var $$a = _vm.form.educativo,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = "Colegios",
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 &&
+                          _vm.$set(_vm.form, "educativo", $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          _vm.$set(
+                            _vm.form,
+                            "educativo",
+                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                          )
+                      }
+                    } else {
+                      _vm.$set(_vm.form, "educativo", $$c)
+                    }
+                  }
+                }
+              }),
+              _c("label", { attrs: { for: "educativo_2" } }, [
+                _vm._v("Colegios")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.educativo,
+                    expression: "form.educativo"
+                  }
+                ],
+                attrs: {
+                  type: "checkbox",
+                  value: "Universidades",
+                  id: "educativo_3"
+                },
+                domProps: {
+                  checked: Array.isArray(_vm.form.educativo)
+                    ? _vm._i(_vm.form.educativo, "Universidades") > -1
+                    : _vm.form.educativo
+                },
+                on: {
+                  change: function($event) {
+                    var $$a = _vm.form.educativo,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = "Universidades",
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 &&
+                          _vm.$set(_vm.form, "educativo", $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          _vm.$set(
+                            _vm.form,
+                            "educativo",
+                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                          )
+                      }
+                    } else {
+                      _vm.$set(_vm.form, "educativo", $$c)
+                    }
+                  }
+                }
+              }),
+              _c("label", { attrs: { for: "educativo_3" } }, [
+                _vm._v("Universidades")
+              ])
+            ])
+          ]),
           _vm._v(" "),
-          _vm._m(7),
+          _c("div", { staticClass: "form-field" }, [
+            _c("span", [_vm._v("Gastronomía")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "my-checkbox" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.gastronomia,
+                    expression: "form.gastronomia"
+                  }
+                ],
+                attrs: {
+                  type: "checkbox",
+                  value: "Restaurantes",
+                  id: "gastronomia_1"
+                },
+                domProps: {
+                  checked: Array.isArray(_vm.form.gastronomia)
+                    ? _vm._i(_vm.form.gastronomia, "Restaurantes") > -1
+                    : _vm.form.gastronomia
+                },
+                on: {
+                  change: function($event) {
+                    var $$a = _vm.form.gastronomia,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = "Restaurantes",
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 &&
+                          _vm.$set(_vm.form, "gastronomia", $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          _vm.$set(
+                            _vm.form,
+                            "gastronomia",
+                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                          )
+                      }
+                    } else {
+                      _vm.$set(_vm.form, "gastronomia", $$c)
+                    }
+                  }
+                }
+              }),
+              _c("label", { attrs: { for: "gastronomia_1" } }, [
+                _vm._v("Restaurantes")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.gastronomia,
+                    expression: "form.gastronomia"
+                  }
+                ],
+                attrs: {
+                  type: "checkbox",
+                  value: "Cafés",
+                  id: "gastronomia_2"
+                },
+                domProps: {
+                  checked: Array.isArray(_vm.form.gastronomia)
+                    ? _vm._i(_vm.form.gastronomia, "Cafés") > -1
+                    : _vm.form.gastronomia
+                },
+                on: {
+                  change: function($event) {
+                    var $$a = _vm.form.gastronomia,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = "Cafés",
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 &&
+                          _vm.$set(_vm.form, "gastronomia", $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          _vm.$set(
+                            _vm.form,
+                            "gastronomia",
+                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                          )
+                      }
+                    } else {
+                      _vm.$set(_vm.form, "gastronomia", $$c)
+                    }
+                  }
+                }
+              }),
+              _c("label", { attrs: { for: "gastronomia_2" } }, [
+                _vm._v("Cafés")
+              ])
+            ])
+          ]),
           _vm._v(" "),
-          _vm._m(8)
+          _c("div", { staticClass: "form-field" }, [
+            _c("span", [_vm._v("Mascotas")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "my-checkbox" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.mascotas,
+                    expression: "form.mascotas"
+                  }
+                ],
+                attrs: {
+                  type: "checkbox",
+                  value: "Veterinarias",
+                  id: "mascotas_1"
+                },
+                domProps: {
+                  checked: Array.isArray(_vm.form.mascotas)
+                    ? _vm._i(_vm.form.mascotas, "Veterinarias") > -1
+                    : _vm.form.mascotas
+                },
+                on: {
+                  change: function($event) {
+                    var $$a = _vm.form.mascotas,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = "Veterinarias",
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 &&
+                          _vm.$set(_vm.form, "mascotas", $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          _vm.$set(
+                            _vm.form,
+                            "mascotas",
+                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                          )
+                      }
+                    } else {
+                      _vm.$set(_vm.form, "mascotas", $$c)
+                    }
+                  }
+                }
+              }),
+              _c("label", { attrs: { for: "mascotas_1" } }, [
+                _vm._v("Veterinarias")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.mascotas,
+                    expression: "form.mascotas"
+                  }
+                ],
+                attrs: {
+                  type: "checkbox",
+                  value: "Guarderias",
+                  id: "mascotas_2"
+                },
+                domProps: {
+                  checked: Array.isArray(_vm.form.mascotas)
+                    ? _vm._i(_vm.form.mascotas, "Guarderias") > -1
+                    : _vm.form.mascotas
+                },
+                on: {
+                  change: function($event) {
+                    var $$a = _vm.form.mascotas,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = "Guarderias",
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 &&
+                          _vm.$set(_vm.form, "mascotas", $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          _vm.$set(
+                            _vm.form,
+                            "mascotas",
+                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                          )
+                      }
+                    } else {
+                      _vm.$set(_vm.form, "mascotas", $$c)
+                    }
+                  }
+                }
+              }),
+              _c("label", { attrs: { for: "mascotas_2" } }, [
+                _vm._v("Guarderias")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.mascotas,
+                    expression: "form.mascotas"
+                  }
+                ],
+                attrs: {
+                  type: "checkbox",
+                  value: "Paseadores de perros",
+                  id: "mascotas_3"
+                },
+                domProps: {
+                  checked: Array.isArray(_vm.form.mascotas)
+                    ? _vm._i(_vm.form.mascotas, "Paseadores de perros") > -1
+                    : _vm.form.mascotas
+                },
+                on: {
+                  change: function($event) {
+                    var $$a = _vm.form.mascotas,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = "Paseadores de perros",
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 &&
+                          _vm.$set(_vm.form, "mascotas", $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          _vm.$set(
+                            _vm.form,
+                            "mascotas",
+                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                          )
+                      }
+                    } else {
+                      _vm.$set(_vm.form, "mascotas", $$c)
+                    }
+                  }
+                }
+              }),
+              _c("label", { attrs: { for: "mascotas_3" } }, [
+                _vm._v("Paseadores de perros")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.mascotas,
+                    expression: "form.mascotas"
+                  }
+                ],
+                attrs: {
+                  type: "checkbox",
+                  value: "Tienda para mascotas",
+                  id: "mascotas_4"
+                },
+                domProps: {
+                  checked: Array.isArray(_vm.form.mascotas)
+                    ? _vm._i(_vm.form.mascotas, "Tienda para mascotas") > -1
+                    : _vm.form.mascotas
+                },
+                on: {
+                  change: function($event) {
+                    var $$a = _vm.form.mascotas,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = "Tienda para mascotas",
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 &&
+                          _vm.$set(_vm.form, "mascotas", $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          _vm.$set(
+                            _vm.form,
+                            "mascotas",
+                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                          )
+                      }
+                    } else {
+                      _vm.$set(_vm.form, "mascotas", $$c)
+                    }
+                  }
+                }
+              }),
+              _c("label", { attrs: { for: "mascotas_4" } }, [
+                _vm._v("Tienda para mascotas")
+              ])
+            ])
+          ])
         ]),
         _vm._v(" "),
-        _vm._m(9)
+        _vm._m(3)
       ]),
       _vm._v(" "),
-      _vm._m(10)
+      _c("fieldset", [
+        _c("h4", [_vm._v("Más información")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group more" }, [
+          _c("div", { staticClass: "form-field" }, [
+            _c("span", [_vm._v("Más información")]),
+            _vm._v(" "),
+            _c("textarea", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.form.mas_informacion,
+                  expression: "form.mas_informacion"
+                }
+              ],
+              attrs: { placeholder: "¿Cúal?" },
+              domProps: { value: _vm.form.mas_informacion },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.form, "mas_informacion", $event.target.value)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-field" }, [
+            _c("span", [_vm._v("Imágenes")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "image" }, [
+              _c("input", {
+                ref: "file",
+                staticClass: "inputfile",
+                attrs: { type: "file", id: "file" },
+                on: { change: _vm.img }
+              }),
+              _vm._v(" "),
+              _c("label", { attrs: { for: "file" } }, [_vm._v("Subir imagen")])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _vm._m(4)
+      ])
     ]
   )
 }
@@ -66110,250 +67619,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-field" }, [
-      _c("span", [_vm._v("Víveres")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "my-checkbox" }, [
-        _c("input", {
-          attrs: { type: "checkbox", name: "viveres", id: "viveres_1" }
-        }),
-        _c("label", { attrs: { for: "viveres_1" } }, [
-          _vm._v("Tienda de barrio")
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          attrs: { type: "checkbox", name: "viveres", id: "viveres_2" }
-        }),
-        _c("label", { attrs: { for: "viveres_2" } }, [_vm._v("Panadería")]),
-        _vm._v(" "),
-        _c("input", {
-          attrs: { type: "checkbox", name: "viveres", id: "viveres_3" }
-        }),
-        _c("label", { attrs: { for: "viveres_3" } }, [_vm._v("Fruterías")]),
-        _vm._v(" "),
-        _c("input", {
-          attrs: { type: "checkbox", name: "viveres", id: "viveres_4" }
-        }),
-        _c("label", { attrs: { for: "viveres_4" } }, [
-          _vm._v("Plaza de mercado")
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          attrs: { type: "checkbox", name: "viveres", id: "viveres_5" }
-        }),
-        _c("label", { attrs: { for: "viveres_5" } }, [
-          _vm._v("Mercado de frutas y verduras")
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          attrs: { type: "checkbox", name: "viveres", id: "viveres_6" }
-        }),
-        _c("label", { attrs: { for: "viveres_6" } }, [_vm._v("Supermercados")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-field" }, [
-      _c("span", [_vm._v("Bienestar")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "my-checkbox" }, [
-        _c("input", {
-          attrs: { type: "checkbox", name: "bienestar", id: "bienestar_1" }
-        }),
-        _c("label", { attrs: { for: "bienestar_1" } }, [_vm._v("Gimnasios")]),
-        _vm._v(" "),
-        _c("input", {
-          attrs: { type: "checkbox", name: "bienestar", id: "bienestar_2" }
-        }),
-        _c("label", { attrs: { for: "bienestar_2" } }, [
-          _vm._v("Centro de Yoga")
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          attrs: { type: "checkbox", name: "bienestar", id: "bienestar_3" }
-        }),
-        _c("label", { attrs: { for: "bienestar_3" } }, [_vm._v("Ciclovía")]),
-        _vm._v(" "),
-        _c("input", {
-          attrs: { type: "checkbox", name: "bienestar", id: "bienestar_4" }
-        }),
-        _c("label", { attrs: { for: "bienestar_4" } }, [_vm._v("Parques")]),
-        _vm._v(" "),
-        _c("input", {
-          attrs: { type: "checkbox", name: "bienestar", id: "bienestar_5" }
-        }),
-        _c("label", { attrs: { for: "bienestar_5" } }, [_vm._v("Hospitales")]),
-        _vm._v(" "),
-        _c("input", {
-          attrs: { type: "checkbox", name: "bienestar", id: "bienestar_6" }
-        }),
-        _c("label", { attrs: { for: "bienestar_6" } }, [_vm._v("Clínicas")]),
-        _vm._v(" "),
-        _c("input", {
-          attrs: { type: "checkbox", name: "bienestar", id: "bienestar_7" }
-        }),
-        _c("label", { attrs: { for: "bienestar_7" } }, [_vm._v("Iglesias")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-field" }, [
-      _c("span", [_vm._v("Entretenimiento")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "my-checkbox" }, [
-        _c("input", {
-          attrs: {
-            type: "checkbox",
-            name: "entrenimiento",
-            id: "entrenimiento_1"
-          }
-        }),
-        _c("label", { attrs: { for: "entrenimiento_1" } }, [
-          _vm._v("Centros comerciales")
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          attrs: {
-            type: "checkbox",
-            name: "entrenimiento",
-            id: "entrenimiento_2"
-          }
-        }),
-        _c("label", { attrs: { for: "entrenimiento_2" } }, [_vm._v("Teatros")]),
-        _vm._v(" "),
-        _c("input", {
-          attrs: {
-            type: "checkbox",
-            name: "entrenimiento",
-            id: "entrenimiento_3"
-          }
-        }),
-        _c("label", { attrs: { for: "entrenimiento_3" } }, [_vm._v("Cines")]),
-        _vm._v(" "),
-        _c("input", {
-          attrs: {
-            type: "checkbox",
-            name: "entrenimiento",
-            id: "entrenimiento_4"
-          }
-        }),
-        _c("label", { attrs: { for: "entrenimiento_4" } }, [_vm._v("Bares")]),
-        _vm._v(" "),
-        _c("input", {
-          attrs: {
-            type: "checkbox",
-            name: "entrenimiento",
-            id: "entrenimiento_5"
-          }
-        }),
-        _c("label", { attrs: { for: "entrenimiento_5" } }, [
-          _vm._v("Discotecas")
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          attrs: {
-            type: "checkbox",
-            name: "entrenimiento",
-            id: "entrenimiento_6"
-          }
-        }),
-        _c("label", { attrs: { for: "entrenimiento_6" } }, [_vm._v("Museos")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-field" }, [
-      _c("span", [_vm._v("Educativo")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "my-checkbox" }, [
-        _c("input", {
-          attrs: { type: "checkbox", name: "educativo", id: "educativo_1" }
-        }),
-        _c("label", { attrs: { for: "educativo_1" } }, [_vm._v("Jardines")]),
-        _vm._v(" "),
-        _c("input", {
-          attrs: { type: "checkbox", name: "educativo", id: "educativo_2" }
-        }),
-        _c("label", { attrs: { for: "educativo_2" } }, [_vm._v("Colegios")]),
-        _vm._v(" "),
-        _c("input", {
-          attrs: { type: "checkbox", name: "educativo", id: "educativo_3" }
-        }),
-        _c("label", { attrs: { for: "educativo_3" } }, [
-          _vm._v("Universidades")
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-field" }, [
-      _c("span", [_vm._v("Gastronomía")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "my-checkbox" }, [
-        _c("input", {
-          attrs: { type: "checkbox", name: "gastronomia", id: "gastronomia_1" }
-        }),
-        _c("label", { attrs: { for: "gastronomia_1" } }, [
-          _vm._v("Restaurantes")
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          attrs: { type: "checkbox", name: "gastronomia", id: "gastronomia_2" }
-        }),
-        _c("label", { attrs: { for: "gastronomia_2" } }, [_vm._v("Cafés")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-field" }, [
-      _c("span", [_vm._v("Mascotas")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "my-checkbox" }, [
-        _c("input", {
-          attrs: { type: "checkbox", name: "mascotas", id: "mascotas_1" }
-        }),
-        _c("label", { attrs: { for: "mascotas_1" } }, [_vm._v("Veterinarias")]),
-        _vm._v(" "),
-        _c("input", {
-          attrs: { type: "checkbox", name: "mascotas", id: "mascotas_2" }
-        }),
-        _c("label", { attrs: { for: "mascotas_2" } }, [_vm._v("Guarderias")]),
-        _vm._v(" "),
-        _c("input", {
-          attrs: { type: "checkbox", name: "mascotas", id: "mascotas_3" }
-        }),
-        _c("label", { attrs: { for: "mascotas_3" } }, [
-          _vm._v("Paseadores de perros")
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          attrs: { type: "checkbox", name: "mascotas", id: "mascotas_4" }
-        }),
-        _c("label", { attrs: { for: "mascotas_4" } }, [
-          _vm._v("Tienda para mascotas")
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "f1-buttons" }, [
       _c("button", { staticClass: "btn btn-prev", attrs: { type: "button" } }, [
         _vm._v("Anterior")
@@ -66368,43 +67633,16 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("fieldset", [
-      _c("h4", [_vm._v("Más información")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group more" }, [
-        _c("div", { staticClass: "form-field" }, [
-          _c("span", [_vm._v("Más información")]),
-          _vm._v(" "),
-          _c("textarea", { attrs: { placeholder: "¿Cúal?" } })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-field" }, [
-          _c("span", [_vm._v("Imágenes")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "image" }, [
-            _c("input", {
-              staticClass: "inputfile",
-              attrs: { type: "file", id: "file" }
-            }),
-            _vm._v(" "),
-            _c("label", { attrs: { for: "file" } }, [_vm._v("Subir imagen")])
-          ])
-        ])
+    return _c("div", { staticClass: "f1-buttons" }, [
+      _c("button", { staticClass: "btn btn-prev", attrs: { type: "button" } }, [
+        _vm._v("Anterior")
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "f1-buttons" }, [
-        _c(
-          "button",
-          { staticClass: "btn btn-prev", attrs: { type: "button" } },
-          [_vm._v("Anterior")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          { staticClass: "btn btn-submit", attrs: { type: "submit" } },
-          [_vm._v("Finalizar")]
-        )
-      ])
+      _c(
+        "button",
+        { staticClass: "btn btn-submit", attrs: { type: "submit" } },
+        [_vm._v("Finalizar")]
+      )
     ])
   }
 ]
@@ -66416,6 +67654,509 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-e5fb8486", module.exports)
   }
 }
+
+/***/ }),
+/* 51 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 52 */,
+/* 53 */,
+/* 54 */,
+/* 55 */,
+/* 56 */,
+/* 57 */,
+/* 58 */,
+/* 59 */,
+/* 60 */,
+/* 61 */,
+/* 62 */,
+/* 63 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
+ * Toastr
+ * Copyright 2012-2015
+ * Authors: John Papa, Hans Fjällemark, and Tim Ferrell.
+ * All Rights Reserved.
+ * Use, reproduction, distribution, and modification of this code is subject to the terms and
+ * conditions of the MIT license, available at http://www.opensource.org/licenses/mit-license.php
+ *
+ * ARIA Support: Greta Krafsig
+ *
+ * Project: https://github.com/CodeSeven/toastr
+ */
+/* global define */
+(function (define) {
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(2)], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($) {
+        return (function () {
+            var $container;
+            var listener;
+            var toastId = 0;
+            var toastType = {
+                error: 'error',
+                info: 'info',
+                success: 'success',
+                warning: 'warning'
+            };
+
+            var toastr = {
+                clear: clear,
+                remove: remove,
+                error: error,
+                getContainer: getContainer,
+                info: info,
+                options: {},
+                subscribe: subscribe,
+                success: success,
+                version: '2.1.4',
+                warning: warning
+            };
+
+            var previousToast;
+
+            return toastr;
+
+            ////////////////
+
+            function error(message, title, optionsOverride) {
+                return notify({
+                    type: toastType.error,
+                    iconClass: getOptions().iconClasses.error,
+                    message: message,
+                    optionsOverride: optionsOverride,
+                    title: title
+                });
+            }
+
+            function getContainer(options, create) {
+                if (!options) { options = getOptions(); }
+                $container = $('#' + options.containerId);
+                if ($container.length) {
+                    return $container;
+                }
+                if (create) {
+                    $container = createContainer(options);
+                }
+                return $container;
+            }
+
+            function info(message, title, optionsOverride) {
+                return notify({
+                    type: toastType.info,
+                    iconClass: getOptions().iconClasses.info,
+                    message: message,
+                    optionsOverride: optionsOverride,
+                    title: title
+                });
+            }
+
+            function subscribe(callback) {
+                listener = callback;
+            }
+
+            function success(message, title, optionsOverride) {
+                return notify({
+                    type: toastType.success,
+                    iconClass: getOptions().iconClasses.success,
+                    message: message,
+                    optionsOverride: optionsOverride,
+                    title: title
+                });
+            }
+
+            function warning(message, title, optionsOverride) {
+                return notify({
+                    type: toastType.warning,
+                    iconClass: getOptions().iconClasses.warning,
+                    message: message,
+                    optionsOverride: optionsOverride,
+                    title: title
+                });
+            }
+
+            function clear($toastElement, clearOptions) {
+                var options = getOptions();
+                if (!$container) { getContainer(options); }
+                if (!clearToast($toastElement, options, clearOptions)) {
+                    clearContainer(options);
+                }
+            }
+
+            function remove($toastElement) {
+                var options = getOptions();
+                if (!$container) { getContainer(options); }
+                if ($toastElement && $(':focus', $toastElement).length === 0) {
+                    removeToast($toastElement);
+                    return;
+                }
+                if ($container.children().length) {
+                    $container.remove();
+                }
+            }
+
+            // internal functions
+
+            function clearContainer (options) {
+                var toastsToClear = $container.children();
+                for (var i = toastsToClear.length - 1; i >= 0; i--) {
+                    clearToast($(toastsToClear[i]), options);
+                }
+            }
+
+            function clearToast ($toastElement, options, clearOptions) {
+                var force = clearOptions && clearOptions.force ? clearOptions.force : false;
+                if ($toastElement && (force || $(':focus', $toastElement).length === 0)) {
+                    $toastElement[options.hideMethod]({
+                        duration: options.hideDuration,
+                        easing: options.hideEasing,
+                        complete: function () { removeToast($toastElement); }
+                    });
+                    return true;
+                }
+                return false;
+            }
+
+            function createContainer(options) {
+                $container = $('<div/>')
+                    .attr('id', options.containerId)
+                    .addClass(options.positionClass);
+
+                $container.appendTo($(options.target));
+                return $container;
+            }
+
+            function getDefaults() {
+                return {
+                    tapToDismiss: true,
+                    toastClass: 'toast',
+                    containerId: 'toast-container',
+                    debug: false,
+
+                    showMethod: 'fadeIn', //fadeIn, slideDown, and show are built into jQuery
+                    showDuration: 300,
+                    showEasing: 'swing', //swing and linear are built into jQuery
+                    onShown: undefined,
+                    hideMethod: 'fadeOut',
+                    hideDuration: 1000,
+                    hideEasing: 'swing',
+                    onHidden: undefined,
+                    closeMethod: false,
+                    closeDuration: false,
+                    closeEasing: false,
+                    closeOnHover: true,
+
+                    extendedTimeOut: 1000,
+                    iconClasses: {
+                        error: 'toast-error',
+                        info: 'toast-info',
+                        success: 'toast-success',
+                        warning: 'toast-warning'
+                    },
+                    iconClass: 'toast-info',
+                    positionClass: 'toast-top-right',
+                    timeOut: 5000, // Set timeOut and extendedTimeOut to 0 to make it sticky
+                    titleClass: 'toast-title',
+                    messageClass: 'toast-message',
+                    escapeHtml: false,
+                    target: 'body',
+                    closeHtml: '<button type="button">&times;</button>',
+                    closeClass: 'toast-close-button',
+                    newestOnTop: true,
+                    preventDuplicates: false,
+                    progressBar: false,
+                    progressClass: 'toast-progress',
+                    rtl: false
+                };
+            }
+
+            function publish(args) {
+                if (!listener) { return; }
+                listener(args);
+            }
+
+            function notify(map) {
+                var options = getOptions();
+                var iconClass = map.iconClass || options.iconClass;
+
+                if (typeof (map.optionsOverride) !== 'undefined') {
+                    options = $.extend(options, map.optionsOverride);
+                    iconClass = map.optionsOverride.iconClass || iconClass;
+                }
+
+                if (shouldExit(options, map)) { return; }
+
+                toastId++;
+
+                $container = getContainer(options, true);
+
+                var intervalId = null;
+                var $toastElement = $('<div/>');
+                var $titleElement = $('<div/>');
+                var $messageElement = $('<div/>');
+                var $progressElement = $('<div/>');
+                var $closeElement = $(options.closeHtml);
+                var progressBar = {
+                    intervalId: null,
+                    hideEta: null,
+                    maxHideTime: null
+                };
+                var response = {
+                    toastId: toastId,
+                    state: 'visible',
+                    startTime: new Date(),
+                    options: options,
+                    map: map
+                };
+
+                personalizeToast();
+
+                displayToast();
+
+                handleEvents();
+
+                publish(response);
+
+                if (options.debug && console) {
+                    console.log(response);
+                }
+
+                return $toastElement;
+
+                function escapeHtml(source) {
+                    if (source == null) {
+                        source = '';
+                    }
+
+                    return source
+                        .replace(/&/g, '&amp;')
+                        .replace(/"/g, '&quot;')
+                        .replace(/'/g, '&#39;')
+                        .replace(/</g, '&lt;')
+                        .replace(/>/g, '&gt;');
+                }
+
+                function personalizeToast() {
+                    setIcon();
+                    setTitle();
+                    setMessage();
+                    setCloseButton();
+                    setProgressBar();
+                    setRTL();
+                    setSequence();
+                    setAria();
+                }
+
+                function setAria() {
+                    var ariaValue = '';
+                    switch (map.iconClass) {
+                        case 'toast-success':
+                        case 'toast-info':
+                            ariaValue =  'polite';
+                            break;
+                        default:
+                            ariaValue = 'assertive';
+                    }
+                    $toastElement.attr('aria-live', ariaValue);
+                }
+
+                function handleEvents() {
+                    if (options.closeOnHover) {
+                        $toastElement.hover(stickAround, delayedHideToast);
+                    }
+
+                    if (!options.onclick && options.tapToDismiss) {
+                        $toastElement.click(hideToast);
+                    }
+
+                    if (options.closeButton && $closeElement) {
+                        $closeElement.click(function (event) {
+                            if (event.stopPropagation) {
+                                event.stopPropagation();
+                            } else if (event.cancelBubble !== undefined && event.cancelBubble !== true) {
+                                event.cancelBubble = true;
+                            }
+
+                            if (options.onCloseClick) {
+                                options.onCloseClick(event);
+                            }
+
+                            hideToast(true);
+                        });
+                    }
+
+                    if (options.onclick) {
+                        $toastElement.click(function (event) {
+                            options.onclick(event);
+                            hideToast();
+                        });
+                    }
+                }
+
+                function displayToast() {
+                    $toastElement.hide();
+
+                    $toastElement[options.showMethod](
+                        {duration: options.showDuration, easing: options.showEasing, complete: options.onShown}
+                    );
+
+                    if (options.timeOut > 0) {
+                        intervalId = setTimeout(hideToast, options.timeOut);
+                        progressBar.maxHideTime = parseFloat(options.timeOut);
+                        progressBar.hideEta = new Date().getTime() + progressBar.maxHideTime;
+                        if (options.progressBar) {
+                            progressBar.intervalId = setInterval(updateProgress, 10);
+                        }
+                    }
+                }
+
+                function setIcon() {
+                    if (map.iconClass) {
+                        $toastElement.addClass(options.toastClass).addClass(iconClass);
+                    }
+                }
+
+                function setSequence() {
+                    if (options.newestOnTop) {
+                        $container.prepend($toastElement);
+                    } else {
+                        $container.append($toastElement);
+                    }
+                }
+
+                function setTitle() {
+                    if (map.title) {
+                        var suffix = map.title;
+                        if (options.escapeHtml) {
+                            suffix = escapeHtml(map.title);
+                        }
+                        $titleElement.append(suffix).addClass(options.titleClass);
+                        $toastElement.append($titleElement);
+                    }
+                }
+
+                function setMessage() {
+                    if (map.message) {
+                        var suffix = map.message;
+                        if (options.escapeHtml) {
+                            suffix = escapeHtml(map.message);
+                        }
+                        $messageElement.append(suffix).addClass(options.messageClass);
+                        $toastElement.append($messageElement);
+                    }
+                }
+
+                function setCloseButton() {
+                    if (options.closeButton) {
+                        $closeElement.addClass(options.closeClass).attr('role', 'button');
+                        $toastElement.prepend($closeElement);
+                    }
+                }
+
+                function setProgressBar() {
+                    if (options.progressBar) {
+                        $progressElement.addClass(options.progressClass);
+                        $toastElement.prepend($progressElement);
+                    }
+                }
+
+                function setRTL() {
+                    if (options.rtl) {
+                        $toastElement.addClass('rtl');
+                    }
+                }
+
+                function shouldExit(options, map) {
+                    if (options.preventDuplicates) {
+                        if (map.message === previousToast) {
+                            return true;
+                        } else {
+                            previousToast = map.message;
+                        }
+                    }
+                    return false;
+                }
+
+                function hideToast(override) {
+                    var method = override && options.closeMethod !== false ? options.closeMethod : options.hideMethod;
+                    var duration = override && options.closeDuration !== false ?
+                        options.closeDuration : options.hideDuration;
+                    var easing = override && options.closeEasing !== false ? options.closeEasing : options.hideEasing;
+                    if ($(':focus', $toastElement).length && !override) {
+                        return;
+                    }
+                    clearTimeout(progressBar.intervalId);
+                    return $toastElement[method]({
+                        duration: duration,
+                        easing: easing,
+                        complete: function () {
+                            removeToast($toastElement);
+                            clearTimeout(intervalId);
+                            if (options.onHidden && response.state !== 'hidden') {
+                                options.onHidden();
+                            }
+                            response.state = 'hidden';
+                            response.endTime = new Date();
+                            publish(response);
+                        }
+                    });
+                }
+
+                function delayedHideToast() {
+                    if (options.timeOut > 0 || options.extendedTimeOut > 0) {
+                        intervalId = setTimeout(hideToast, options.extendedTimeOut);
+                        progressBar.maxHideTime = parseFloat(options.extendedTimeOut);
+                        progressBar.hideEta = new Date().getTime() + progressBar.maxHideTime;
+                    }
+                }
+
+                function stickAround() {
+                    clearTimeout(intervalId);
+                    progressBar.hideEta = 0;
+                    $toastElement.stop(true, true)[options.showMethod](
+                        {duration: options.showDuration, easing: options.showEasing}
+                    );
+                }
+
+                function updateProgress() {
+                    var percentage = ((progressBar.hideEta - (new Date().getTime())) / progressBar.maxHideTime) * 100;
+                    $progressElement.width(percentage + '%');
+                }
+            }
+
+            function getOptions() {
+                return $.extend({}, getDefaults(), toastr.options);
+            }
+
+            function removeToast($toastElement) {
+                if (!$container) { $container = getContainer(); }
+                if ($toastElement.is(':visible')) {
+                    return;
+                }
+                $toastElement.remove();
+                $toastElement = null;
+                if ($container.children().length === 0) {
+                    $container.remove();
+                    previousToast = undefined;
+                }
+            }
+
+        })();
+    }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+}(__webpack_require__(64)));
+
+
+/***/ }),
+/* 64 */
+/***/ (function(module, exports) {
+
+module.exports = function() {
+	throw new Error("define cannot be used indirect");
+};
+
 
 /***/ })
 /******/ ]);

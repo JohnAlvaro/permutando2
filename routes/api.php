@@ -18,3 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('lista-usuarios','UserController@lista');
+
+//Web
+Route::post('store-inmueble','InmuebleController@store');
+

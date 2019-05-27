@@ -1,5 +1,5 @@
 <template>
-<form role="form" action="" method="post" class="f1">
+<form role="form" @submit.prevent="storeInmueble" class="f1">
 
     <div class="f1-steps">
         <div class="f1-progress">
@@ -123,59 +123,59 @@
             <div class="form-field">
                 <span>Víveres</span>
                 <div class="my-checkbox">
-                    <input type="checkbox" name="viveres" id="viveres_1"><label for="viveres_1">Tienda de barrio</label>
-                    <input type="checkbox" name="viveres" id="viveres_2"><label for="viveres_2">Panadería</label>
-                    <input type="checkbox" name="viveres" id="viveres_3"><label for="viveres_3">Fruterías</label>
-                    <input type="checkbox" name="viveres" id="viveres_4"><label for="viveres_4">Plaza de mercado</label>
-                    <input type="checkbox" name="viveres" id="viveres_5"><label for="viveres_5">Mercado de frutas y verduras</label>
-                    <input type="checkbox" name="viveres" id="viveres_6"><label for="viveres_6">Supermercados</label>
+                    <input type="checkbox" v-model="form.viveres" value="Tienda de barrio" id="viveres_1"><label for="viveres_1">Tienda de barrio</label>
+                    <input type="checkbox" v-model="form.viveres" value="Panadería" id="viveres_2"><label for="viveres_2">Panadería</label>
+                    <input type="checkbox" v-model="form.viveres" value="Fruterías" id="viveres_3"><label for="viveres_3">Fruterías</label>
+                    <input type="checkbox" v-model="form.viveres" value="Plaza de mercado" id="viveres_4"><label for="viveres_4">Plaza de mercado</label>
+                    <input type="checkbox" v-model="form.viveres" value="Mercado de frutas y verduras" id="viveres_5"><label for="viveres_5">Mercado de frutas y verduras</label>
+                    <input type="checkbox" v-model="form.viveres" value="Supermercados" id="viveres_6"><label for="viveres_6">Supermercados</label>
                 </div>
             </div>
             <div class="form-field">
                 <span>Bienestar</span>
                 <div class="my-checkbox">
-                    <input type="checkbox" name="bienestar" id="bienestar_1"><label for="bienestar_1">Gimnasios</label>
-                    <input type="checkbox" name="bienestar" id="bienestar_2"><label for="bienestar_2">Centro de Yoga</label>
-                    <input type="checkbox" name="bienestar" id="bienestar_3"><label for="bienestar_3">Ciclovía</label>
-                    <input type="checkbox" name="bienestar" id="bienestar_4"><label for="bienestar_4">Parques</label>
-                    <input type="checkbox" name="bienestar" id="bienestar_5"><label for="bienestar_5">Hospitales</label>
-                    <input type="checkbox" name="bienestar" id="bienestar_6"><label for="bienestar_6">Clínicas</label>
-                    <input type="checkbox" name="bienestar" id="bienestar_7"><label for="bienestar_7">Iglesias</label>
+                    <input type="checkbox" v-model="form.bienestar" value="Gimnasios" id="bienestar_1"><label for="bienestar_1">Gimnasios</label>
+                    <input type="checkbox" v-model="form.bienestar" value="Centro de Yoga" id="bienestar_2"><label for="bienestar_2">Centro de Yoga</label>
+                    <input type="checkbox" v-model="form.bienestar" value="Ciclovía" id="bienestar_3"><label for="bienestar_3">Ciclovía</label>
+                    <input type="checkbox" v-model="form.bienestar" value="Parques" id="bienestar_4"><label for="bienestar_4">Parques</label>
+                    <input type="checkbox" v-model="form.bienestar" value="Hospitales" id="bienestar_5"><label for="bienestar_5">Hospitales</label>
+                    <input type="checkbox" v-model="form.bienestar" value="Clínicas" id="bienestar_6"><label for="bienestar_6">Clínicas</label>
+                    <input type="checkbox" v-model="form.bienestar" value="Iglesias" id="bienestar_7"><label for="bienestar_7">Iglesias</label>
                 </div>
             </div>
             <div class="form-field">
                 <span>Entretenimiento</span>
                 <div class="my-checkbox">
-                    <input type="checkbox" name="entrenimiento" id="entrenimiento_1"><label for="entrenimiento_1">Centros comerciales</label>
-                    <input type="checkbox" name="entrenimiento" id="entrenimiento_2"><label for="entrenimiento_2">Teatros</label>
-                    <input type="checkbox" name="entrenimiento" id="entrenimiento_3"><label for="entrenimiento_3">Cines</label>
-                    <input type="checkbox" name="entrenimiento" id="entrenimiento_4"><label for="entrenimiento_4">Bares</label>
-                    <input type="checkbox" name="entrenimiento" id="entrenimiento_5"><label for="entrenimiento_5">Discotecas</label>
-                    <input type="checkbox" name="entrenimiento" id="entrenimiento_6"><label for="entrenimiento_6">Museos</label>
+                    <input type="checkbox" v-model="form.entretenimiento" value="Centros comerciales" id="entrenimiento_1"><label for="entrenimiento_1">Centros comerciales</label>
+                    <input type="checkbox" v-model="form.entretenimiento" value="Teatros" id="entrenimiento_2"><label for="entrenimiento_2">Teatros</label>
+                    <input type="checkbox" v-model="form.entretenimiento" value="Cines" id="entrenimiento_3"><label for="entrenimiento_3">Cines</label>
+                    <input type="checkbox" v-model="form.entretenimiento" value="Bares" id="entrenimiento_4"><label for="entrenimiento_4">Bares</label>
+                    <input type="checkbox" v-model="form.entretenimiento" value="Discotecas" id="entrenimiento_5"><label for="entrenimiento_5">Discotecas</label>
+                    <input type="checkbox" v-model="form.entretenimiento" value="Museos" id="entrenimiento_6"><label for="entrenimiento_6">Museos</label>
                 </div>
             </div>
             <div class="form-field">
                 <span>Educativo</span>
                 <div class="my-checkbox">
-                    <input type="checkbox" name="educativo" id="educativo_1"><label for="educativo_1">Jardines</label>
-                    <input type="checkbox" name="educativo" id="educativo_2"><label for="educativo_2">Colegios</label>
-                    <input type="checkbox" name="educativo" id="educativo_3"><label for="educativo_3">Universidades</label>
+                    <input type="checkbox" v-model="form.educativo" value="Jardines" id="educativo_1"><label for="educativo_1">Jardines</label>
+                    <input type="checkbox" v-model="form.educativo" value="Colegios" id="educativo_2"><label for="educativo_2">Colegios</label>
+                    <input type="checkbox" v-model="form.educativo" value="Universidades" id="educativo_3"><label for="educativo_3">Universidades</label>
                 </div>
             </div>
             <div class="form-field">
                 <span>Gastronomía</span>
                 <div class="my-checkbox">
-                    <input type="checkbox" name="gastronomia" id="gastronomia_1"><label for="gastronomia_1">Restaurantes</label>
-                    <input type="checkbox" name="gastronomia" id="gastronomia_2"><label for="gastronomia_2">Cafés</label>
+                    <input type="checkbox" v-model="form.gastronomia" value="Restaurantes" id="gastronomia_1"><label for="gastronomia_1">Restaurantes</label>
+                    <input type="checkbox" v-model="form.gastronomia" value="Cafés" id="gastronomia_2"><label for="gastronomia_2">Cafés</label>
                 </div>
             </div>
             <div class="form-field">
                 <span>Mascotas</span>
                 <div class="my-checkbox">
-                    <input type="checkbox" name="mascotas" id="mascotas_1"><label for="mascotas_1">Veterinarias</label>
-                    <input type="checkbox" name="mascotas" id="mascotas_2"><label for="mascotas_2">Guarderias</label>
-                    <input type="checkbox" name="mascotas" id="mascotas_3"><label for="mascotas_3">Paseadores de perros</label>
-                    <input type="checkbox" name="mascotas" id="mascotas_4"><label for="mascotas_4">Tienda para mascotas</label>
+                    <input type="checkbox" v-model="form.mascotas"  value="Veterinarias" id="mascotas_1"><label for="mascotas_1">Veterinarias</label>
+                    <input type="checkbox" v-model="form.mascotas"  value="Guarderias" id="mascotas_2"><label for="mascotas_2">Guarderias</label>
+                    <input type="checkbox" v-model="form.mascotas"  value="Paseadores de perros" id="mascotas_3"><label for="mascotas_3">Paseadores de perros</label>
+                    <input type="checkbox" v-model="form.mascotas"  value="Tienda para mascotas" id="mascotas_4"><label for="mascotas_4">Tienda para mascotas</label>
                 </div>
             </div>
         </div>
@@ -190,12 +190,12 @@
         <div class="form-group more">
             <div class="form-field">
                 <span>Más información</span>
-                <textarea placeholder="¿Cúal?"></textarea>
+                <textarea v-model="form.mas_informacion" placeholder="¿Cúal?"></textarea>
             </div>
             <div class="form-field">
                 <span>Imágenes</span>
                 <div class="image">
-                    <input type="file" id="file" class="inputfile" />
+                    <input type="file" id="file" ref="file" @change="img"  class="inputfile" />
                     <label for="file">Subir imagen</label>
                 </div>
             </div>
@@ -211,6 +211,12 @@
     
 </template>
 <script>
+import toastr from 'toastr'
+toastr.options ={
+  "closeButton": true,
+  "timeOut": "10000",
+  // "progressBar": true,
+};
 export default {
 
     data(){
@@ -224,10 +230,79 @@ export default {
                 porteria:'',
                 parqueadero:'',
                 caracteristica:'',
+                mas_informacion:'',
                 zonas:[],
                 transporte:[],
+                viveres:[],
+                bienestar:[],
+                entretenimiento:[],
+                educativo:[],
+                gastronomia:[],
+                mascotas:[],
+                image:''
             }
         }
+    },
+    methods:{
+        img(event){
+            this.form.image = this.$refs.file.files[0];
+            console.log(this.form.image);
+            
+          },
+          storeInmueble(){
+            let fd = new FormData();
+            fd.append('area',this.form.area);
+            fd.append('habitaciones',this.form.habitaciones);
+            fd.append('banos',this.form.banos);
+            fd.append('balcon',this.form.balcon);
+            fd.append('image',this.form.image);
+            fd.append('terraza',this.form.terraza);
+            fd.append('porteria',this.form.porteria);
+            fd.append('parqueadero',this.form.parqueadero);
+            fd.append('caracteristica',this.form.caracteristica);
+            fd.append('mas_informacion',this.form.mas_informacion);
+            fd.append('zonas',this.form.zonas);
+            fd.append('transporte',this.form.transporte);
+            fd.append('viveres',this.form.viveres);
+            fd.append('bienestar',this.form.bienestar);
+            fd.append('entretenimiento',this.form.entretenimiento);
+            fd.append('educativo',this.form.educativo);
+            fd.append('gastronomia',this.form.gastronomia);
+            fd.append('mascotas',this.form.mascotas);
+
+            axios.post('api/store-inmueble',
+                fd,{
+                  headers: {
+                    'Content-Type': 'multipart/form-data'
+                  }
+              }).then(res=>{
+                  console.log(res.data);
+                  
+                this.form = {
+                  area:'',
+                  habitaciones:'',
+                  banos:'',
+                  balcon:'',
+                  image:'',
+                  terraza:'',
+                  porteria:'',
+                  parqueadero:'',
+                  caracteristica:'',
+                  mas_informacion:'',
+                  zonas:'',
+                  transporte:'',
+                  viveres:'',
+                  bienestar:'',
+                  entretenimiento:'',
+                  educativo:'',
+                  gastronomia:'',
+                  mascotas:'',
+                }
+              toastr.success('Inmueble subido correctamente');
+
+            });
+
+          }
     }
     
 }
