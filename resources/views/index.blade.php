@@ -89,9 +89,9 @@
                                     </div>
                                     <div class="valor">
                                         <h3>Valor</h3>
-                                        <label><input type="checkbox">$50'000.000 - $100'000.000</label>
-                                        <label><input type="checkbox">$100'000.000 - $150'000.000</label>
-                                        <label><input type="checkbox">$150'000.000 - $200'000.000</label>
+                                        <input type="text" placeholder="Desde">
+                                        <input type="text" placeholder="Hasta">
+                                        <label><input type="checkbox">Mostrar todos</label>
                                     </div>
                                 </div>
                             </div>

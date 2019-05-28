@@ -94,6 +94,34 @@
                     </div>
                 </div>
             </div>
+            <div class="form-field w50">
+                <div class="my-select">
+                    <span>Departamento</span>
+                    <select v-model="form.banos">
+                        <option>--</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-field w50">
+                <div class="my-select">
+                    <span>Ciudad</span>
+                    <select v-model="form.banos">
+                        <option>--</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-field w50">
+                <div class="my-text">
+                    <span>Barrio</span>
+                    <input v-model="form.area" type="text" name="area">
+                </div>
+            </div>
+            <div class="form-field w50">
+                <div class="my-text">
+                    <span>Dirección</span>
+                    <input v-model="form.area" type="text" name="area">
+                </div>
+            </div>
             <textarea v-model="form.caracteristica" placeholder="Otras características"></textarea>
             <div class="form-field value">
                 <span>Valor: $</span>
