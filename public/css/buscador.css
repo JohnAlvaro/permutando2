@@ -178,11 +178,19 @@ select:focus {
 
 .valor label {
     font-size: .9rem;
-    margin: 3px 0;
+    margin: 3px;
 }
 .valor input[type=checkbox] {
     margin-right: 5px;
     vertical-align: middle;
+}
+.valor input[type=text] {
+    border: 1px solid #a5a5a5;
+    padding: 3px 7px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    width: 100%;
+    font-size: .9rem;
 }
 
 .content {

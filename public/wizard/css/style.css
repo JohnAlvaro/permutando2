@@ -98,6 +98,9 @@
 .form-group .form-field.w2 {
     width: 62.666%;
 }
+.form-group .form-field.w50 {
+    width: 46%;
+}
 .form-group.list .form-field, .form-group.more .form-field {
     width: 21%;
     vertical-align: top;
@@ -134,6 +137,9 @@
     background: #f1f1f1;
     max-width: 150px;
     height: 32px;
+}
+.form-group .form-field.w50 .my-text input {
+    max-width: 200px;
 }
 .my-radio input[type=radio] {
     display:none;
@@ -178,6 +184,9 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     flex: 0 0 50px;
+}
+.form-group .form-field.w50 .my-select select {
+    flex: 1;
 }
 
 .my-checkbox input[type=checkbox] {
