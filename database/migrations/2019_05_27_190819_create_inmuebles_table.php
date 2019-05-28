@@ -15,6 +15,13 @@ class CreateInmueblesTable extends Migration
     {
         Schema::create('inmuebles', function (Blueprint $table) {
             $table->increments('id');
+            
+            $table->string('tipo')->nullable();
+            $table->string('modo')->nullable();
+            $table->string('barrio')->nullable();
+            $table->string('direccion')->nullable();
+            $table->string('estrato')->nullable();
+
             $table->string('area')->nullable();
             $table->string('habitaciones')->nullable();
             $table->string('banos')->nullable();
@@ -30,6 +37,18 @@ class CreateInmueblesTable extends Migration
             $table->foreign('user_id')
                   ->references('id')
                   ->on('users')
+                  ->onDelete('cascade');
+
+            $table->integer('departamento_id')->unsigned()->nullable();
+            $table->foreign('departamento_id')
+                  ->references('id')
+                  ->on('departamentos')
+                  ->onDelete('cascade');
+
+            $table->integer('ciudad_id')->unsigned()->nullable();
+            $table->foreign('ciudad_id')
+                  ->references('id')
+                  ->on('ciudads')
                   ->onDelete('cascade');
 
             $table->timestamps();
