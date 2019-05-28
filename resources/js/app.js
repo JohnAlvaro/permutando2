@@ -9,6 +9,11 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+
+import Router from 'vue-router'
+
+Vue.use(Router)
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -20,7 +25,24 @@ Vue.component('example-component', require('./components/ExampleComponent.vue'))
 
 //Web
 Vue.component('form-inmueble', require('./web/Form.vue'));
+Vue.component('web-index', require('./web/Index.vue'));
+Vue.component('tengo', require('./web/Tengo.vue'));
+Vue.component('busco', require('./web/Busco.vue'));
+
+
+// let router = new Router({
+//     routes: [
+//         {
+//             path: '/form/venta',
+//             component: require('./web/Form.vue').default
+//         }
+        
+//     ],
+//     linkExactActiveClass: 'active',
+//     // mode: 'history',
+// });
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    // router
 });
