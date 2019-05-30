@@ -71839,7 +71839,7 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "fields" }, [
-            _c("div", { staticClass: "check-group estado vendo" }, [
+            _c("div", { staticClass: "check-group estado showto" }, [
               _c("input", {
                 attrs: {
                   type: "checkbox",
@@ -74859,7 +74859,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "fields" }, [
-      _c("div", { staticClass: "check-group estado" }, [
+      _c("div", { staticClass: "check-group estado showto" }, [
         _c("input", {
           attrs: {
             type: "checkbox",
@@ -74904,14 +74904,20 @@ var staticRenderFns = [
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "detalles" }, [
-        _c("div", { staticClass: "ubicacion" }, [
+        _c("div", { staticClass: "ubicacion showto" }, [
           _c("h3", [_vm._v("Ubicación")]),
           _vm._v(" "),
-          _c("select", [_c("option", [_vm._v("-- Departamento --")])]),
+          _c("select", { attrs: { show: "busco" } }, [
+            _c("option", [_vm._v("-- Departamento --")])
+          ]),
           _vm._v(" "),
-          _c("select", [_c("option", [_vm._v("-- Ciudad --")])]),
+          _c("select", { attrs: { show: "busco" } }, [
+            _c("option", [_vm._v("-- Ciudad --")])
+          ]),
           _vm._v(" "),
-          _c("select", [_c("option", [_vm._v("-- Barrio --")])])
+          _c("select", { attrs: { show: "busco" } }, [
+            _c("option", [_vm._v("-- Barrio --")])
+          ])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "valor" }, [
