@@ -41,17 +41,12 @@ $(document).ready(function () {
         }
         
     });
-<<<<<<< HEAD
 
-    $('.estado, .buscador').on('click', 'input', function () {
-=======
-/*
-    $('.estado').on('click', 'input', function () {
->>>>>>> 3cf7d618731f935e06dcb9959e5ed9bd2d92a1c0
-        var id = $(this).attr("show");
-        hide_res('resultados-' + id);
-        show_res('resultados-' + id);
-    });*/
+    // $('.estado, .buscador').on('click', 'input', function () {
+    //     var id = $(this).attr("show");
+    //     hide_res('resultados-' + id);
+    //     show_res('resultados-' + id);
+    // });
 /*
     function show_res(id) {
         id = id === undefined ? 'content .box' : id;
