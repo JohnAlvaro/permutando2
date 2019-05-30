@@ -92,7 +92,7 @@
                         </div>
                     </div>
                     <div class="buttons">
-                        <button type="button" class="btn" data-toggle="modal" data-target="#infoModal">Información</button>
+                        <button type="button" class="btn" data-toggle="modal" data-target="#infoModal" @click="infoInmueble(resultado.id)">Información</button>
                         <button type="button" class="btn">Mensaje</button>
                     </div>
                 </div>
@@ -112,25 +112,25 @@
                         <div class="modal-body box-info">
                             <div class="img" style="background-image:url('/img/img-demo.jpg')"></div>
                             <div class="text">
-                                <h3>Casa en venta (Usaquén)</h3>
+                                <h3>{{info.tipo}} en venta (Usaquén)</h3>
                                 <div class="desc">
                                     <div>
-                                        <span><strong>Área:</strong> 54 Area mts<sup>2</sup></span>
+                                        <span><strong>Área:</strong> {{info.area}} Area mts<sup>2</sup></span>
                                         <span><strong>Habitaciones:</strong> 3</span>
                                         <span><strong>Baños:</strong> 2</span>
                                     </div>
                                     <div>
-                                        <span><strong>Valor:</strong> $200'000.000</span>
-                                        <span><strong>Barrio:</strong> Usaquén</span>
-                                        <span><strong>Baños:</strong> Calle 150 #1-50</span>
+                                        <span><strong>Valor:</strong> ${{info.valor}}</span>
+                                        <span><strong>Barrio:</strong> {{info.barrio}}</span>
+                                        <span><strong>Baños:</strong> {{info.direccon}}</span>
                                     </div>
                                 </div>
-                                <strong>Descripción:</strong>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec faucibus nec massa vitae facilisis. Vestibulum purus felis, porttitor eu faucibus vitae, condimentum in eros.</p>
+                                <strong>Caracteristicas:</strong>
+                                <p>{{info.caracteristicas}}</p>
                             </div>
                             <div class="more">
-                                <strong>Entorno:</strong>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec faucibus nec massa vitae facilisis. Vestibulum purus felis, porttitor eu faucibus vitae, condimentum in eros.</p>
+                                <strong>Mas información:</strong>
+                                <p>{{info.mas_informacion}}</p>
                                 <button type="button" class="btn">Contactar</button>
                                 <button type="button" class="btn">Ofertar</button>
                             </div>
@@ -406,6 +406,7 @@ export default {
     data(){
         return{
             resultadoTipo:[],
+            info:[],
             tipo:[],
             modo:'',
             form:{
@@ -440,6 +441,14 @@ export default {
     methods:{
 
         //Buscador
+        infoInmueble(id){
+            axios.get('api/info-inmueble/'+id).then(res=>{
+                this.info = res.data;
+                console.log(this.info);
+                
+            });
+
+        },
         buscarTipo(dato){
             axios.get('api/buscar-tipo/'+dato).then(res=>{
                 this.resultadoTipo = res.data;

@@ -17,4 +17,8 @@ class InmuebleController extends Controller
         return Inmueble::where('tipo',$tipo)->get();
 
     }
+    public function info($id){
+        return Inmueble::find($id);
+
+    }
 }

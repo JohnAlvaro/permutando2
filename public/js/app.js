@@ -71503,6 +71503,7 @@ __WEBPACK_IMPORTED_MODULE_0_toastr___default.a.options = {
     data: function data() {
         return {
             resultadoTipo: [],
+            info: [],
             tipo: [],
             modo: '',
             form: {
@@ -71538,11 +71539,19 @@ __WEBPACK_IMPORTED_MODULE_0_toastr___default.a.options = {
     methods: {
 
         //Buscador
-        buscarTipo: function buscarTipo(dato) {
+        infoInmueble: function infoInmueble(id) {
             var _this = this;
 
+            axios.get('api/info-inmueble/' + id).then(function (res) {
+                _this.info = res.data;
+                console.log(_this.info);
+            });
+        },
+        buscarTipo: function buscarTipo(dato) {
+            var _this2 = this;
+
             axios.get('api/buscar-tipo/' + dato).then(function (res) {
-                _this.resultadoTipo = res.data;
+                _this2.resultadoTipo = res.data;
             });
         },
 
@@ -71948,13 +71957,127 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _vm._m(2, true)
+                _c("div", { staticClass: "buttons" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn",
+                      attrs: {
+                        type: "button",
+                        "data-toggle": "modal",
+                        "data-target": "#infoModal"
+                      },
+                      on: {
+                        click: function($event) {
+                          return _vm.infoInmueble(resultado.id)
+                        }
+                      }
+                    },
+                    [_vm._v("Información")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    { staticClass: "btn", attrs: { type: "button" } },
+                    [_vm._v("Mensaje")]
+                  )
+                ])
               ])
             }),
             0
           ),
           _vm._v(" "),
-          _vm._m(3)
+          _c(
+            "div",
+            {
+              staticClass: "modal fade",
+              attrs: {
+                id: "infoModal",
+                tabindex: "-1",
+                role: "dialog",
+                "aria-hidden": "true"
+              }
+            },
+            [
+              _c(
+                "div",
+                { staticClass: "modal-dialog modal-dialog-centered modal-lg" },
+                [
+                  _c("div", { staticClass: "modal-content" }, [
+                    _vm._m(2),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "modal-body box-info" }, [
+                      _c("div", {
+                        staticClass: "img",
+                        staticStyle: {
+                          "background-image": "url('/img/img-demo.jpg')"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "text" }, [
+                        _c("h3", [
+                          _vm._v(_vm._s(_vm.info.tipo) + " en venta (Usaquén)")
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "desc" }, [
+                          _c("div", [
+                            _c("span", [
+                              _c("strong", [_vm._v("Área:")]),
+                              _vm._v(" " + _vm._s(_vm.info.area) + " Area mts"),
+                              _c("sup", [_vm._v("2")])
+                            ]),
+                            _vm._v(" "),
+                            _vm._m(3),
+                            _vm._v(" "),
+                            _vm._m(4)
+                          ]),
+                          _vm._v(" "),
+                          _c("div", [
+                            _c("span", [
+                              _c("strong", [_vm._v("Valor:")]),
+                              _vm._v(" $" + _vm._s(_vm.info.valor))
+                            ]),
+                            _vm._v(" "),
+                            _c("span", [
+                              _c("strong", [_vm._v("Barrio:")]),
+                              _vm._v(" " + _vm._s(_vm.info.barrio))
+                            ]),
+                            _vm._v(" "),
+                            _c("span", [
+                              _c("strong", [_vm._v("Baños:")]),
+                              _vm._v(" " + _vm._s(_vm.info.direccon))
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("strong", [_vm._v("Caracteristicas:")]),
+                        _vm._v(" "),
+                        _c("p", [_vm._v(_vm._s(_vm.info.caracteristicas))])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "more" }, [
+                        _c("strong", [_vm._v("Mas información:")]),
+                        _vm._v(" "),
+                        _c("p", [_vm._v(_vm._s(_vm.info.mas_informacion))]),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          { staticClass: "btn", attrs: { type: "button" } },
+                          [_vm._v("Contactar")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          { staticClass: "btn", attrs: { type: "button" } },
+                          [_vm._v("Ofertar")]
+                        )
+                      ])
+                    ])
+                  ])
+                ]
+              )
+            ]
+          )
         ])
       ]),
       _vm._v(" "),
@@ -71972,7 +72095,7 @@ var render = function() {
             }
           },
           [
-            _vm._m(4),
+            _vm._m(5),
             _vm._v(" "),
             _c("fieldset", [
               _c("h4", [_vm._v(_vm._s(_vm.tipo) + " en " + _vm._s(_vm.modo))]),
@@ -71980,7 +72103,7 @@ var render = function() {
               _c("div", { staticClass: "form-group" }, [
                 _c("div", { staticClass: "form-field" }, [
                   _c("div", { staticClass: "my-text" }, [
-                    _vm._m(5),
+                    _vm._m(6),
                     _vm._v(" "),
                     _c("input", {
                       directives: [
@@ -72811,7 +72934,7 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _vm._m(6)
+              _vm._m(7)
             ]),
             _vm._v(" "),
             _c("fieldset", [
@@ -74668,7 +74791,7 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _vm._m(7)
+              _vm._m(8)
             ]),
             _vm._v(" "),
             _c("fieldset", [
@@ -74722,7 +74845,7 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _vm._m(8)
+              _vm._m(9)
             ])
           ]
         )
@@ -74832,153 +74955,36 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "buttons" }, [
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [
+        _vm._v("Descripción del inmueble")
+      ]),
+      _vm._v(" "),
       _c(
         "button",
         {
-          staticClass: "btn",
+          staticClass: "close",
           attrs: {
             type: "button",
-            "data-toggle": "modal",
-            "data-target": "#infoModal"
+            "data-dismiss": "modal",
+            "aria-label": "Close"
           }
         },
-        [_vm._v("Información")]
-      ),
-      _vm._v(" "),
-      _c("button", { staticClass: "btn", attrs: { type: "button" } }, [
-        _vm._v("Mensaje")
-      ])
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "modal fade",
-        attrs: {
-          id: "infoModal",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-hidden": "true"
-        }
-      },
-      [
-        _c(
-          "div",
-          { staticClass: "modal-dialog modal-dialog-centered modal-lg" },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _c("div", { staticClass: "modal-header" }, [
-                _c("h5", { staticClass: "modal-title" }, [
-                  _vm._v("Descripción del inmueble")
-                ]),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "close",
-                    attrs: {
-                      type: "button",
-                      "data-dismiss": "modal",
-                      "aria-label": "Close"
-                    }
-                  },
-                  [
-                    _c("span", { attrs: { "aria-hidden": "true" } }, [
-                      _vm._v("×")
-                    ])
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body box-info" }, [
-                _c("div", {
-                  staticClass: "img",
-                  staticStyle: {
-                    "background-image": "url('/img/img-demo.jpg')"
-                  }
-                }),
-                _vm._v(" "),
-                _c("div", { staticClass: "text" }, [
-                  _c("h3", [_vm._v("Casa en venta (Usaquén)")]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "desc" }, [
-                    _c("div", [
-                      _c("span", [
-                        _c("strong", [_vm._v("Área:")]),
-                        _vm._v(" 54 Area mts"),
-                        _c("sup", [_vm._v("2")])
-                      ]),
-                      _vm._v(" "),
-                      _c("span", [
-                        _c("strong", [_vm._v("Habitaciones:")]),
-                        _vm._v(" 3")
-                      ]),
-                      _vm._v(" "),
-                      _c("span", [
-                        _c("strong", [_vm._v("Baños:")]),
-                        _vm._v(" 2")
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", [
-                      _c("span", [
-                        _c("strong", [_vm._v("Valor:")]),
-                        _vm._v(" $200'000.000")
-                      ]),
-                      _vm._v(" "),
-                      _c("span", [
-                        _c("strong", [_vm._v("Barrio:")]),
-                        _vm._v(" Usaquén")
-                      ]),
-                      _vm._v(" "),
-                      _c("span", [
-                        _c("strong", [_vm._v("Baños:")]),
-                        _vm._v(" Calle 150 #1-50")
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("strong", [_vm._v("Descripción:")]),
-                  _vm._v(" "),
-                  _c("p", [
-                    _vm._v(
-                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec faucibus nec massa vitae facilisis. Vestibulum purus felis, porttitor eu faucibus vitae, condimentum in eros."
-                    )
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "more" }, [
-                  _c("strong", [_vm._v("Entorno:")]),
-                  _vm._v(" "),
-                  _c("p", [
-                    _vm._v(
-                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec faucibus nec massa vitae facilisis. Vestibulum purus felis, porttitor eu faucibus vitae, condimentum in eros."
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    { staticClass: "btn", attrs: { type: "button" } },
-                    [_vm._v("Contactar")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    { staticClass: "btn", attrs: { type: "button" } },
-                    [_vm._v("Ofertar")]
-                  )
-                ])
-              ])
-            ])
-          ]
-        )
-      ]
-    )
+    return _c("span", [_c("strong", [_vm._v("Habitaciones:")]), _vm._v(" 3")])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("strong", [_vm._v("Baños:")]), _vm._v(" 2")])
   },
   function() {
     var _vm = this
