@@ -71505,7 +71505,9 @@ __WEBPACK_IMPORTED_MODULE_0_toastr___default.a.options = {
             resultadoTipo: [],
             info: [],
             tipo: [],
-            modo: '',
+            tipoParaBusqueda: '',
+            modoParaBusqueda: '',
+            modo: [],
             form: {
                 area: '',
                 habitaciones: '',
@@ -71550,8 +71552,17 @@ __WEBPACK_IMPORTED_MODULE_0_toastr___default.a.options = {
         buscarTipo: function buscarTipo(dato) {
             var _this2 = this;
 
+            this.tipoParaBusqueda = dato;
             axios.get('api/buscar-tipo/' + dato).then(function (res) {
                 _this2.resultadoTipo = res.data;
+            });
+        },
+        buscarModo: function buscarModo(dato) {
+            var _this3 = this;
+
+            this.tipoParaBusqueda = dato;
+            axios.get('api/buscar-tipo/' + dato).then(function (res) {
+                _this3.resultadoTipo = res.data;
             });
         },
 
@@ -71561,7 +71572,7 @@ __WEBPACK_IMPORTED_MODULE_0_toastr___default.a.options = {
             console.log(this.tipo);
         },
         modos: function modos(dato) {
-            this.modo = dato;
+            this.modo.push(dato);
             console.log(this.modo);
         },
         img: function img(event) {
@@ -71594,9 +71605,12 @@ __WEBPACK_IMPORTED_MODULE_0_toastr___default.a.options = {
             for (var i = 0; i < this.form.mascotas.length; i++) {
                 fd.append('mascotas[]', this.form.mascotas[i]);
             }
+            for (var i = 0; i < this.modo.length; i++) {
+                fd.append('modos[]', this.modo[i]);
+            }
             fd.append('area', this.form.area);
             fd.append('tipo', this.tipo);
-            fd.append('modo', this.modo);
+
             fd.append('habitaciones', this.form.habitaciones);
             fd.append('banos', this.form.banos);
             fd.append('balcon', this.form.balcon);
@@ -71682,7 +71696,7 @@ var render = function() {
             _vm._v(" "),
             _c("h2", [_vm._v("Busco")]),
             _vm._v(" "),
-            _c("div", { staticClass: "check-group buscador" }, [
+            _c("div", { staticClass: "check-group buscador showto" }, [
               _c("input", {
                 staticClass: "unique",
                 attrs: {
@@ -71705,7 +71719,17 @@ var render = function() {
               _vm._v(" "),
               _c("input", {
                 staticClass: "unique",
-                attrs: { type: "checkbox", id: "busco-2", name: "inmueble" }
+                attrs: {
+                  type: "checkbox",
+                  id: "busco-2",
+                  name: "inmueble",
+                  show: "busco"
+                },
+                on: {
+                  click: function($event) {
+                    return _vm.buscarTipo("Apto")
+                  }
+                }
               }),
               _c(
                 "label",
@@ -71921,7 +71945,14 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "info" }, [
                   _c("h3", [
-                    _vm._v(_vm._s(resultado.tipo) + " en venta (Usaquén)")
+                    _vm._v(
+                      _vm._s(resultado.tipo) +
+                        " en " +
+                        _vm._s(resultado.modo) +
+                        " (" +
+                        _vm._s(resultado.barrio) +
+                        ")"
+                    )
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "desc" }, [
@@ -72009,8 +72040,8 @@ var render = function() {
                     _c("div", { staticClass: "modal-body box-info" }, [
                       _c("div", {
                         staticClass: "img",
-                        staticStyle: {
-                          "background-image": "url('/img/img-demo.jpg')"
+                        style: {
+                          backgroundImage: "url(" + "/" + _vm.info.imagen + ")"
                         }
                       }),
                       _vm._v(" "),

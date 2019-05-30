@@ -8,7 +8,7 @@
                                 <h2>Busco</h2>
                                 <div class="check-group buscador showto">
                                     <input type="checkbox" id="busco-1" name="inmueble" @click="buscarTipo('Casa')" class="unique" show="busco"><label for="busco-1" class="radio-btn">Casa</label>
-                                    <input type="checkbox" id="busco-2" name="inmueble" class="unique"><label for="busco-2" class="radio-btn">Apto</label>
+                                    <input type="checkbox" id="busco-2" name="inmueble" class="unique" @click="buscarTipo('Apto')" show="busco"><label for="busco-2" class="radio-btn">Apto</label>
                                     <input type="checkbox" id="busco-3" name="inmueble" class="unique"><label for="busco-3" class="radio-btn">Oficina</label>
                                     <input type="checkbox" id="busco-4" name="inmueble" class="unique"><label for="busco-4" class="radio-btn">Bodega</label>
                                 </div>
@@ -77,7 +77,7 @@
                 <div class="item" v-for="resultado in resultadoTipo" :key="resultado.id">
                     <div class="img" v-bind:style="{ backgroundImage: 'url(' + '/' + resultado.imagen+')' }"></div>
                     <div class="info">
-                        <h3>{{resultado.tipo}} en venta (Usaquén)</h3>
+                        <h3>{{resultado.tipo}} en {{resultado.modo}} ({{resultado.barrio}})</h3>
                         <div class="desc">
                             <div>
                                 <span><strong>Área:</strong> {{resultado.area}} Area mts<sup>2</sup></span>
@@ -110,7 +110,7 @@
                             </button>
                         </div>
                         <div class="modal-body box-info">
-                            <div class="img" style="background-image:url('/img/img-demo.jpg')"></div>
+                            <div class="img" v-bind:style="{ backgroundImage: 'url(' + '/' + info.imagen+')' }"></div>
                             <div class="text">
                                 <h3>{{info.tipo}} en venta (Usaquén)</h3>
                                 <div class="desc">
@@ -408,7 +408,9 @@ export default {
             resultadoTipo:[],
             info:[],
             tipo:[],
-            modo:'',
+            tipoParaBusqueda:'',
+            modoParaBusqueda:'',
+            modo:[],
             form:{
                 area:'',
                 habitaciones:'',
@@ -450,10 +452,16 @@ export default {
 
         },
         buscarTipo(dato){
+            this.tipoParaBusqueda = dato;
             axios.get('api/buscar-tipo/'+dato).then(res=>{
                 this.resultadoTipo = res.data;
             });
-
+        },
+        buscarModo(dato){
+            this.tipoParaBusqueda = dato;
+            axios.get('api/buscar-tipo/'+dato).then(res=>{
+                this.resultadoTipo = res.data;
+            });
         },
         //Tengo
         tengo(dato){
@@ -462,7 +470,7 @@ export default {
             
         },
         modos(dato){
-            this.modo = dato;
+            this.modo.push(dato);
             console.log(this.modo);
             
         },
@@ -498,9 +506,12 @@ export default {
             for (var i = 0; i < this.form.mascotas.length; i++) {    
                  fd.append('mascotas[]',this.form.mascotas[i]);
             }
+            for (var i = 0; i < this.modo.length; i++) {    
+                 fd.append('modos[]',this.modo[i]);
+            }
             fd.append('area',this.form.area);
             fd.append('tipo',this.tipo);
-            fd.append('modo',this.modo);
+            
             fd.append('habitaciones',this.form.habitaciones);
             fd.append('banos',this.form.banos);
             fd.append('balcon',this.form.balcon);

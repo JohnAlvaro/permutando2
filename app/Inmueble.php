@@ -36,6 +36,15 @@ class Inmueble extends Model
         // $inmueble->departamento_id = $request->departamento;
         // $inmueble->ciudad_id = $request->ciudad;
         $inmueble->save();
+
+        //Modos
+        foreach ((array)$request->modos as $item) {
+             $modo = new Modo();
+             $modo->modo = $item;
+             $modo->inmueble_id = $inmueble->id;
+             $modo->save();
+
+        }
         foreach ((array)$request->zonas as $item) {
             $zona = new Zonas();
              $zona->nombre = $item;
