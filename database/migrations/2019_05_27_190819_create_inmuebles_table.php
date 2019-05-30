@@ -16,8 +16,9 @@ class CreateInmueblesTable extends Migration
         Schema::create('inmuebles', function (Blueprint $table) {
             $table->increments('id');
             
-            $table->string('tipo')->nullable();
+            $table->string('tipo')->nullable(); //Casa,Apartamento,Oficina,Bodega
             $table->string('modo')->nullable();
+
             $table->string('barrio')->nullable();
             $table->string('direccion')->nullable();
             $table->string('estrato')->nullable();
@@ -25,6 +26,7 @@ class CreateInmueblesTable extends Migration
             $table->string('area')->nullable();
             $table->string('habitaciones')->nullable();
             $table->string('banos')->nullable();
+
             $table->boolean('balcon')->nullable();
             $table->boolean('terraza')->nullable();
             $table->boolean('parqueadero')->nullable();
@@ -32,6 +34,7 @@ class CreateInmueblesTable extends Migration
             $table->text('caracteristicas')->nullable();
             $table->string('valor')->nullable();
             $table->string('mas_informacion')->nullable();
+            $table->string('imagen')->nullable();
 
             $table->integer('user_id')->unsigned()->nullable();
             $table->foreign('user_id')

@@ -303,7 +303,7 @@ export default {
             fd.append('parqueadero',this.form.parqueadero);
             fd.append('caracteristica',this.form.caracteristica);
             fd.append('mas_informacion',this.form.mas_informacion);
-            fd.append('zonas',this.form.zonas);
+            fd.append('zonas[]',this.form.zonas);
             fd.append('transporte',this.form.transporte);
             fd.append('viveres',this.form.viveres);
             fd.append('bienestar',this.form.bienestar);

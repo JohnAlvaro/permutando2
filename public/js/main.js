@@ -31,7 +31,7 @@ $(document).ready(function () {
         
     });
 
-    $('.estado').on('click', 'input', function () {
+    $('.estado, .buscador').on('click', 'input', function () {
         var id = $(this).attr("show");
         hide_res('resultados-' + id);
         show_res('resultados-' + id);
