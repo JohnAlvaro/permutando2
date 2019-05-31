@@ -21,7 +21,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('buscar-tipo/{tipo}','InmuebleController@buscarTipo');
 Route::get('info-inmueble/{id}','InmuebleController@info');
 
+
+// Admin
 Route::get('lista-usuarios','UserController@lista');
+
 
 //Web
 Route::post('store-inmueble','InmuebleController@store');

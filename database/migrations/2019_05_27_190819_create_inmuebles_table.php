@@ -35,6 +35,10 @@ class CreateInmueblesTable extends Migration
             $table->string('valor')->nullable();
             $table->string('mas_informacion')->nullable();
             $table->string('imagen')->nullable();
+            // Usuario
+            $table->string('username')->nullable();
+            $table->string('useremail')->nullable();
+            $table->string('usertel')->nullable();
 
             $table->integer('user_id')->unsigned()->nullable();
             $table->foreign('user_id')

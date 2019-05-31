@@ -41,6 +41,7 @@
                     </li>
                     <li class="nav-item">
                         @if(Auth::user())
+                            <input type="hidden" id="userId" value="{{Auth::User()->id}}">
                             <button type="button" class="btn nav-link mx-3" >{{Auth::User()->name}}</button>
                         @else
                         <button type="button" class="btn nav-link mx-3" data-toggle="modal" data-target="#loginModal">Iniciar sesión</button>

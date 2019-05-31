@@ -3,14 +3,16 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Auth;
+use Auth;
 use App\Inmueble;
 use App\Zonas;
 use App\Viveres;
 use App\Transporte;
+use Illuminate\Session\Middleware\StartSession;
 // use App\Entretenimiento;
 class Inmueble extends Model
 {
+
     public function crear($request){
         $inmueble =new Inmueble();
         $inmueble->tipo = $request->tipo;
@@ -28,6 +30,16 @@ class Inmueble extends Model
         $inmueble->valor = $request->valor;
         $inmueble->mas_informacion = $request->mas_informacion;
         $inmueble->valor = $request->valor;
+
+         //User
+         $user = User::find($request->userId);
+    
+        $inmueble->user_id = $user->id;
+        $inmueble->username = $user->name;
+        $inmueble->useremail = $user->email;
+        $inmueble->usertel = $user->tel;
+
+        
 
         if($request->file('image')){
             $inmueble->imagen = $request->file('image')->store('imagenes');

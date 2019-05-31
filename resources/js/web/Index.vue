@@ -399,12 +399,15 @@ toastr.options ={
   "timeOut": "10000",
   // "progressBar": true,
 };
+var userId = document.getElementById("userId").value;
+
 export default {
 
     created(){        
     },
     data(){
         return{
+            userId:userId,
             resultadoTipo:[],
             info:[],
             tipo:[],
@@ -522,6 +525,7 @@ export default {
             fd.append('caracteristica',this.form.caracteristica);
             fd.append('valor',this.form.valor);
             fd.append('mas_informacion',this.form.mas_informacion);
+            fd.append('userId',this.userId);
             
             
 
