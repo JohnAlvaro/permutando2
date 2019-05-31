@@ -24,6 +24,7 @@ Route::get('info-inmueble/{id}','InmuebleController@info');
 
 // Admin
 Route::get('lista-usuarios','UserController@lista');
+Route::get('lista-inmuebles','InmuebleController@lista');
 
 
 //Web

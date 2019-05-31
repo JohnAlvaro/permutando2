@@ -13,7 +13,29 @@ use Illuminate\Session\Middleware\StartSession;
 class Inmueble extends Model
 {
 
-    public function crear($request){
+     public function zonas() {
+         return $this->hasMany('App\Zonas');
+     }
+     public function transporte() {
+          return $this->hasMany('App\Transporte');
+     }
+     public function viveres() {
+          return $this->hasMany('App\Viveres');
+     }
+     public function entretenimiento() {
+          return $this->hasMany('App\Entretenimiento');
+     }
+     public function educativo() {
+          return $this->hasMany('App\Educativo');
+     }
+     public function gastronomia() {
+          return $this->hasMany('App\Gastronimia');
+     }
+     public function mascotas() {
+          return $this->hasMany('App\Mascotas');
+     }
+
+     public function crear($request){
         $inmueble =new Inmueble();
         $inmueble->tipo = $request->tipo;
         $inmueble->barrio = $request->barrio;

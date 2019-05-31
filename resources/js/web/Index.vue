@@ -15,9 +15,9 @@
                             </div>
                             <div class="fields">
                                 <div class="check-group estado showto">
-                                    <input type="checkbox" id="busco_estado-1" name="busco_estado" show="busco"><label for="busco_estado-1" class="radio-btn">Venta</label>
-                                    <input type="checkbox" id="busco_estado-2" name="busco_estado" show="busco"><label for="busco_estado-2" class="radio-btn">Arriendo</label>
-                                    <input type="checkbox" id="busco_estado-3" name="busco_estado" show="busco"><label for="busco_estado-3" class="radio-btn">Permuta</label>
+                                    <input type="checkbox" id="busco_estado-1" class="unique"  name="busco_estado" show="busco"><label for="busco_estado-1"  class="radio-btn">Venta</label>
+                                    <input type="checkbox" id="busco_estado-2" class="unique"  name="busco_estado" show="busco"><label for="busco_estado-2" class="radio-btn">Arriendo</label>
+                                    <input type="checkbox" id="busco_estado-3" class="unique"  name="busco_estado" show="busco"><label for="busco_estado-3" class="radio-btn">Permuta</label>
                                 </div>
                                 <div class="detalles">
                                     <div class="ubicacion showto">
@@ -54,9 +54,14 @@
                             </div>
                             <div class="fields">
                                 <div class="check-group estado showto">
-                                    <input type="checkbox" id="vendo_estado-1" name="vendo_estado" @click="modos('Venta')" show="vendo"><label for="vendo_estado-1" class="radio-btn">Venta</label>
-                                    <input type="checkbox" id="vendo_estado-2" name="vendo_estado" @click="modos('Arriendo')" show="vendo"><label for="vendo_estado-2" class="radio-btn">Arriendo</label>
-                                    <input type="checkbox" id="vendo_estado-3" name="vendo_estado" @click="modos('Permuta')" show="vendo"><label for="vendo_estado-3" class="radio-btn">Permuta</label>
+                                    <input type="checkbox" id="vendo_estado-1" class="unique" name="vendo_estado" @click="modos('Venta')" show="vendo">
+                                    <label for="vendo_estado-1" class="radio-btn">Venta</label>
+
+                                    <input type="checkbox" id="vendo_estado-2" class="unique" name="vendo_estado" @click="modos('Arriendo')" show="vendo">
+                                    <label for="vendo_estado-2" class="radio-btn">Arriendo</label>
+
+                                    <input type="checkbox" id="vendo_estado-3" class="unique" name="vendo_estado" @click="modos('Permuta')" show="vendo">
+                                    <label for="vendo_estado-3" class="radio-btn">Permuta</label>
                                 </div>
                             </div>
                         </div>
@@ -473,7 +478,10 @@ export default {
             
         },
         modos(dato){
-            this.modo.push(dato);
+
+              this.modo = dato;
+            // this.modo.push(dato);
+            
             console.log(this.modo);
             
         },

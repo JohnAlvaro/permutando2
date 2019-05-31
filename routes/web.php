@@ -23,3 +23,4 @@ Route::get('logout','UserController@logout');
 Route::get('admin',function(){return view('admin.index');});
 Route::get('lista-usuarios',function(){return view('admin.usuario.lista');});
 Route::get('lista-inmuebles',function(){return view('admin.inmueble.lista');});
+Route::get('detalle-inmueble/{id}','InmuebleController@detalle');

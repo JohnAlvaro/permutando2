@@ -3,7 +3,7 @@
 
   <section class="content-header">
     <h1>
-      Usuarios
+      Inmuebles
       <small>Listas</small>
     </h1>
     <ol class="breadcrumb">
@@ -12,14 +12,14 @@
           <i class="fa fa-dashboard"></i> Dashboard
         
       </li>
-      <li class="active" ><i class="fa fa-book"></i>Usuarios</li>
+      <li class="active" ><i class="fa fa-book"></i>Inmuebles</li>
     </ol>
   </section>
   <!-- Main content -->
   <section class="content container-fluid">
     <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Listado de Usuarios</h3>
+              <h3 class="box-title">Listado de Inmuebles</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -27,8 +27,10 @@
                 <thead>
                 <tr>
                   <th>id</th>
-                  <th>Nombre</th>
-                  <th>Tel / Cel</th>
+                  <th>Tipo</th>
+                  <th>Area m2</th>
+                  <th>Habitaciones</th>
+                  <th>Usuario</th>
                   <th>Email</th>
                   <th>Accion</th>
                 </tr>
@@ -54,12 +56,14 @@ export default {
     $(document).ready( function () {
         $('#datatable-suscripciones').DataTable({
           "serverSide":true,
-          "ajax":"api/lista-usuarios",
+          "ajax":"api/lista-inmuebles",
           "columns":[
             {data:'id'},
-            {data:'name'},
-            {data:'tel'},
-            {data:'email'},
+            {data:'tipo'},
+            {data:'area'},
+            {data:'habitaciones'},
+            {data:'username'},
+            {data:'useremail'},
             {data:'btn'},
           ],
           "language":{

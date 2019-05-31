@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Yajra\Datatables\Datatables;
 use App\Inmueble;
 
 class InmuebleController extends Controller
@@ -10,6 +11,25 @@ class InmuebleController extends Controller
     public function store(Request $request){
         $inmueble = new Inmueble();
         return $inmueble->crear($request);
+    }
+    public function detalle($id){
+        $inmueble = Inmueble::find($id);
+        return view('admin.inmueble.detalle')->with('inmueble',$inmueble);
+
+    }
+
+    public function lista(){
+      $inmueble =  Inmueble::orderBy('id','DESC');
+      return Datatables::of($inmueble)
+                //  ->addColumn('btn','ixtus.partials.botones_suscripcion')
+                ->addColumn('btn', function ($inmueble) {
+                return '
+                <a class="btn btn-primary btn-sm"  href=" '.url('detalle-inmueble', $inmueble->id) . '">
+                  <i class="fa fa-eye"></i>
+                </a>';
+                })
+                ->rawColumns(['btn'])
+                ->make(true);
     }
 
     //Buscadores

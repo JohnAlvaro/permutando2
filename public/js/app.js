@@ -71492,6 +71492,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 __WEBPACK_IMPORTED_MODULE_0_toastr___default.a.options = {
@@ -71576,7 +71581,10 @@ var userId = document.getElementById("userId").value;
             console.log(this.tipo);
         },
         modos: function modos(dato) {
-            this.modo.push(dato);
+
+            this.modo = dato;
+            // this.modo.push(dato);
+
             console.log(this.modo);
         },
         img: function img(event) {
@@ -71870,6 +71878,7 @@ var render = function() {
           _c("div", { staticClass: "fields" }, [
             _c("div", { staticClass: "check-group estado showto" }, [
               _c("input", {
+                staticClass: "unique",
                 attrs: {
                   type: "checkbox",
                   id: "vendo_estado-1",
@@ -71882,6 +71891,7 @@ var render = function() {
                   }
                 }
               }),
+              _vm._v(" "),
               _c(
                 "label",
                 { staticClass: "radio-btn", attrs: { for: "vendo_estado-1" } },
@@ -71889,6 +71899,7 @@ var render = function() {
               ),
               _vm._v(" "),
               _c("input", {
+                staticClass: "unique",
                 attrs: {
                   type: "checkbox",
                   id: "vendo_estado-2",
@@ -71901,6 +71912,7 @@ var render = function() {
                   }
                 }
               }),
+              _vm._v(" "),
               _c(
                 "label",
                 { staticClass: "radio-btn", attrs: { for: "vendo_estado-2" } },
@@ -71908,6 +71920,7 @@ var render = function() {
               ),
               _vm._v(" "),
               _c("input", {
+                staticClass: "unique",
                 attrs: {
                   type: "checkbox",
                   id: "vendo_estado-3",
@@ -71920,6 +71933,7 @@ var render = function() {
                   }
                 }
               }),
+              _vm._v(" "),
               _c(
                 "label",
                 { staticClass: "radio-btn", attrs: { for: "vendo_estado-3" } },
@@ -74897,6 +74911,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "fields" }, [
       _c("div", { staticClass: "check-group estado showto" }, [
         _c("input", {
+          staticClass: "unique",
           attrs: {
             type: "checkbox",
             id: "busco_estado-1",
@@ -74911,6 +74926,7 @@ var staticRenderFns = [
         ),
         _vm._v(" "),
         _c("input", {
+          staticClass: "unique",
           attrs: {
             type: "checkbox",
             id: "busco_estado-2",
@@ -74925,6 +74941,7 @@ var staticRenderFns = [
         ),
         _vm._v(" "),
         _c("input", {
+          staticClass: "unique",
           attrs: {
             type: "checkbox",
             id: "busco_estado-3",
@@ -75859,6 +75876,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -75870,8 +75889,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     $(document).ready(function () {
       $('#datatable-suscripciones').DataTable({
         "serverSide": true,
-        "ajax": "api/lista-usuarios",
-        "columns": [{ data: 'id' }, { data: 'name' }, { data: 'tel' }, { data: 'email' }, { data: 'btn' }],
+        "ajax": "api/lista-inmuebles",
+        "columns": [{ data: 'id' }, { data: 'tipo' }, { data: 'area' }, { data: 'habitaciones' }, { data: 'username' }, { data: 'useremail' }, { data: 'btn' }],
         "language": {
           "sProcessing": "Procesando...",
           "sLengthMenu": "Mostrar _MENU_ registros",
@@ -75927,7 +75946,7 @@ var staticRenderFns = [
     return _c("div", {}, [
       _c("section", { staticClass: "content-header" }, [
         _c("h1", [
-          _vm._v("\n    Usuarios\n    "),
+          _vm._v("\n    Inmuebles\n    "),
           _c("small", [_vm._v("Listas")])
         ]),
         _vm._v(" "),
@@ -75939,7 +75958,7 @@ var staticRenderFns = [
           _vm._v(" "),
           _c("li", { staticClass: "active" }, [
             _c("i", { staticClass: "fa fa-book" }),
-            _vm._v("Usuarios")
+            _vm._v("Inmuebles")
           ])
         ])
       ]),
@@ -75948,7 +75967,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "box" }, [
           _c("div", { staticClass: "box-header" }, [
             _c("h3", { staticClass: "box-title" }, [
-              _vm._v("Listado de Usuarios")
+              _vm._v("Listado de Inmuebles")
             ])
           ]),
           _vm._v(" "),
@@ -75964,9 +75983,13 @@ var staticRenderFns = [
                   _c("tr", [
                     _c("th", [_vm._v("id")]),
                     _vm._v(" "),
-                    _c("th", [_vm._v("Nombre")]),
+                    _c("th", [_vm._v("Tipo")]),
                     _vm._v(" "),
-                    _c("th", [_vm._v("Tel / Cel")]),
+                    _c("th", [_vm._v("Area m2")]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v("Habitaciones")]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v("Usuario")]),
                     _vm._v(" "),
                     _c("th", [_vm._v("Email")]),
                     _vm._v(" "),
