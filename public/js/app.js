@@ -71816,7 +71816,7 @@ var userId = document.getElementById("userId").value;
         buscarModo: function buscarModo(dato) {
             var _this3 = this;
 
-            // this.resultadoTipo = [];
+            this.resultadoTipo = [];
             this.modoParaBusqueda = dato;
             axios.get('api/buscar-modo/' + this.tipoParaBusqueda + '/' + dato).then(function (res) {
                 _this3.resultadoTipo = res.data;

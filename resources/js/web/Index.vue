@@ -475,7 +475,7 @@ export default {
             });
         },
         buscarModo(dato){
-            // this.resultadoTipo = [];
+            this.resultadoTipo = [];
             this.modoParaBusqueda = dato;
             axios.get('api/buscar-modo/'+this.tipoParaBusqueda+'/'+dato).then(res=>{
                 this.resultadoTipo = res.data;
