@@ -34,6 +34,9 @@ class Inmueble extends Model
      public function mascotas() {
           return $this->hasMany('App\Mascotas');
      }
+     public function modos() {
+          return $this->hasMany('App\Modo');
+     }
 
      public function crear($request){
         $inmueble =new Inmueble();

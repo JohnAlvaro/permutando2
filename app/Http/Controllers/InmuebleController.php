@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
 use App\Inmueble;
+use App\Modo;
 
 class InmuebleController extends Controller
 {
@@ -36,6 +37,17 @@ class InmuebleController extends Controller
     public function buscarTipo($tipo){
         return Inmueble::where('tipo',$tipo)->get();
 
+    }
+    public function buscarModo($tipo,$modo){
+        $inmuebles;
+        $modos = Modo::where('modo',$modo)->get(); 
+        foreach ($modos as $m) {
+           $id = $m->inmueble_id;
+
+                $inmuebles += Inmueble::where('tipo',$tipo)->where('id',$id)->get();
+           
+        }
+         return $inmuebles;
     }
     public function info($id){
         return Inmueble::find($id);

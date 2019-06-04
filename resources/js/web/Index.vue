@@ -9,15 +9,15 @@
                                 <div class="check-group buscador showto">
                                     <input type="checkbox" id="busco-1" name="inmueble" @click="buscarTipo('Casa')" class="unique" show="busco"><label for="busco-1" class="radio-btn">Casa</label>
                                     <input type="checkbox" id="busco-2" name="inmueble" class="unique" @click="buscarTipo('Apto')" show="busco"><label for="busco-2" class="radio-btn">Apto</label>
-                                    <input type="checkbox" id="busco-3" name="inmueble" class="unique"><label for="busco-3" class="radio-btn">Oficina</label>
-                                    <input type="checkbox" id="busco-4" name="inmueble" class="unique"><label for="busco-4" class="radio-btn">Bodega</label>
+                                    <input type="checkbox" id="busco-3" name="inmueble" @click="buscarTipo('Oficina')" class="unique" show="busco"><label for="busco-3" class="radio-btn">Oficina</label>
+                                    <input type="checkbox" id="busco-4" name="inmueble"  @click="buscarTipo('Bodega')"  class="unique" show="busco"><label for="busco-4" class="radio-btn">Bodega</label>
                                 </div>
                             </div>
                             <div class="fields">
                                 <div class="check-group estado showto">
-                                    <input type="checkbox" id="busco_estado-1" class="unique"  name="busco_estado" show="busco"><label for="busco_estado-1"  class="radio-btn">Venta</label>
-                                    <input type="checkbox" id="busco_estado-2" class="unique"  name="busco_estado" show="busco"><label for="busco_estado-2" class="radio-btn">Arriendo</label>
-                                    <input type="checkbox" id="busco_estado-3" class="unique"  name="busco_estado" show="busco"><label for="busco_estado-3" class="radio-btn">Permuta</label>
+                                    <input type="checkbox" id="busco_estado-1" class="unique" @click="buscarModo('Venta')"   name="busco_estado" show="busco"><label for="busco_estado-1"  class="radio-btn">Venta</label>
+                                    <input type="checkbox" id="busco_estado-2" class="unique" @click="buscarModo('Arriendo')"    name="busco_estado" show="busco"><label for="busco_estado-2" class="radio-btn">Arriendo</label>
+                                    <input type="checkbox" id="busco_estado-3" class="unique" @click="buscarModo('Permuta')"     name="busco_estado" show="busco"><label for="busco_estado-3" class="radio-btn">Permuta</label>
                                 </div>
                                 <div class="detalles">
                                     <div class="ubicacion showto">
@@ -54,13 +54,13 @@
                             </div>
                             <div class="fields">
                                 <div class="check-group estado showto">
-                                    <input type="checkbox" id="vendo_estado-1" class="unique" name="vendo_estado" @click="modos('Venta')" show="vendo">
+                                    <input type="checkbox" id="vendo_estado-1" v-model="modo" value="Venta" name="vendo_estado"  show="vendo">
                                     <label for="vendo_estado-1" class="radio-btn">Venta</label>
 
-                                    <input type="checkbox" id="vendo_estado-2" class="unique" name="vendo_estado" @click="modos('Arriendo')" show="vendo">
+                                    <input type="checkbox" id="vendo_estado-2"  v-model="modo"  value="Arriendo"  name="vendo_estado"  show="vendo">
                                     <label for="vendo_estado-2" class="radio-btn">Arriendo</label>
 
-                                    <input type="checkbox" id="vendo_estado-3" class="unique" name="vendo_estado" @click="modos('Permuta')" show="vendo">
+                                    <input type="checkbox" id="vendo_estado-3" v-model="modo"  value="Permuta"   name="vendo_estado"  show="vendo">
                                     <label for="vendo_estado-3" class="radio-btn">Permuta</label>
                                 </div>
                             </div>
@@ -82,7 +82,7 @@
                 <div class="item" v-for="resultado in resultadoTipo" :key="resultado.id">
                     <div class="img" v-bind:style="{ backgroundImage: 'url(' + '/' + resultado.imagen+')' }"></div>
                     <div class="info">
-                        <h3>{{resultado.tipo}} en {{resultado.modo}} ({{resultado.barrio}})</h3>
+                        <h3>{{resultado.tipo}} en {{modoParaBusqueda}} ({{resultado.barrio}})</h3>
                         <div class="desc">
                             <div>
                                 <span><strong>Área:</strong> {{resultado.area}} Area mts<sup>2</sup></span>
@@ -414,11 +414,13 @@ export default {
         return{
             userId:userId,
             resultadoTipo:[],
+            resultadoModo:[],
             info:[],
             tipo:[],
             tipoParaBusqueda:'',
             modoParaBusqueda:'',
             modo:[],
+            modoBusco:'',
             form:{
                 area:'',
                 habitaciones:'',
@@ -460,15 +462,22 @@ export default {
 
         },
         buscarTipo(dato){
+            this.resultadoTipo = [];
+            // this.modoParaBusqueda='';
             this.tipoParaBusqueda = dato;
             axios.get('api/buscar-tipo/'+dato).then(res=>{
                 this.resultadoTipo = res.data;
+                console.log(res.data);
+                
             });
         },
         buscarModo(dato){
-            this.tipoParaBusqueda = dato;
-            axios.get('api/buscar-tipo/'+dato).then(res=>{
+            // this.resultadoTipo = [];
+            this.modoParaBusqueda = dato;
+            axios.get('api/buscar-modo/'+this.tipoParaBusqueda+'/'+dato).then(res=>{
                 this.resultadoTipo = res.data;
+                console.log(res.data);
+                
             });
         },
         //Tengo
@@ -478,10 +487,8 @@ export default {
             
         },
         modos(dato){
-
               this.modo = dato;
-            // this.modo.push(dato);
-            
+            // this.modo.push(dato);    
             console.log(this.modo);
             
         },

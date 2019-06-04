@@ -139,19 +139,39 @@
             <!-- Horizontal Form -->
             <div class="box box-info">
               <div class="box-header with-border">
-                <h3 class="box-title">Zonas Comunes</h3>
+                <h3 class="box-title">Modo</h3>
               </div>
                 <div class="container box-body">
                     <div class="row">
                         <div class="col-md-4">
-                          @foreach($inmueble->zonas as $zona)
-                            <span class="label label-success">{{$zona->nombre}}</span>
+                          @foreach($inmueble->modos as $modos)
+                            <span class="label label-success">{{$modos->modo}}</span>
                           @endforeach
                         </div>
 
                     </div>
                 </div>
 
+            </div>
+            <!-- /.box -->
+          </div>
+          <div class="col-md-5">
+            <!-- Horizontal Form -->
+            <div class="box box-info">
+              <div class="box-header with-border">
+                <h3 class="box-title">Zonas Comunes</h3>
+              </div>
+              <div class="container box-body">
+                <div class="row">
+                  <div class="col-md-4">
+                    @foreach($inmueble->zonas as $zona)
+                    <span class="label label-success">{{$zona->nombre}}</span>
+                    @endforeach
+                  </div>
+          
+                </div>
+              </div>
+          
             </div>
             <!-- /.box -->
           </div>
