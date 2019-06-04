@@ -463,7 +463,7 @@ export default {
         },
         buscarTipo(dato){
             this.resultadoTipo = [];
-            // this.modoParaBusqueda='';
+            this.modoParaBusqueda='';
             this.tipoParaBusqueda = dato;
             axios.get('api/buscar-tipo/'+dato).then(res=>{
                 this.resultadoTipo = res.data;

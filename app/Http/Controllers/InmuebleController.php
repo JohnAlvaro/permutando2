@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
 use App\Inmueble;
 use App\Modo;
+use Illuminate\Support\Collection as Collection;
+
 
 class InmuebleController extends Controller
 {
@@ -39,13 +41,11 @@ class InmuebleController extends Controller
 
     }
     public function buscarModo($tipo,$modo){
-        $inmuebles;
+        $inmuebles=[];
         $modos = Modo::where('modo',$modo)->get(); 
-        foreach ($modos as $m) {
-           $id = $m->inmueble_id;
 
-                $inmuebles += Inmueble::where('tipo',$tipo)->where('id',$id)->get();
-           
+        foreach ($modos as $m) {
+             $inmuebles = Inmueble::where('tipo',$tipo)->where('id',$m->inmueble_id)->get();           
         }
          return $inmuebles;
     }
