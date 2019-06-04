@@ -72513,11 +72513,6 @@ var render = function() {
                             _c("span", [
                               _c("strong", [_vm._v("Barrio:")]),
                               _vm._v(" " + _vm._s(_vm.info.barrio))
-                            ]),
-                            _vm._v(" "),
-                            _c("span", [
-                              _c("strong", [_vm._v("Baños:")]),
-                              _vm._v(" " + _vm._s(_vm.info.direccon))
                             ])
                           ])
                         ]),

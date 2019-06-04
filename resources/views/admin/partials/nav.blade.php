@@ -22,7 +22,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="/lista-inmuebles">Lista</a></li>
-            <li><a href="#">Apartamentos</a></li>
+            <!-- <li><a href="#">Apartamentos</a></li> -->
           </ul>
         </li>
       </ul>

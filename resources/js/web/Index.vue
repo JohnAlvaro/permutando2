@@ -127,7 +127,7 @@
                                     <div>
                                         <span><strong>Valor:</strong> ${{info.valor}}</span>
                                         <span><strong>Barrio:</strong> {{info.barrio}}</span>
-                                        <span><strong>Baños:</strong> {{info.direccon}}</span>
+                                        <!-- <span><strong>Baños:</strong> {{info.direccon}}</span> -->
                                     </div>
                                 </div>
                                 <strong>Caracteristicas:</strong>
