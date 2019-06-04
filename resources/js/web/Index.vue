@@ -384,7 +384,9 @@
         </div>
         <div class="f1-buttons">
             <button type="button" class="btn btn-prev">Anterior</button>
-            <button type="submit" class="btn btn-submit">Finalizar</button>
+
+            <button type="submit" v-if="enviando" class="btn btn-submit">Finalizar</button>
+            <button type="submit" v-else  class="btn btn-submit">Enviando...</button>
         </div>
     </fieldset>
 
@@ -412,6 +414,7 @@ export default {
     },
     data(){
         return{
+            enviando:true,
             userId:userId,
             resultadoTipo:[],
             resultadoModo:[],
@@ -499,6 +502,7 @@ export default {
           },
           
           storeInmueble(){
+              this.enviando =  false;
             let fd = new FormData();
             for (var i = 0; i < this.form.zonas.length; i++) {
                 fd.append('zonas[]',this.form.zonas[i]);
@@ -558,6 +562,7 @@ export default {
                   }
               }).then(res=>{
                   console.log(res.data);
+                  this.enviando = true;
                   
                 // this.form = {
                 //   area:'',
