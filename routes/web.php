@@ -24,3 +24,8 @@ Route::get('admin',function(){return view('admin.index');});
 Route::get('lista-usuarios',function(){return view('admin.usuario.lista');});
 Route::get('lista-inmuebles',function(){return view('admin.inmueble.lista');});
 Route::get('detalle-inmueble/{id}','InmuebleController@detalle');
+
+//Rutas de Perfil
+Route::get('perfil',function(){
+    return view('perfil.index');
+});
