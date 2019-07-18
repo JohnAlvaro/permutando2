@@ -78,7 +78,7 @@
                 <input type="radio" id="lista" name="lista" checked><label for="lista" class="radio-btn">Lista</label>
                 <input type="radio" id="mapa" name="lista"><label for="mapa" class="radio-btn">Mapa</label>
             </div>
-            <div class="list">
+            <!-- <div class="list">
                 <div class="item" v-for="resultado in resultadoTipo" :key="resultado.id">
                     <div class="img" v-bind:style="{ backgroundImage: 'url(' + '/' + resultado.imagen+')' }"></div>
                     <div class="info">
@@ -92,7 +92,7 @@
                             <div>
                                 <span><strong>Valor:</strong> ${{resultado.valor}}</span>
                                 <span><strong>Barrio:</strong> {{resultado.barrio}}</span>
-                                <!-- <span><strong>Baños:</strong> Calle 150 #1-50</span> -->
+                               
                             </div>
                         </div>
                     </div>
@@ -101,10 +101,10 @@
                         <button type="button" class="btn">Mensaje</button>
                     </div>
                 </div>
-                
-                
-                
-            </div>
+            </div> -->
+            <leaflet></leaflet>
+
+
             <div id="infoModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-lg">
                     <div class="modal-content">
@@ -146,23 +146,22 @@
         </div>
     </div>
                     
-                    <div class="box resultados-vendo">
-                      <form role="form" @submit.prevent="storeInmueble" class="f1">
-
-    <div class="f1-steps">
-        <div class="f1-progress">
-            <div class="f1-progress-line" data-now-value="16.66" data-number-of-steps="3" style="width: 16.66%;"></div>
+  <div class="box resultados-vendo">
+    <form role="form" @submit.prevent="storeInmueble" class="f1">
+        <div class="f1-steps">
+            <div class="f1-progress">
+                <div class="f1-progress-line" data-now-value="16.66" data-number-of-steps="3" style="width: 16.66%;"></div>
+            </div>
+            <div class="f1-step active">
+                <div class="f1-step-icon">1</div>
+            </div>
+            <div class="f1-step">
+                <div class="f1-step-icon">2</div>
+            </div>
+            <div class="f1-step">
+                <div class="f1-step-icon">3</div>
+            </div>
         </div>
-        <div class="f1-step active">
-            <div class="f1-step-icon">1</div>
-        </div>
-        <div class="f1-step">
-            <div class="f1-step-icon">2</div>
-        </div>
-        <div class="f1-step">
-            <div class="f1-step-icon">3</div>
-        </div>
-    </div>
 
     <fieldset>
         <h4>{{tipo}} en {{modo}}</h4>

@@ -29,6 +29,7 @@ Vue.component('form-inmueble', require('./web/Form.vue'));
 Vue.component('web-index', require('./web/Index.vue'));
 Vue.component('tengo', require('./web/Tengo.vue'));
 Vue.component('busco', require('./web/Busco.vue'));
+Vue.component('leaflet', require('./web/Leaflet.vue'));
 
 
 // let router = new Router({

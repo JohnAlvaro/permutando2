@@ -30104,6 +30104,7 @@ Vue.component('form-inmueble', __webpack_require__(53));
 Vue.component('web-index', __webpack_require__(57));
 Vue.component('tengo', __webpack_require__(60));
 Vue.component('busco', __webpack_require__(63));
+Vue.component('leaflet', __webpack_require__(79));
 
 // let router = new Router({
 //     routes: [
@@ -71737,7 +71738,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 __WEBPACK_IMPORTED_MODULE_0_toastr___default.a.options = {
@@ -72369,183 +72369,110 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "col-12 col-md-7 col-lg-8 content" }, [
       _c("div", { staticClass: "box resultados-busco" }, [
-        _c("div", { staticClass: "list-mode" }, [
-          _vm._m(1),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "list" },
-            _vm._l(_vm.resultadoTipo, function(resultado) {
-              return _c("div", { key: resultado.id, staticClass: "item" }, [
-                _c("div", {
-                  staticClass: "img",
-                  style: {
-                    backgroundImage: "url(" + "/" + resultado.imagen + ")"
-                  }
-                }),
-                _vm._v(" "),
-                _c("div", { staticClass: "info" }, [
-                  _c("h3", [
-                    _vm._v(
-                      _vm._s(resultado.tipo) +
-                        " en " +
-                        _vm._s(_vm.modoParaBusqueda) +
-                        " (" +
-                        _vm._s(resultado.barrio) +
-                        ")"
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "desc" }, [
-                    _c("div", [
-                      _c("span", [
-                        _c("strong", [_vm._v("Área:")]),
-                        _vm._v(" " + _vm._s(resultado.area) + " Area mts"),
-                        _c("sup", [_vm._v("2")])
-                      ]),
+        _c(
+          "div",
+          { staticClass: "list-mode" },
+          [
+            _vm._m(1),
+            _vm._v(" "),
+            _c("leaflet"),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "modal fade",
+                attrs: {
+                  id: "infoModal",
+                  tabindex: "-1",
+                  role: "dialog",
+                  "aria-hidden": "true"
+                }
+              },
+              [
+                _c(
+                  "div",
+                  {
+                    staticClass: "modal-dialog modal-dialog-centered modal-lg"
+                  },
+                  [
+                    _c("div", { staticClass: "modal-content" }, [
+                      _vm._m(2),
                       _vm._v(" "),
-                      _c("span", [
-                        _c("strong", [_vm._v("Habitaciones:")]),
-                        _vm._v(" " + _vm._s(resultado.habitaciones))
-                      ]),
-                      _vm._v(" "),
-                      _c("span", [
-                        _c("strong", [_vm._v("Baños:")]),
-                        _vm._v(" " + _vm._s(resultado.banos))
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", [
-                      _c("span", [
-                        _c("strong", [_vm._v("Valor:")]),
-                        _vm._v(" $" + _vm._s(resultado.valor))
-                      ]),
-                      _vm._v(" "),
-                      _c("span", [
-                        _c("strong", [_vm._v("Barrio:")]),
-                        _vm._v(" " + _vm._s(resultado.barrio))
-                      ])
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "buttons" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn",
-                      attrs: {
-                        type: "button",
-                        "data-toggle": "modal",
-                        "data-target": "#infoModal"
-                      },
-                      on: {
-                        click: function($event) {
-                          return _vm.infoInmueble(resultado.id)
-                        }
-                      }
-                    },
-                    [_vm._v("Información")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    { staticClass: "btn", attrs: { type: "button" } },
-                    [_vm._v("Mensaje")]
-                  )
-                ])
-              ])
-            }),
-            0
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "modal fade",
-              attrs: {
-                id: "infoModal",
-                tabindex: "-1",
-                role: "dialog",
-                "aria-hidden": "true"
-              }
-            },
-            [
-              _c(
-                "div",
-                { staticClass: "modal-dialog modal-dialog-centered modal-lg" },
-                [
-                  _c("div", { staticClass: "modal-content" }, [
-                    _vm._m(2),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "modal-body box-info" }, [
-                      _c("div", {
-                        staticClass: "img",
-                        style: {
-                          backgroundImage: "url(" + "/" + _vm.info.imagen + ")"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "text" }, [
-                        _c("h3", [
-                          _vm._v(_vm._s(_vm.info.tipo) + " en venta (Usaquén)")
-                        ]),
+                      _c("div", { staticClass: "modal-body box-info" }, [
+                        _c("div", {
+                          staticClass: "img",
+                          style: {
+                            backgroundImage:
+                              "url(" + "/" + _vm.info.imagen + ")"
+                          }
+                        }),
                         _vm._v(" "),
-                        _c("div", { staticClass: "desc" }, [
-                          _c("div", [
-                            _c("span", [
-                              _c("strong", [_vm._v("Área:")]),
-                              _vm._v(" " + _vm._s(_vm.info.area) + " Area mts"),
-                              _c("sup", [_vm._v("2")])
-                            ]),
-                            _vm._v(" "),
-                            _vm._m(3),
-                            _vm._v(" "),
-                            _vm._m(4)
+                        _c("div", { staticClass: "text" }, [
+                          _c("h3", [
+                            _vm._v(
+                              _vm._s(_vm.info.tipo) + " en venta (Usaquén)"
+                            )
                           ]),
                           _vm._v(" "),
-                          _c("div", [
-                            _c("span", [
-                              _c("strong", [_vm._v("Valor:")]),
-                              _vm._v(" $" + _vm._s(_vm.info.valor))
+                          _c("div", { staticClass: "desc" }, [
+                            _c("div", [
+                              _c("span", [
+                                _c("strong", [_vm._v("Área:")]),
+                                _vm._v(
+                                  " " + _vm._s(_vm.info.area) + " Area mts"
+                                ),
+                                _c("sup", [_vm._v("2")])
+                              ]),
+                              _vm._v(" "),
+                              _vm._m(3),
+                              _vm._v(" "),
+                              _vm._m(4)
                             ]),
                             _vm._v(" "),
-                            _c("span", [
-                              _c("strong", [_vm._v("Barrio:")]),
-                              _vm._v(" " + _vm._s(_vm.info.barrio))
+                            _c("div", [
+                              _c("span", [
+                                _c("strong", [_vm._v("Valor:")]),
+                                _vm._v(" $" + _vm._s(_vm.info.valor))
+                              ]),
+                              _vm._v(" "),
+                              _c("span", [
+                                _c("strong", [_vm._v("Barrio:")]),
+                                _vm._v(" " + _vm._s(_vm.info.barrio))
+                              ])
                             ])
-                          ])
+                          ]),
+                          _vm._v(" "),
+                          _c("strong", [_vm._v("Caracteristicas:")]),
+                          _vm._v(" "),
+                          _c("p", [_vm._v(_vm._s(_vm.info.caracteristicas))])
                         ]),
                         _vm._v(" "),
-                        _c("strong", [_vm._v("Caracteristicas:")]),
-                        _vm._v(" "),
-                        _c("p", [_vm._v(_vm._s(_vm.info.caracteristicas))])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "more" }, [
-                        _c("strong", [_vm._v("Mas información:")]),
-                        _vm._v(" "),
-                        _c("p", [_vm._v(_vm._s(_vm.info.mas_informacion))]),
-                        _vm._v(" "),
-                        _c(
-                          "button",
-                          { staticClass: "btn", attrs: { type: "button" } },
-                          [_vm._v("Contactar")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "button",
-                          { staticClass: "btn", attrs: { type: "button" } },
-                          [_vm._v("Ofertar")]
-                        )
+                        _c("div", { staticClass: "more" }, [
+                          _c("strong", [_vm._v("Mas información:")]),
+                          _vm._v(" "),
+                          _c("p", [_vm._v(_vm._s(_vm.info.mas_informacion))]),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            { staticClass: "btn", attrs: { type: "button" } },
+                            [_vm._v("Contactar")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            { staticClass: "btn", attrs: { type: "button" } },
+                            [_vm._v("Ofertar")]
+                          )
+                        ])
                       ])
                     ])
-                  ])
-                ]
-              )
-            ]
-          )
-        ])
+                  ]
+                )
+              ]
+            )
+          ],
+          1
+        )
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "box resultados-vendo" }, [
@@ -76139,6 +76066,129 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 67 */,
+/* 68 */,
+/* 69 */,
+/* 70 */,
+/* 71 */,
+/* 72 */,
+/* 73 */,
+/* 74 */,
+/* 75 */,
+/* 76 */,
+/* 77 */,
+/* 78 */,
+/* 79 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(80)
+/* template */
+var __vue_template__ = __webpack_require__(81)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/web/Leaflet.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-4d336214", Component.options)
+  } else {
+    hotAPI.reload("data-v-4d336214", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 80 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {};
+    },
+    created: function created() {},
+
+
+    methods: {}
+
+});
+
+/***/ }),
+/* 81 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c("div", { staticClass: "list" }, [
+        _c("div", { staticClass: "item" }, [
+          _c("div", { attrs: { id: "map" } }, [_c("h1", [_vm._v("map")])])
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-4d336214", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

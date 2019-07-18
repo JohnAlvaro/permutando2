@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="css/bootstrap.min.css" type='text/css' media='all'>
     <link rel="stylesheet" href="css/main.css" type='text/css' media='all'>
     <link rel="stylesheet" href="css/buscador.css" type='text/css' media='all'>
-
     <link rel="stylesheet" href="wizard/css/style.css">
     <link rel="stylesheet" href="/css/app.css">
 
@@ -66,7 +65,9 @@
 
     <script src="wizard/js/jquery.backstretch.min.js"></script>
     <script src="wizard/js/scripts.js"></script>
-    <script src="js/app.js"></script>
+    
+
+     <script src="js/app.js"></script>
 
 </body>
 
