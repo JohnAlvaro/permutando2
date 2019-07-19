@@ -1,0 +1,98 @@
+.map {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:url(../img/bg-map.jpg);
+    background-size: cover;
+    background-position: center;
+}
+.map:after {
+    content: '';
+    position: absolute;
+    background: rgba(255, 255, 255, 0.5);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.sidebar {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 1000;
+    height: 100vh;
+    padding: 20px;
+    background: #fff;
+    color: #005c96;
+}
+
+.sidebar .logo {
+    display: block;
+    margin: 0 auto 20px auto;
+}
+.sidebar .user {
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.sidebar .menu {
+    list-style: none;
+    padding: 0;
+    font-size: .9rem;
+    letter-spacing: 1px;
+}
+.sidebar .menu a {
+    color: #005c96;
+    display: block;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    text-decoration: none;
+    border-radius: 10px;
+}
+.sidebar .menu a.active, .sidebar .menu a:hover {
+    background: #e67319;
+    color: #fff;
+}
+
+.title {
+    color: #fff;
+    background: #e67319;
+    padding: 10px;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.inmuebles { padding: 40px 2%; }
+.inmueble { padding: 2%; color: #005c96; }
+.inmueble .box { background: #f2f2f2; box-shadow: 0px 3px 6px rgba(136, 136, 136, 0.6); }
+.inmueble .content { padding: 20px; }
+.inmueble .image {  display: block; height: 200px; background-size: cover; background-position: center; position: relative; }
+.inmueble h4 { font-weight: 600; margin-bottom: 5px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; font-size: 20px; }
+.inmueble .name { border-bottom: 1px solid #005c96; margin-bottom: 5px; }
+.inmueble .group { width: 50%; display: inline-block; vertical-align: top; font-size: 14px; line-height: 18px; }
+.inmueble .item { padding: 5px 0 5px 40px; margin-top: 5px; background-size: contain; background-position: center left; background-repeat: no-repeat; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; }
+
+.inmueble .item.rooms { background-image: url(../img/icon-alcobas.png); }
+.inmueble .item.bath { background-image: url(../img/icon-banos.png); }
+.inmueble .item.garage { background-image: url(../img/icon-garaje.png); }
+.inmueble .item.meters { background-image: url(../img/icon-metros.png); padding-left: 30px; }
+.inmueble .item.price { background-image: url(../img/icon-metros.png); padding-left: 30px; }
+
+.inmueble a { display: block; background: #005c96; padding: 5px 10px; text-align: center; margin-top: 5px; border-radius: 30px; color: #fff; }
+.inmueble a:hover { background: #e67319; color: #fff; }
+
+@media (min-width: 768px){
+
+    .sidebar {
+        display: block;
+    }
+    .inmuebles { padding: 40px 4%; }
+
+}
