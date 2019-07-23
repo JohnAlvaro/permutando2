@@ -41,13 +41,13 @@ class InmuebleController extends Controller
 
     }
     public function buscarModo($tipo,$modo){
-        $inmuebles=[];
         $modos = Modo::where('modo',$modo)->get(); 
-
         foreach ($modos as $m) {
-             $inmuebles = Inmueble::where('tipo',$tipo)->where('id',$m->inmueble_id)->get();           
+            $inmuebles[] = Inmueble::where('tipo',$tipo)->where('id',$m->inmueble_id)->get();   
+            $collection = Collection::make($inmuebles);        
         }
-         return $inmuebles;
+        
+        return $collection->all();
     }
     public function info($id){
         return Inmueble::find($id);

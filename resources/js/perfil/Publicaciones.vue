@@ -5,8 +5,13 @@
         <span>Mis publicaciones</span>
       </div>
     </div>
+
     <div class="row inmuebles">
-      <div class="inmueble col-12 col-lg-6 col-xl-4">
+      <div
+        class="inmueble col-12 col-lg-6 col-xl-4"
+        v-for="inmueble in inmuebles"
+        :key="inmueble.id"
+      >
         <div class="box">
           <div class="image" style="background-image:url(img/img-demo.jpg);"></div>
           <div class="content">
@@ -30,5 +35,24 @@
   </div>
 </template>
 <script>
-export default {};
+var userId = document.getElementById("userId").value;
+export default {
+  data() {
+    return {
+      userId: userId,
+      inmuebles: []
+    };
+  },
+  created() {
+    this.getInmuebles();
+  },
+  methods: {
+    getInmuebles() {
+      axios.get("api/mis-inmuebles/" + this.userId).then(res => {
+        this.inmuebles = res.data;
+        console.log(this.inmuebles);
+      });
+    }
+  }
+};
 </script>

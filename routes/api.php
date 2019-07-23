@@ -32,3 +32,7 @@ Route::get('lista-inmuebles','InmuebleController@lista');
 Route::post('store-inmueble','InmuebleController@store');
 Route::get('inmuebles-map','InmuebleController@listaMap');
 
+//Perfil
+Route::get('mis-inmuebles/{id}','PerfilController@misInmuebles');
+
+

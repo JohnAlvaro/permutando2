@@ -1,11 +1,12 @@
 <template>
-  <div class="conenedor">
+  <div class="list">
     <div class="mapa" id="mymap"></div>
   </div>
 </template>
 
 <script>
 export default {
+  props: ["dato"],
   data() {
     return {
       direcciones: [],
@@ -45,11 +46,16 @@ export default {
       }
     },
     cargarInmuebles() {
-      axios.get("/api/inmuebles-map").then(res => {
+      axios.get("api/buscar-tipo/" + "Casa").then(res => {
         this.direcciones = res.data;
-        console.log(this.direcciones);
+        console.log(this.props);
         this.cargarMap(this.direcciones);
       });
+      // axios.get("/api/inmuebles-map").then(res => {
+      //   this.direcciones = res.data;
+      //   console.log(this.direcciones);
+      //   this.cargarMap(this.direcciones);
+      // });
     }
   }
 };
