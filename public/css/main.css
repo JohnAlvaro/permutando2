@@ -51,3 +51,19 @@
     outline: none;
     box-shadow: none;
 }
+
+.dropdown-menu {
+    background: #f19100;
+}
+.dropdown-item {
+    color: #fff;
+    transition: all .15s ease-in-out;
+}
+.dropdown-item:focus, .dropdown-item:hover {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    background-color: transparent;
+}
+.dropdown-divider {
+    border-color: #cd7b05;
+}

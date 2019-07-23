@@ -226,6 +226,9 @@ select:focus {
 .list-mode .list {
     margin-top: 40px;
 }
+.list-mode .list-map {
+    display: none;
+}
 .list-mode .list .item {
     display: flex;
     border: 1px solid #ccc;

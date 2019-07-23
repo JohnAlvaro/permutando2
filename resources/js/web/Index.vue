@@ -101,7 +101,7 @@
                 </div>
             </div>
 
-            <div class="list">
+            <div class="list-map">
                 <div class="mapa" id="mymap"></div>
             </div>
 

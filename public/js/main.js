@@ -71,11 +71,11 @@ $(document).ready(function () {
 
     $('.filter').on('click', 'input', function () {
 
-
-
         if ($(this).attr('id') == 'lista') {
             $(this).parent().parent().find('.list').slideDown();
+            $(this).parent().parent().find('.list-map').slideUp();
         } else {
+            $(this).parent().parent().find('.list-map').slideDown();
             $(this).parent().parent().find('.list').slideUp();
         }
 

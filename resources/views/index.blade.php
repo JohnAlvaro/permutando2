@@ -64,28 +64,21 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#">Contacto</a>
                         </li>
-                        <li class="nav-item">
-                            @if(Auth::user())
-                            <input
-                                type="hidden"
-                                id="userId"
-                                value="{{Auth::User()->id}}"
-                            />
-                            <button type="button" class="btn nav-link mx-3">
-                                {{Auth::User()->name}}
-                            </button>
+                        @if(Auth::user())
+                            <li class="nav-item dropdown">
+                                <input type="hidden" id="userId" value="{{Auth::User()->id}}">
+                                <button type="button" class="btn nav-link mx-3 dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{Auth::User()->name}}</button>
+                                <div class="dropdown-menu dropdown-menu-right mx-3" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">Perfil</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Cerrar sesión</a>
+                                </div>
+                            </li>
                             @else
-                            <button
-                                type="button"
-                                class="btn nav-link mx-3"
-                                data-toggle="modal"
-                                data-target="#loginModal"
-                            >
-                                Iniciar sesión
-                            </button>
-
-                            @endif
-                        </li>
+                            <li class="nav-item">
+                                <button type="button" class="btn nav-link mx-3" data-toggle="modal" data-target="#loginModal">Iniciar sesión</button>
+                            </li>
+                        @endif
                     </ul>
                 </div>
             </nav>
