@@ -59,6 +59,8 @@
         
     </div>
 
+   
+
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
@@ -66,8 +68,18 @@
     <script src="wizard/js/jquery.backstretch.min.js"></script>
     <script src="wizard/js/scripts.js"></script>
     
+   
+  
 
-     <script src="js/app.js"></script>
+    
+     
+     <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQW6mlbcn4P312vnTaZNdknL0O1JRwdvA">
+    </script>
+    <script src="js/app.js"></script>
+
+    <script>
+    </script>
 
 </body>
 

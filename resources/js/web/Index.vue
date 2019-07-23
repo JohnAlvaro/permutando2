@@ -102,7 +102,7 @@
                     </div>
                 </div>
             </div> -->
-            <leaflet></leaflet>
+            <maps></maps>
 
 
             <div id="infoModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">

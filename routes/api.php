@@ -30,4 +30,5 @@ Route::get('lista-inmuebles','InmuebleController@lista');
 
 //Web
 Route::post('store-inmueble','InmuebleController@store');
+Route::get('inmuebles-map','InmuebleController@listaMap');
 

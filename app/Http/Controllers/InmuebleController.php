@@ -53,4 +53,7 @@ class InmuebleController extends Controller
         return Inmueble::find($id);
 
     }
+    public function listaMap(){
+        return Inmueble::all();
+    }
 }

@@ -27,5 +27,5 @@ Route::get('detalle-inmueble/{id}','InmuebleController@detalle');
 
 //Rutas de Perfil
 Route::get('perfil',function(){
-    return view('perfil.index');
+    return view('perfil.publicaciones');
 });
