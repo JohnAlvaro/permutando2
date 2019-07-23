@@ -45,8 +45,7 @@ class InmuebleController extends Controller
         foreach ($modos as $m) {
             $inmuebles[] = Inmueble::where('tipo',$tipo)->where('id',$m->inmueble_id)->get();   
             $collection = Collection::make($inmuebles);        
-        }
-        
+        }    
         return $collection->all();
     }
     public function info($id){

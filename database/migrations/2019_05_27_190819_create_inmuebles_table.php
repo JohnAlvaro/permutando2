@@ -18,6 +18,8 @@ class CreateInmueblesTable extends Migration
             
             $table->string('tipo')->nullable(); //Casa,Apartamento,Oficina,Bodega
             $table->string('modo')->nullable();
+            $table->string('estado')->nullable();
+            $table->string('video')->nullable();
 
             $table->string('barrio')->nullable();
             $table->string('direccion')->nullable();

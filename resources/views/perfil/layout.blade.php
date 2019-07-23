@@ -20,17 +20,13 @@
             type="text/css"
             media="all"
         />
+        @stack('styles')
+       
     </head>
 
     <body>
         <div id="app">
-            <div class="map"></div>
-            <div class="container-fluid">
-                <div class="row justify-content-end">
-                    @include('perfil.partials.nav')
-                    <publicaciones></publicaciones>  
-                </div>
-            </div>
+            @yield('content')
         </div>
         <script
             type="text/javascript"
@@ -41,6 +37,7 @@
             src="js/bootstrap.bundle.min.js"
         ></script>
         <script type="text/javascript" src="js/perfil.js"></script>
+        @stack('scripts')
         <script type="text/javascript" src="js/app.js"></script>
     </body>
 </html>

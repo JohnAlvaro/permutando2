@@ -95,8 +95,8 @@
                         </div>
                     </div>
                     <div class="buttons">
-                        <button type="button" class="btn" data-toggle="modal" data-target="#infoModal" @click="infoInmueble(resultado.id)">Información</button>
-                        <button type="button" class="btn">Mensaje</button>
+                        <button type="button" class="btn"  @click="infoInmueble(resultado.id)">Información</button>
+                        <!-- <button type="button" class="btn">Mensaje</button> -->
                     </div>
                 </div>
             </div>
@@ -105,7 +105,7 @@
                 <div class="mapa" id="mymap"></div>
             </div>
 
-
+            <!-- Modal -->
             <div id="infoModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-lg">
                     <div class="modal-content">
@@ -122,8 +122,8 @@
                                 <div class="desc">
                                     <div>
                                         <span><strong>Área:</strong> {{info.area}} Area mts<sup>2</sup></span>
-                                        <span><strong>Habitaciones:</strong> 3</span>
-                                        <span><strong>Baños:</strong> 2</span>
+                                        <span><strong>Habitaciones:</strong> {{info.habitaciones}}</span>
+                                        <span><strong>Baños:</strong> {{info.banos}}</span>
                                     </div>
                                     <div>
                                         <span><strong>Valor:</strong> ${{info.valor}}</span>
@@ -379,6 +379,13 @@
                         <div class="image">
                             <input type="file" id="file" ref="file" @change="img"  class="inputfile" />
                             <label for="file">Subir imagen</label>
+                            <small>Máximo 6 imágenes</small>
+                        </div>
+                    </div>
+                    <div class="form-field w100">
+                        <div class="my-text">
+                            <span>Url Video</span>
+                            <input v-model="form.video" type="text" name="area">
                         </div>
                     </div>
                 </div>
@@ -404,9 +411,12 @@ toastr.options ={
 };
 var userId = document.getElementById("userId").value;
 
+
+
 export default {
 
-    created(){        
+    created(){   
+
     },
     data(){
         return{
@@ -454,6 +464,7 @@ export default {
             var map;
             var geocoder;
             geocoder = new google.maps.Geocoder();
+            var infowindow = new google.maps.InfoWindow();
             map = new google.maps.Map(document.getElementById("mymap"), {
                 center: { lat: 4.60971, lng: -74.08175 },
                 zoom: 10
@@ -471,6 +482,18 @@ export default {
                     map: map,
                     position: results[0].geometry.location
                     });
+                    google.maps.event.addListener(marker, 'click', function() {
+                        var contentString = '<div id="content">'+
+                            '<h2>'+ direcciones[index].tipo + '</h2>'+
+                            '<div>'+
+                            '<p><b> $'+ direcciones[index].valor + '</b></p>'+
+                            '<button onclick="infoInmueble()">Información</button>'+'</div>'+
+                            '</div>';
+                        // infowindow.setContent(direcciones[index].tipo +' $' + direcciones[index].valor   );
+                        infowindow.setContent(contentString );
+                        infowindow.open(map, this);
+                        
+                    });
                 } else {
                     alert("Error al mostrar Inmuebles: " + status);
                 }
@@ -481,6 +504,7 @@ export default {
         infoInmueble(id){
             axios.get('api/info-inmueble/'+id).then(res=>{
                 this.info = res.data;
+                $('#infoModal').modal('show');
                 console.log(this.info);  
             });
         },
@@ -612,8 +636,12 @@ export default {
 
           }
     }
+   
     
 }
+
+
+
 </script>
 
 <style>

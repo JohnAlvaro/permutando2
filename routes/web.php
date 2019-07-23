@@ -26,6 +26,5 @@ Route::get('lista-inmuebles',function(){return view('admin.inmueble.lista');});
 Route::get('detalle-inmueble/{id}','InmuebleController@detalle');
 
 //Rutas de Perfil
-Route::get('perfil',function(){
-    return view('perfil.publicaciones');
-});
+Route::get('perfil-mis-publicaciones',function(){return view('perfil.publicaciones');});
+Route::get('perfil-publicar',function(){return view('perfil.publicar');});

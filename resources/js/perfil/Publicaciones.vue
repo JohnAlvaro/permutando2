@@ -16,16 +16,16 @@
           <div class="image" style="background-image:url(img/img-demo.jpg);"></div>
           <div class="content">
             <div class="name">
-              <h4>Apartamento Bogotá</h4>
+              <h4>{{inmueble.tipo}}</h4>
             </div>
             <div class="group">
-              <div class="item rooms">2 Alcobas</div>
-              <div class="item bath">3 baños</div>
-              <div class="item garage">3 parqueaderos</div>
+              <div class="item rooms">{{inmueble.habitaciones}} Habitaciones</div>
+              <div class="item bath">{{inmueble.banos}} baños</div>
+              <div class="item garage">{{inmueble.parqueadero}} parqueaderos</div>
             </div>
             <div class="group">
-              <div class="item meters">76,2 m2</div>
-              <div class="item price">$100.000.000</div>
+              <div class="item meters">{{inmueble.area}} m2</div>
+              <div class="item price">${{inmueble.valor}}</div>
               <a href="#">Editar</a>
             </div>
           </div>

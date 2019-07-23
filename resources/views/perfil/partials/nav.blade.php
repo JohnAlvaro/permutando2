@@ -10,13 +10,18 @@
     </div>
     <ul class="menu">
         <li><a href="#">Perfil</a></li>
-        <li><a href="#">Mis inmuebles favoritos</a></li>
-        <li><a href="#">Mis inmuebles contactados</a></li>
-        <li><a href="#">Mis mensajes</a></li>
+        <!-- <li><a href="#">Mis inmuebles favoritos</a></li> -->
+        <!-- <li><a href="#">Mis inmuebles contactados</a></li> -->
+        <li><a href="/perfil-publicar">Publicar Inmueble</a></li>
         <li>
-            <a href="#" class="">Mis publicaciones</a>
+            <a href="/perfil-mis-publicaciones" class="">Mis publicaciones</a>
         </li>
-        <li><a href="#">Mis alertas</a></li>
-        <li><a href="#">Crear Alertas</a></li>
+        <li><a href="#">Mis mensajes</a></li>
+        
+        <!-- <li><a href="#">Mis alertas</a></li>
+        <li><a href="#">Crear Alertas</a></li> -->
+        <li>
+            <a href="#" class="">Cerrar sesión</a>
+        </li>
     </ul>
 </div>
