@@ -67768,6 +67768,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {},
@@ -68295,11 +68298,7 @@ var render = function() {
                         _vm._v(" "),
                         _c("p", [_vm._v(_vm._s(_vm.info.mas_informacion))]),
                         _vm._v(" "),
-                        _c(
-                          "button",
-                          { staticClass: "btn", attrs: { type: "button" } },
-                          [_vm._v("Contactar")]
-                        )
+                        _vm._m(4)
                       ])
                     ])
                   ])
@@ -68397,6 +68396,16 @@ var staticRenderFns = [
         },
         [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
       )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { attrs: { href: "perfil-detalle/1" } }, [
+      _c("button", { staticClass: "btn", attrs: { type: "button" } }, [
+        _vm._v("Contactar")
+      ])
     ])
   }
 ]

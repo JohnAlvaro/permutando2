@@ -11,7 +11,7 @@
        {{Auth::User()->name}}
     </div>
     <ul class="menu">
-        <li><a href="#">Perfil</a></li>
+        <!-- <li><a href="#">Perfil</a></li> -->
         <!-- <li><a href="#">Mis inmuebles favoritos</a></li> -->
         <!-- <li><a href="#">Mis inmuebles contactados</a></li> -->
         <li><a href="/perfil-publicar">Publicar Inmueble</a>

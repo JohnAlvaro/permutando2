@@ -71,7 +71,7 @@
                                 <div class="dropdown-menu dropdown-menu-right mx-3" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="/perfil-mis-publicaciones">Perfil</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Cerrar sesión</a>
+                                    <a class="dropdown-item" href="/logout">Cerrar sesión</a>
                                 </div>
                             </li>
                             @else

@@ -225,7 +225,10 @@
                   <div class="more">
                     <strong>Mas información:</strong>
                     <p>{{info.mas_informacion}}</p>
-                    <button type="button" class="btn">Contactar</button>
+                    <a href="perfil-detalle/1">
+                      <button type="button" class="btn">Contactar</button>
+                    </a>
+
                     <!-- <button type="button" class="btn">Ofertar</button> -->
                   </div>
                 </div>

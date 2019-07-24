@@ -139,14 +139,30 @@
             <!-- Horizontal Form -->
             <div class="box box-info">
               <div class="box-header with-border">
-                <h3 class="box-title">Modo</h3>
+                <h3 class="box-title">Tipo de inmueble</h3>
               </div>
                 <div class="container box-body">
                     <div class="row">
                         <div class="col-md-4">
-                          @foreach($inmueble->modos as $modos)
-                            <span class="label label-success">{{$modos->modo}}</span>
-                          @endforeach
+                            <span class="label label-success">{{$inmueble->tipo_inmueble}}</span>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.box -->
+          </div>
+          <div class="col-md-5">
+            <!-- Horizontal Form -->
+            <div class="box box-info">
+              <div class="box-header with-border">
+                <h3 class="box-title">Tipo de Publicación</h3>
+              </div>
+                <div class="container box-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <span class="label label-success">{{$inmueble->tipo_publicacion}}</span>
                         </div>
 
                     </div>
