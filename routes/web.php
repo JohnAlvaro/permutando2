@@ -30,4 +30,7 @@ Route::get('perfil-mis-publicaciones',function(){return view('perfil.publicacion
 Route::get('perfil-publicar',function(){return view('perfil.publicar.casa');});
 Route::get('perfil-publicar-oficina',function(){return view('perfil.publicar.oficina');});
 Route::get('perfil-index',function(){return view('perfil.index');});
-Route::get('perfil-detalle/{id}',function(){return view('perfil.detalle');});
+Route::get('perfil-detalle/{id}','PerfilController@detalle');
+
+//Contacto
+Route::post('contacto','ContactoController@contacto');
