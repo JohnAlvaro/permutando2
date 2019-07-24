@@ -43,7 +43,7 @@
             src="/js/bootstrap.bundle.min.js"
         ></script>
         <script type="text/javascript" src="/js/perfil.js"></script>
-        @stack('scripts')
         <script type="text/javascript" src="/js/app.js"></script>
+        @stack('scripts')
     </body>
 </html>

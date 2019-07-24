@@ -10,10 +10,18 @@
 @stop
 
 @push('styles')
-<link rel="stylesheet" href="/wizard/css/style.css" />
+    <link rel="stylesheet" href="/css/slick.css" />
 @endpush
 
 @push('scripts')
-<script src="/wizard/js/jquery.backstretch.min.js"></script>
-<script src="/wizard/js/scripts.js"></script>
+    <script src="/js/slick.min.js"></script>
+    <script>
+        $('.gallery').slick({
+            infinite: true,
+            speed: 300,
+            slidesToShow: 1,
+            adaptiveHeight: true,
+            accessibility: false
+        });
+    </script>
 @endpush
