@@ -24,15 +24,50 @@
         </div>
 
             <fieldset>
-                <h4>{{tipo}} en {{modo}}</h4>
+                <h4>Publicar Inmueble</h4>
                 <div class="form-group">
+                    <div class="form-field w50">
+                        <div class="my-select">
+                            <span>Tipo de publicación</span>
+                            <select required v-model="form.tipoPublicacion">
+                                <option  >Seleccione..</option>
+                                <option value="Venta" >Venta</option>
+                                <option value="Arriendo">Arriendo</option>
+                                <option value="Permuto">Permuto</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-field w50">
+                        <div class="my-select">
+                            <span>Tipo de Inmueble</span>
+                            <select required v-model="form.tipoInmueble">
+                                <option  >Seleccione..</option>
+                                <option value="Casa" >Casa</option>
+                                <option value="Apartamento">Apartamento</option>
+                                <option value="Bodega">Bodega</option>
+                                <option value="Lote">Lote</option>
+                                <option value="Oficina">Oficina</option>
+                                <option value="Edificio">Edificio</option>
+                                <option value="Casa Lote">Casa Lote</option>
+                                <option value="Quinta">Quinta</option>
+                                <option value="Finca">Finca</option>
+                                <option value="Hacienda">Hacienda</option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="form-field">
                         <div class="my-text">
                             <span>Area mts<sup>2</sup></span>
                             <input v-model="form.area" type="text" name="area">
                         </div>
                     </div>
-                    <div class="form-field">
+                    <div class="form-field" v-if="form.tipoInmueble == 'Bodega'">
+                        <div class="my-text">
+                            <span>Area Construida mts<sup>2</sup></span>
+                            <input v-model="form.areaConstruida" type="text" name="area">
+                        </div>
+                    </div>
+                    <div class="form-field" v-if="form.tipoInmueble == 'Apartamento' || form.tipoInmueble == 'Casa' ">
                         <div class="my-select">
                             <span>Habitaciones</span>
                             <select v-model="form.habitaciones">
@@ -101,20 +136,16 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-field w50">
+                    <!-- <div class="form-field w50">
                         <div class="my-select">
                             <span>Departamento</span>
-                            <select v-model="form.departamento">
-                                <option>Cundinamarca</option>
-                            </select>
+                            
                         </div>
-                    </div>
+                    </div> -->
                     <div class="form-field w50">
-                        <div class="my-select">
-                            <span>Ciudad</span>
-                            <select v-model="form.ciudad">
-                                <option>--</option>
-                            </select>
+                        <div class="my-text">
+                            <span>Ciudad / Municipio</span>
+                            <input v-model="form.ciudad" type="text" name="area">
                         </div>
                     </div>
                     <div class="form-field w50">
@@ -129,10 +160,19 @@
                             <input v-model="form.direccion" type="text" name="area">
                         </div>
                     </div>
-                    <div class="form-field w50">
-                        <div class="my-text">
+                    <div class="form-field">
+                        <div class="my-select">
                             <span>Estrato</span>
-                            <input v-model="form.estrato" type="text" name="area">
+                            <select v-model="form.estrato">
+                                <option>--</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">5</option>
+                                <option value="Campestre">Campestre</option>
+                            </select>
                         </div>
                     </div>
                     <textarea v-model="form.caracteristica" placeholder="Otras características"></textarea>
@@ -252,7 +292,7 @@
                     <button type="button" class="btn btn-prev">Anterior</button>
 
                     <button type="submit" v-if="enviando" class="btn btn-submit">Finalizar</button>
-                    <button type="submit" v-else  class="btn btn-submit">Enviando...</button>
+                    <button type="button" v-else  class="btn btn-submit">Enviando...</button>
                 </div>
             </fieldset> 
      </form>
@@ -262,17 +302,149 @@
   
 </template>
 <script>
+import toastr from "toastr";
+toastr.options = {
+  closeButton: true,
+  timeOut: "10000"
+  // "progressBar": true,
+};
 var userId = document.getElementById("userId").value;
 export default {
   data() {
     return {
       userId: userId,
-      enviando: false,
-      form: {}
+      enviando: true,
+      form:{
+            tipoPublicacion:'',
+            tipoInmueble:'',
+            area:'',
+            habitaciones:'',
+            banos:'',
+            balcon:'',
+            terraza:'',
+            porteria:'',
+            parqueadero:'',
+            caracteristica:'',
+            valor:'',
+            mas_informacion:'',
+            zonas:[],
+            transporte:[],
+            viveres:[],
+            bienestar:[],
+            entretenimiento:[],
+            educativo:[],
+            gastronomia:[],
+            mascotas:[],
+            image:'',
+            estrato:'',
+            departamento:'',
+            ciudad:'',
+            barrio:'',
+            direccion:'',
+            video:''
+
+            }
     };
   },
   created() {},
-  methods: {}
+  methods: {
+    img(event){
+        this.form.image = this.$refs.file.files[0];
+        console.log(this.form.image);           
+    },
+    storeInmueble(){
+            this.enviando =  false;
+            let fd = new FormData();
+            for (var i = 0; i < this.form.zonas.length; i++) {
+                fd.append('zonas[]',this.form.zonas[i]);
+            }
+            for (var i = 0; i < this.form.transporte.length; i++) {  
+                fd.append('transporte[]',this.form.transporte[i]);
+            }
+            for (var i = 0; i < this.form.viveres.length; i++) {    
+                fd.append('viveres[]',this.form.viveres[i]);
+            }
+            for (var i = 0; i < this.form.bienestar.length; i++) {    
+                 fd.append('bienestar[]',this.form.bienestar[i]);
+            }
+            for (var i = 0; i < this.form.entretenimiento.length; i++) {    
+                 fd.append('entretenimiento[]',this.form.entretenimiento[i]);
+            }
+            for (var i = 0; i < this.form.educativo.length; i++) {    
+                 fd.append('educativo[]',this.form.educativo[i]);
+            }
+            for (var i = 0; i < this.form.gastronomia.length; i++) {    
+                 fd.append('gastronomia[]',this.form.gastronomia[i]);
+            }
+            for (var i = 0; i < this.form.mascotas.length; i++) {    
+                 fd.append('mascotas[]',this.form.mascotas[i]);
+            }
+            // for (var i = 0; i < this.modo.length; i++) {    
+            //      fd.append('modos[]',this.modo[i]);
+            // }
+            fd.append('area',this.form.area);
+            fd.append('tipo',this.tipo);
+            
+            fd.append('habitaciones',this.form.habitaciones);
+            fd.append('banos',this.form.banos);
+            fd.append('balcon',this.form.balcon);
+            fd.append('image',this.form.image);
+            fd.append('terraza',this.form.terraza);
+            fd.append('porteria',this.form.porteria);
+            fd.append('parqueadero',this.form.parqueadero);
+            fd.append('caracteristica',this.form.caracteristica);
+            fd.append('valor',this.form.valor);
+            fd.append('mas_informacion',this.form.mas_informacion);
+            fd.append('userId',this.userId);
+            
+            
+
+            
+            fd.append('departamento',this.form.departamento);
+            fd.append('ciudad',this.form.ciudad);
+            fd.append('barrio',this.form.barrio);
+            fd.append('direccion',this.form.direccion);
+            fd.append('estrato',this.form.estrato);
+            fd.append('video',this.form.video);
+            fd.append('tipo_publicacion',this.form.tipoPublicacion);
+            fd.append('tipo_inmueble',this.form.tipoInmueble);
+
+            axios.post('api/store-inmueble',
+                fd,{
+                  headers: {
+                    'Content-Type': 'multipart/form-data'
+                  }
+              }).then(res=>{
+                  console.log(res.data);
+                  this.enviando = true;
+                  
+                // this.form = {
+                //   area:'',
+                //   habitaciones:'',
+                //   banos:'',
+                //   balcon:'',
+                //   image:'',
+                //   terraza:'',
+                //   porteria:'',
+                //   parqueadero:'',
+                //   caracteristica:'',
+                //   mas_informacion:'',
+                //   zonas:'',
+                //   transporte:'',
+                //   viveres:'',
+                //   bienestar:'',
+                //   entretenimiento:'',
+                //   educativo:'',
+                //   gastronomia:'',
+                //   mascotas:'',
+                // }
+              toastr.success('Inmueble subido correctamente');
+
+            });
+
+          }
+
+  }
 };
 </script>
 

@@ -21,7 +21,8 @@ Vue.component("busco", require("./web/Busco.vue"));
 Vue.component("maps", require("./web/Maps.vue"));
 //Perfil
 Vue.component("publicaciones", require("./perfil/Publicaciones.vue"));
-Vue.component("publicar", require("./perfil/Publicar.vue"));
+Vue.component("inmueble-detalle", require("./perfil/Detalle.vue"));
+Vue.component("publicar-casa", require("./perfil/publicar/Casa.vue"));
 
 let router = new Router({
     routes: [

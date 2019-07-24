@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="row justify-content-end">
         @include('perfil.partials.nav')
-        <publicar></publicar> 
+        <inmueble-detalle></inmueble-detalle>
     </div>
 </div>
 @stop

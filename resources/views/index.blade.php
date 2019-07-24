@@ -69,7 +69,7 @@
                                 <input type="hidden" id="userId" value="{{Auth::User()->id}}">
                                 <button type="button" class="btn nav-link mx-3 dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{Auth::User()->name}}</button>
                                 <div class="dropdown-menu dropdown-menu-right mx-3" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="#">Perfil</a>
+                                    <a class="dropdown-item" href="/perfil-mis-publicaciones">Perfil</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#">Cerrar sesión</a>
                                 </div>

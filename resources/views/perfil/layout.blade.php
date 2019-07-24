@@ -10,13 +10,19 @@
         <title>Perfil</title>
         <link
             rel="stylesheet"
-            href="css/bootstrap.min.css"
+            href="/css/bootstrap.min.css"
             type="text/css"
             media="all"
         />
         <link
             rel="stylesheet"
-            href="css/perfil.css"
+            href="/css/perfil.css"
+            type="text/css"
+            media="all"
+        />
+        <link
+            rel="stylesheet"
+            href="/css/app.css"
             type="text/css"
             media="all"
         />
@@ -34,10 +40,10 @@
         ></script>
         <script
             type="text/javascript"
-            src="js/bootstrap.bundle.min.js"
+            src="/js/bootstrap.bundle.min.js"
         ></script>
-        <script type="text/javascript" src="js/perfil.js"></script>
+        <script type="text/javascript" src="/js/perfil.js"></script>
         @stack('scripts')
-        <script type="text/javascript" src="js/app.js"></script>
+        <script type="text/javascript" src="/js/app.js"></script>
     </body>
 </html>

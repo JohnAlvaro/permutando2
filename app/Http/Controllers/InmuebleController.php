@@ -37,16 +37,11 @@ class InmuebleController extends Controller
 
     //Buscadores
     public function buscarTipo($tipo){
-        return Inmueble::where('tipo',$tipo)->get();
+        return Inmueble::where('tipo_inmueble',$tipo)->get();
 
     }
     public function buscarModo($tipo,$modo){
-        $modos = Modo::where('modo',$modo)->get(); 
-        foreach ($modos as $m) {
-            $inmuebles[] = Inmueble::where('tipo',$tipo)->where('id',$m->inmueble_id)->get();   
-            $collection = Collection::make($inmuebles);        
-        }    
-        return $collection->all();
+      return  Inmueble::where('tipo_inmueble',$tipo)->where('tipo_publicacion',$modo)->get();   
     }
     public function info($id){
         return Inmueble::find($id);

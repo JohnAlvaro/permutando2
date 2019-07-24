@@ -26,7 +26,7 @@
             <div class="group">
               <div class="item meters">{{inmueble.area}} m2</div>
               <div class="item price">${{inmueble.valor}}</div>
-              <a href="#">Editar</a>
+              <a href="/perfil-detalle/1">Ver</a>
             </div>
           </div>
         </div>

@@ -40,7 +40,10 @@ class Inmueble extends Model
 
      public function crear($request){
         $inmueble =new Inmueble();
-        $inmueble->tipo = $request->tipo;
+        $inmueble->tipo_publicacion = $request->tipo_publicacion;
+        $inmueble->tipo_inmueble = $request->tipo_inmueble;
+        $inmueble->estado = $request->tipo_publicacion;
+        $inmueble->ciudad = $request->ciudad;
         $inmueble->barrio = $request->barrio;
         $inmueble->direccion = $request->direccion;
         $inmueble->estrato = $request->estrato;
@@ -55,6 +58,7 @@ class Inmueble extends Model
         $inmueble->valor = $request->valor;
         $inmueble->mas_informacion = $request->mas_informacion;
         $inmueble->valor = $request->valor;
+        $inmueble->video = $request->video;
 
          //User
          $user = User::find($request->userId);
@@ -75,13 +79,13 @@ class Inmueble extends Model
         $inmueble->save();
 
         //Modos
-        foreach ((array)$request->modos as $item) {
-             $modo = new Modo();
-             $modo->modo = $item;
-             $modo->inmueble_id = $inmueble->id;
-             $modo->save();
+     //    foreach ((array)$request->modos as $item) {
+     //         $modo = new Modo();
+     //         $modo->modo = $item;
+     //         $modo->inmueble_id = $inmueble->id;
+     //         $modo->save();
 
-        }
+     //    }
         foreach ((array)$request->zonas as $item) {
             $zona = new Zonas();
              $zona->nombre = $item;
@@ -131,6 +135,6 @@ class Inmueble extends Model
              $mascotas->inmueble_id = $inmueble->id;
              $mascotas->save();
         }
-        return $request->zonas;
+        return 200;
     }
 }

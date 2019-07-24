@@ -1,5 +1,7 @@
 <div class="col-12 col-md-4 col-lg-3 col-xl-2 sidebar">
-    <img class="logo" src="img/perfil-logo.png" />
+    <a href="/">
+        <img class="logo" src="/img/perfil-logo.png" />
+    </a>
     <div class="user">
         <input
             type="hidden"
@@ -13,12 +15,12 @@
         <!-- <li><a href="#">Mis inmuebles favoritos</a></li> -->
         <!-- <li><a href="#">Mis inmuebles contactados</a></li> -->
         <li><a href="/perfil-publicar">Publicar Inmueble</a>
-            <ul>
-                <li><a href="#">Casa</a></li>
-                <li><a href="#">Apartamento</a></li>
-                <li><a href="#">Oficina</a></li>
+            <!-- <ul>
+                <li><a href="/perfil-publicar">Casa</a></li>
+                <li><a href="/perfil-publicar">Apartamento</a></li>
+                <li><a href="/perfil-publicar-oficina">Oficina</a></li>
                 <li><a href="#">Bodega</a></li>
-            </ul>
+            </ul> -->
         </li>
         <li>
             <a href="/perfil-mis-publicaciones" class="">Mis publicaciones</a>

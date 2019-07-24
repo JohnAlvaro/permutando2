@@ -16,11 +16,12 @@ class CreateInmueblesTable extends Migration
         Schema::create('inmuebles', function (Blueprint $table) {
             $table->increments('id');
             
-            $table->string('tipo')->nullable(); //Casa,Apartamento,Oficina,Bodega
-            $table->string('modo')->nullable();
+            $table->string('tipo_publicacion')->nullable();
+            $table->string('tipo_inmueble')->nullable();
             $table->string('estado')->nullable();
             $table->string('video')->nullable();
 
+            $table->string('ciudad')->nullable();
             $table->string('barrio')->nullable();
             $table->string('direccion')->nullable();
             $table->string('estrato')->nullable();
